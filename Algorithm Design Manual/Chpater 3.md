@@ -21,6 +21,10 @@ Suppose that we are given a squence of $n$ values $x_1, x_2, .., x_n$ and seek t
 * ($a$) Design a data structure that uses $O(n^2)$ space and answers queries in $O(1)$ time.
 * ($b$) Design a data structure that uses $O(n)$ space and answers queries in $O(log \ n)$ time. For partial credit, your data structure can use $O(n \ log \ n)$ space and have $O(log \ n)$ query time.
 
-($a$)  Create a grid where the coordiantes are the input of $i$ and $j$ and the value of the cell is the smallest number between $i$ and $j$. In other we words we create a two dimensional array and access the values directly.  This requires a preporcessing phase to create the grid, but since $n$ is static relative to the queries on $i$ and $j$ this is not an issue.
+($a$)  Create a grid where the coordiantes are the input of $i$ and $j$ and the value of the cell is the smallest number between $x_i$ and $x_j$. In other we words we create a two dimensional array and access the values directly.  This requires a preporcessing phase to create the grid, but since $n$ is static relative to the queries on $i$ and $j$ this is not an issue.
 
-($a$)
+($b$) Skip!
+
+3-12
+
+3-13
