@@ -25,6 +25,40 @@ Suppose that we are given a squence of $n$ values $x_1, x_2, .., x_n$ and seek t
 
 ($b$) Skip!
 
-3-12
+3-12 Suppose you are given an input set $S$ of $n$ numbers and a black box that if given any sequence of real numbers and an integer $k$ instantly and correctly answers whether there is a subset of input sequence whose sum is exactly $k$. Show how to use the black box $O(n)$ times to find a subset of $S$ that adds up to $k$.
 
-3-13
+Call the black box on the sequence of all items but one.  If it fails keep the removed element, otherwise discard it and repeat.  This allows us after a single pass, via removing one element at a time to find a subset that adds up to $k$. (Note this only finds us a valid subset and not all of them.)
+
+
+3-13 Let $a[1..n]$ be an array of real numbers. Design an algorithm to perform any sequence of the following operations.
+
+* $Add(i,y)$ - Add the value $y$ to the $i$th number.
+* $Partial$-$sum(i)$ - Return the sum of the first $i$ numbers, i.e. $\sum^{i}_{j=1}A[j]$.
+
+There are no insertions or deletions; the only change is to the values of the numbers.  Each operation should take $O(log \ n)$ steps. You may use one additional array of size $n$ as a work space.
+
+Create a balanced binary tree ordered by index.  On each node store the sum of all its left children.  On $Add$, traverse the tree updating the sum on every left traversal.  On $Partial$-$sum$ traverse to the specified node and add up the stored sum on every node that was traversed.
+
+3-14 Extend the data structure of the previous problem to support insertions and
+deletions. Each element now has both a key and a value. An element is accessed
+by its key. The addition operation is applied to the values, but the elements are
+accessed by its key. The Partial sum operation is different.
+
+* $Add(k,y)$ – Add the value $y$ to the item with key $k$.
+* $Insert(k,y)$ – Insert a new item with key $k$ and value $y$.
+* $Delete(k)$ – Delete the item with key $k$.
+* $Partial$-$sum(k)$ – Return the sum of all the elements currently in the set whose
+key is less than $y$, i.e. $\sum_{x_j<y} x_i$.
+
+The worst case running time should still be $O(n \ log \ n)$ for any sequence of $O(n)$
+operations.
+
+\
+Similiar to above with the following differences
+* Order binary tree by key instead of index.
+* On a Deletion, after traversal we have to update nodes thankfully in constant time.
+* On insertion is similiar to add with constant time swapping of sums and pointers after traversal.  I believe the reason "$O(n \ log \ n)$ for any sequence of $O(n)$
+operations." is mentioned is due to potential balancing occuring during insertion.
+Not sure exactly how that would look. 
+ 
+3-15
