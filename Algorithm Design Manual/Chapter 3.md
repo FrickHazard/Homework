@@ -1,4 +1,4 @@
-3-10
+**3-10**
 
 In the *bin-packing problem*, we are given $n$ metal objects, each weighing between zero and one kilogram. Our goal is to find the smallest number of bins that will
 hold the $n$ objects, with each bin holding one kilogram at most.
@@ -15,7 +15,8 @@ The *worst-fit heuristic* is the same as the *best-fit heuristic* in implementai
 
 
 \
-3-11
+**3-11**
+
 Suppose that we are given a squence of $n$ values $x_1, x_2, .., x_n$ and seek to quickly answer repeated queries of the from: given $i$ and $j$, find the smallest value in $x_i,...,x_j$.
 
 * ($a$) Design a data structure that uses $O(n^2)$ space and answers queries in $O(1)$ time.
@@ -30,7 +31,9 @@ Suppose that we are given a squence of $n$ values $x_1, x_2, .., x_n$ and seek t
 Call the black box on the sequence of all items but one.  If it fails keep the removed element, otherwise discard it and repeat.  This allows us after a single pass, via removing one element at a time to find a subset that adds up to $k$. (Note this only finds us a valid subset and not all of them.)
 
 
-3-13 Let $a[1..n]$ be an array of real numbers. Design an algorithm to perform any sequence of the following operations.
+**3-13**
+
+Let $a[1..n]$ be an array of real numbers. Design an algorithm to perform any sequence of the following operations.
 
 * $Add(i,y)$ - Add the value $y$ to the $i$th number.
 * $Partial$-$sum(i)$ - Return the sum of the first $i$ numbers, i.e. $\sum^{i}_{j=1}A[j]$.
@@ -39,7 +42,9 @@ There are no insertions or deletions; the only change is to the values of the nu
 
 Create a balanced binary tree ordered by index.  On each node store the sum of all its left children.  On $Add$, traverse the tree updating the sum on every left traversal.  On $Partial$-$sum$ traverse to the specified node and add up the stored sum on every node that was traversed.
 
-3-14 Extend the data structure of the previous problem to support insertions and
+**3-14**
+
+Extend the data structure of the previous problem to support insertions and
 deletions. Each element now has both a key and a value. An element is accessed
 by its key. The addition operation is applied to the values, but the elements are
 accessed by its key. The Partial sum operation is different.
@@ -61,4 +66,14 @@ Similiar to above with the following differences
 operations." is mentioned is due to potential balancing occuring during insertion.
 Not sure exactly how that would look. 
  
-3-15
+**3-15**
+
+Design a data structure that allows one to search, insert and delete an integer $X$ in $O(1)$ time (i.e. , constant time, independant of the total number of integers stored).  Assume that $1 \leq X \leq n$ and that there are $m + n$ units of space available, where $m$ is the maximum numbers of integers that can be in the table at any one time.  (Hint: use two arrays $A[1..n]$ and $B[1..m]$.) You are not allowed to initialize either $A$ or $B$, as that would take $O(m)$ or $O(n)$ operations.  This means the arrays are full of random garbage to begin with, so you must be very careful.
+
+Create $2$ arrays as mentioned in the hint, $A[1..n]$ and $B[1..m]$. 
+Because of the constraint given, $1 \leq X \leq n$ this allows us to treat zero essentially like a special null value.  First we create a counter $c$, and since this just a constant time initialization it does not violate anything.  We use $A$ as a jump table to $B$.  $B$ stores the actual values of an inserted $X$.
+
+* For *insert* with $x$, we use the counter to find the head item $B[c]$ and set the value in $A[x]$ to $c$, then increment the $c$.
+* When we delete an item we use $A[x]$ to find the index into $B$.  But we don't know whether this index is safe to use!  In order to verify that it is correct we first ensure that index is within the bounds of the counter, $A[x] < c$.  Then we check if $x = B[A[x]]$.  If either condition fails we exit, since the item we never inserted.  We then swap the contents of $B[c - 1]$ with $B[A[x]]$ and then set the value of $A[B[c - 1]]$ to $A[x]$.  Finally we decrement the counter.
+* When we search for an item we do the same bounds check in $delete$ and then return $B[A[x]]$.
+
