@@ -63,3 +63,49 @@ We wish to show that $\overline{B}_2 = \overline{A}_1 \cup \overline{A}_2$. Cons
 
 
 **8.**
+
+Is every point of every open set $E \subset R^2$ a limit point of $E$? Answer the same question for closed sets in $R^2$.
+
+Yes, the definition of an open set is that every point is an interior point of $E$.  In $R^2$ this implies that every neighborhood of an interior point contains a point in $E$ and thus is a limit point.  This is not true for all closed sets. Consider this proof by a counter example, an isolated point.  If we restrict closed sets to not contain isolated points we could also make this claim for closed sets.  Note this property is specific to metric space we are in.
+
+**9.**
+
+Let $E^{\circ}$ denote the set of all interior points of a set $E$. [See Definition 2.18(e);  $E^{\circ}$ is called the *interior* of $E$.]\
+($a$) Prove that $E^{\circ}$ is always open.\
+($b$) Prove that $E$ is open if and only if $E^{\circ} = E$\
+($c$) If $G \subset E$ and $G$ is open, prove that $G \subset E^{\circ}$.\
+($d$) Prove that the complement of $E^{\circ}$ is the closure of the complement $E$.\
+($e$) Do $E$ and $\overline{E}$ always have the same interiors?\
+($f$) Do $E$ and $E^{\circ}$ always have the same closures.
+
+($a$) We call a set *open* if every point of the set is an interior point.  Since every point of $E^{\circ}$ is an interior point, $E^{\circ}$ must be open.
+
+($b$) By similiar logic above, if a set $E$ is equal to its interior, it must be open by the defintion of an *open* set.  If $E^{\circ}$ was different in any way from $E$ then $E$ must contain a non interior point, and heance cannot be open.
+
+($c$) If $G$ is open than every point in $G$ must be an interior point.  Since $G$ is a subset of $E$, every point in $G$ must be a point in $E$.  Finally, since $E^{\circ}$ is defined as all the interior points of $E$, $G$ must be a subset of $E^{\circ}$ 
+
+($d$) The complement is defined as intersection of the space $X$ and $E$.  
+
+For any point $e_c$ in $\overline{E^c}$, $e_c$ is a member of $E^c$, $(E^{c})'$ or both. If $e_c$ is a point in $E^c$, then $e_c$ must be a point in $(E^{\circ})^c$, since the compliment of $E^{\circ}$ is a subset of the compliment of $E$.  If $e_c$ is a member of $(E^{c})'$ then it must be either an isolated point of $E$ or an limit point of $E$.  If $e_c$ is an isolated point in $E$, then it is contained in the complement of $E^{\circ}$.  Otherwise if $e_c$ is a limit point $E$, then $e_c$ cannot be an interior point of $E$, since an interior point could not be in $\overline{E^c}$. Because $e_c$ is not an interior point of $E$ then it must be in the compliment of $E^{\circ}$.
+
+Going the other way, consider any point in $e_{\circ}$ in the compliment of $E^{\circ}$. Either $e_{\circ}$ is not in $E$ or it is a non interior point in $E$.  Both cases imply membership in $\overline{E^c}$.
+
+($e$) No. Consider the following counter example.  Imagine a circle $S$ in $R^2$ which has a single point missing from its center.  The closure of $S$ has a single additional interior point than $S$.
+
+($f$) No. Any set $E$ with an isolated point is a counter example. This is because $E^\circ$ will not include isolated points, which would still be in the closure of $E$.
+
+**10.**
+
+Let $X$ be an infinite set. For $p \in X$ and $q \in X$, define
+
+$$d(p,q) = \{ 1 \ (if \ p \neq q) \ or \ 0 \ (if \ p = q) \}$$
+Prove that this is a metric. Which subsets of the resulting metric space are open? Which are closed? Which are compact?
+
+The first criteria ($a$) is clear since the distance is always 1, unless $p$ and $q$ are the same. 
+
+The second criteria ($b$) is clear as well since $d(p, q) = d(q, d) = 1$, unless $p = q$, in which case $d(p, q) = d(q, p) = 0$.  
+
+The third case is less obvious than the previous two.
+We enumerate the cases of the third requirement $d(p,q) \leq d(p,r) + d(r,q)$.  When $p, q$ and $r$ are different $d(p,r) + d(r,q)$ will be $2$, which is greater than the left hand side. If $p$ is equal to $q$ and or $r =$ $p$ or $q$, the equality holds as well.
+
+Every subset of this metric is closed, since limit points cannot exist!  Every subset of the metric is open as well since for any neighborhood of point $p$ with $r \leq 1$, contains only one point $p$! Compact subsets can only exist for a single point.
