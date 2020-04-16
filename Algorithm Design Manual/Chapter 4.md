@@ -38,3 +38,7 @@ The mode of a *tuple* of numbers is the number that occurs most frequently in th
 
 Sort the tuple as a list of numbers.  After the list is sorted do a single pass over the data keeping track of which element has the longest run.
 
+**4-6**
+
+Given two sets $S_1$ and $S_2$ (each of size *n*), and a number $x$, describe an $O(n \ log \ n)$ algorithm for finding whether there exists a pair of elements, one from $S_1$ and one from $S_2$, that add up to $x$. (For partial credit, give a $\Theta(n^2)$ algorithm for this problem.)
+
