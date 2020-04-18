@@ -108,4 +108,55 @@ The second criteria ($b$) is clear as well since $d(p, q) = d(q, d) = 1$, unless
 The third case is less obvious than the previous two.
 We enumerate the cases of the third requirement $d(p,q) \leq d(p,r) + d(r,q)$.  When $p, q$ and $r$ are different $d(p,r) + d(r,q)$ will be $2$, which is greater than the left hand side. If $p$ is equal to $q$ and or $r =$ $p$ or $q$, the equality holds as well.
 
-Every subset of this metric is closed, since limit points cannot exist!  Every subset of the metric is open as well since for any neighborhood of point $p$ with $r \leq 1$, contains only one point $p$! Compact subsets can only exist for a single point.
+Every subset of this metric is closed, since limit points cannot exist!  Every subset of the metric is open as well since for any neighborhood of point $p$ with $r \leq 1$, contains only one point $p$! Compact subsets can only exist for finite points.
+
+**11.**
+
+For $x \in R^1$ and $y \in R^1$, define
+
+$$d_1(x, y) = (x - y)^2$$
+$$d_2(x, y) = \sqrt{|x - y|}$$
+$$d_3(x, y) = |x^2 - y^2|$$
+$$d_4(x, y) = |x - 2y|$$
+$$d_5(x, y) = \frac{|x - y|}{1 + |x - y|}$$
+
+Determine, for each of these, whether it is a metric or not.
+
+For each criteria we consider each of the three properties.
+
+$d_1$ No\
+($a$) $x = y \implies (0)^2 = 0$\
+($b$) $d_1(x, y) = x^2 - 2xy + y^2 = y^2 - 2xy + x^2 = d_1(y, x)$\
+($c$) $d_1(p, q) \leq d_1(p, r) + d(r, q)$ for any  $r \in x$. Expanding this definition out we have $p^2 -2pq +q^2$ on the left hand side, and $p^2 - 2pr + r^2 + q^2 -2qr + r^2$ on the right hand side.  We remove common terms and end up with $-2pq$ and $- 2pr -2qr + 2r^2$ respectively. Factoring $2r$ on the right hand side and then dividing both sides by two we have $-pq \leq r(- p - q + r)$.  Clearly there are cases where this fails.  Consider $p = 1, q = -1, r = 0$. Then $d_(p,q) = 4$ and $d_1(p, r) + d(r, q) = 1$.
+
+**//TODO Review Proof** 
+
+$d_2$ Yes\
+($a$) $x = y \implies \sqrt{|0|} = 0$\
+($b$) By $|x - y| = |y - x|$, then $\sqrt{|x - y|} = \sqrt{|y - x|}$\
+($c$) $\sqrt{|x - y|} \leq \sqrt{|x - r|} + \sqrt{|y - r|}$, Square both sides $|x -y| \leq |x - r| + 2\sqrt{|x - r|}\sqrt{|y - r|} +|y - r|$ Now that we have the inequality in this form, we recognize the schwartz inequality, and call it a day.
+
+$d_3$ No\
+($a$) $x = y \implies |0^2 - 0^2| = 0$, But when $x = 1, y = -1$ it is also zero which is a violation\
+
+
+$d_4$ No\
+($a$) $x = y \implies |0 - 2\cdot0| = 0$ ( When $x = 1, y = 1/2$ the function violates the positivity requirement)\
+($b$) The second property is false.  $∣x−2y∣$ does not always equal $|y - 2x|$, in fact the second property fails anytime $x$ is different than $y$.
+
+$d_5$ Yes\
+($a$) $x = y \implies 0/1 = 0$\
+($b$) By $|x - y| = |y - x|$, then $|x - y|/(1 + |x - y|) = |y - x|/(1 + |y - x|)$\
+($c$)
+
+$$ \frac{|x -y|}{1 + |x - y|} \leq \frac{|x -r|}{1 + |x - r|} + \frac{|y - r|}{1 + |y - r|}$$
+
+-- Expand right side
+
+$$\frac{|x -y|}{1 + |x - y|} \leq \frac{(1 + |y - r|)(|x -r|) + (|y - r|)(1 + |x - r|)}{(1 + |x - r|)(1 + |y - r|)}$$
+
+-- Expand
+
+$$\frac{|x -y|}{1 + |x - y|} \leq \frac{|x -r| + 2|x -r||y - r| + |y - r| }{1 + |x - r| + |x -r||y - r|+ |y - r|}$$
+
+Notice in the fraction that $|x -r| + 2|x -r||y - r| + |y - r|$ will always be greater than or equal to $|x -r| + |x -r||y - r| + |y - r|$ in the denominator. Since both sides have the $+1$ in the denominator, if we can show that $|x -r| + 2|x -r||y - r| + |y - r|$ is greater than $|x -y|$, then we can prove the inequality.    And this is not hard to prove since this is another case of the schwartz inequality of real numbers, because $2|x -r||y - r|$ is never negative.
