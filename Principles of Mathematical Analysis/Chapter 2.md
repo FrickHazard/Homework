@@ -160,3 +160,12 @@ $$\frac{|x -y|}{1 + |x - y|} \leq \frac{(1 + |y - r|)(|x -r|) + (|y - r|)(1 + |x
 $$\frac{|x -y|}{1 + |x - y|} \leq \frac{|x -r| + 2|x -r||y - r| + |y - r| }{1 + |x - r| + |x -r||y - r|+ |y - r|}$$
 
 Notice in the fraction that $|x -r| + 2|x -r||y - r| + |y - r|$ will always be greater than or equal to $|x -r| + |x -r||y - r| + |y - r|$ in the denominator. Since both sides have the $+1$ in the denominator, if we can show that $|x -r| + 2|x -r||y - r| + |y - r|$ is greater than $|x -y|$, then we can prove the inequality.    And this is not hard to prove since this is another case of the schwartz inequality of real numbers, because $2|x -r||y - r|$ is never negative.
+
+**12.**
+
+Let $K \subset R^1$ consist of $0$ and the numbers $1/n$, for $n = 1, 2, 3...$.  Prove that $K$ is compact directly from the definition (without using the Heine-Borel theorem).
+
+Consider any open cover $c$ of $K$. The cover $c$ must have an element $c_0$ that covers $0$, further more $c_0$ is either bounded or unbounded.  If $c_0$ is unbounded it covers the entier set, otherwise it is bounded.  Because the sequance $k$ is bounded above, we can show that a finite subcover exists for $K$ by showing the  points uncovered by $c_0$ are finite.  We know that there is some neighborhood $N$ with a radius $r$ around $0$ contaied in $c_0$. We then know that any element in $K$ where $1/n < r$ is covered by $c_0$.  That leaves finitly many elments uncovered by $c_0$.  We then for the finitly many left points choose one open set that contains them.  Thus we have shown any open cover must cover the elment $0$, and this must leaves a finite set of uncovered points which we know is compact.
+
+**13.**
+
