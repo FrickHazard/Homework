@@ -180,26 +180,27 @@ nat.rec_on n
   (by simp only [zero_add, add_zero])
   (λ n ih, by simp only [new_add_succ, ih, new_succ_n_add_m])
 -- 7.5
-namespace C
 
+namespace C
+section
 inductive list (α : Type u)
 | nil {} : list
 | cons : α → list → list
 
 variable {α : Type}
 
-notation h :: t  := list.cons h t
+local notation h :: t  := list.cons h t
 
 def append (s t : list α) : list α :=
 list.rec t (λ x l u, x::u) s
 
-notation s ++ t := append s t
+local notation s ++ t := append s t
 
 theorem nil_append (t : list α) : list.nil ++ t = t := rfl
 theorem cons_append (x : α) (s t : list α) :
   x::s ++ t = x::(s ++ t) := rfl
 
-  notation `[` l:(foldr `,` (h t, list.cons h t) list.nil) `]` := l
+local notation `[` l:(foldr `,` (h t, list.cons h t) list.nil) `]` := l
 
 section
   open nat
@@ -220,7 +221,7 @@ theorem append_nil (t : list α) : t ++ list.nil = t :=
     )
 
 -- triple nested recursive
-theorem append_assoc (r s t : C.list α) :
+theorem append_assoc (r s t : list α) :
   r ++ s ++ t = r ++ (s ++ t) :=
   list.rec_on t
   (show r ++ s ++ list.nil = r ++ (s ++ list.nil), from calc
@@ -249,5 +250,264 @@ theorem append_assoc (r s t : C.list α) :
            ... = itm3::((lst3 ++ (itm2::lst2 ++ itm::lst))) : by rw ih3
            ... = itm3::(lst3 ++ (itm2::lst2 ++ itm::lst)) : by rw cons_append)))
 
+def length_list :  list α → ℕ :=
+(assume l, show nat, from
+list.rec_on l 0 (assume itm lst ih, show nat, from nat.succ ih))
+
+-- Implict length exercise
+theorem nil_zero_length : length_list (@list.nil α) = 0 := rfl
+theorem length_plus_one (r : list α) (itm: α) : length_list (itm::r) = (length_list r) + 1 := rfl
+
+example (r s : list α) : (length_list r) + (length_list s) = length_list (r++s) :=
+list.rec_on r 
+(show (length_list list.nil) + (length_list s) = length_list (list.nil++s),
+    from calc
+    (length_list list.nil) + (length_list s) = 0 + (length_list s) : by rw (@nil_zero_length α)
+    ...  = (length_list s) : by rw nat.zero_add
+    ... = length_list (list.nil++s) : by rw nil_append)
+(assume itm r ih,
+    show (length_list (itm::r)) + (length_list s) = length_list (itm::r++s), from
+    calc
+    (length_list (itm::r)) + (length_list s) = (length_list r) + 1 + (length_list s) : by rw length_plus_one
+   ... = (length_list r + length_list s) + 1 : by rw nat.add_right_comm
+    ... = length_list (r ++ s) + 1 : by rw ih
+    ... = length_list (itm::(r++s)) : by rw length_plus_one
+    ... = length_list (itm::r++s) : by rw cons_append
+)
+end
 end C
 
+inductive binary_tree
+| leaf : binary_tree
+| node : binary_tree → binary_tree → binary_tree
+
+inductive cbtree
+| leaf : cbtree
+| sup : (ℕ → cbtree) → cbtree
+
+namespace cbtree
+def succ (t : cbtree) : cbtree :=
+sup (λ n, t)
+
+def omega : cbtree :=
+sup (λ n, nat.rec_on n leaf (λ n t, succ t))
+end cbtree
+
+variable p : ℕ → Prop
+
+example (hz : p 0) (hs : ∀ n, p (nat.succ n)) : ∀ n, p n :=
+begin
+  intro n,
+  cases n,
+  { exact hz },  -- goal is p 0
+  apply hs       -- goal is a : ℕ ⊢ p (succ a)
+end
+
+example (n : ℕ) (h : n ≠ 0) : nat.succ (nat.pred n) = n :=
+begin
+  cases n with m,
+  -- first goal: h : 0 ≠ 0 ⊢ succ (pred 0) = 0
+    { apply (absurd rfl h) },
+  -- second goal: h : succ m ≠ 0 ⊢ succ (pred (succ a)) = succ a
+  reflexivity
+end
+
+def f (n : ℕ) : ℕ :=
+begin
+  cases n, exact 3, exact 7
+end
+
+example : f 0 = 3 := rfl
+example : f 5 = 7 := rfl
+
+def tuple (α : Type u) (n : ℕ) :=
+  { l : list α // list.length l = n }
+
+variables {α : Type u} {n : ℕ}
+
+def rand_f {n : ℕ} (t : tuple α n) : ℕ :=
+begin
+  cases n, exact 3, exact 7
+end
+
+def my_tuple : tuple ℕ 3 :=  ⟨[0, 1, 2], rfl⟩
+
+example : rand_f my_tuple = 7 := rfl
+
+inductive foo : Type
+| bar1 : ℕ → ℕ → foo
+| bar2 : ℕ → ℕ → ℕ → foo
+
+def silly (x : foo) : ℕ :=
+begin
+  cases x with a b c d e,
+  exact b,    -- a, b    are in the context
+  exact e     -- c, d, e are in the context
+end
+-- include foo in tatics
+open foo
+
+def silly_2 (x : foo) : ℕ :=
+begin
+  cases x,
+    case bar1 : a b
+      { exact b },
+    case bar2 : c d e
+      { exact e }
+end
+
+def silly_3 (x : foo) : ℕ :=
+begin
+  cases x,
+    case bar2 : c d e
+      { exact e },
+    case bar1 : a b
+      { exact b }
+end
+
+example (hz : p 0) (hs : ∀ n, p (nat.succ n)) (m k : ℕ) :
+  p (m + 3 * k) :=
+begin
+  cases (m + 3 * k),
+  { exact hz },  -- goal is p 0
+  apply hs       -- goal is a : ℕ ⊢ p (succ a)
+end
+-- Top and bottom are the same ↑ ↓ 
+example (hz : p 0) (hs : ∀ n, p (nat.succ n)) (m k : ℕ) :
+  p (m + 3 * k) :=
+begin
+  generalize : m + 3 * k = n,
+  cases n,
+  { exact hz },  -- goal is p 0
+  apply hs       -- goal is a : ℕ ⊢ p (succ a)
+end
+
+-- If the expression you case on does not appear in the goal, the cases tactic uses have to put the type of the expression into the context
+example (p : Prop) (m n : ℕ)
+  (h₁ : m < n → p) (h₂ : m ≥ n → p) : p :=
+begin
+  cases lt_or_ge m n with hlt hge,
+  { exact h₁ hlt },
+  exact h₂ hge
+end
+
+example (m n : ℕ) : m - n = 0 ∨ m ≠ n :=
+begin
+  cases decidable.em (m = n) with heq hne,
+  { rw heq,
+    left, exact nat.sub_self n },
+  right, exact hne
+end
+
+open nat
+
+theorem zero_add_n (n : ℕ) : 0 + n = n :=
+begin
+  induction n,
+  case zero : { refl },
+  case succ : n ih { rw [add_succ, ih]}
+end
+
+theorem succ_add_n (m n : ℕ) : succ m + n = succ (m + n) :=
+begin
+  induction n,
+  case zero : { refl },
+  case succ : n ih { rw [add_succ, ih] }
+end
+
+theorem add_comm_n (m n : ℕ) : m + n = n + m :=
+begin
+  induction n,
+  case zero : { rw zero_add, refl },
+  case succ : n ih { rw [add_succ, ih, succ_add] }
+end
+
+example (m n k : ℕ) (h : succ (succ m) = succ (succ n)) :
+  n + k = m + k :=
+begin
+  injection h with h',
+  injection h' with h'',
+  rw h''
+end
+
+example (m n k : ℕ) (h : succ (succ m) = succ (succ n)) :
+  n + k = m + k :=
+begin
+  injections with h' h'',
+  rw h''
+end
+
+example (m n k : ℕ) (h : succ (succ m) = succ (succ n)) :
+  n + k = m + k :=
+by injections; simp *
+
+-- 7.10. Exercises
+namespace hidden_1
+
+def new_mul (n m : ℕ) : ℕ  := 
+    nat.rec_on n 0 (assume n ih, show ℕ, from m + ih)
+
+def new_pred (n) : ℕ := 
+    nat.rec_on n 0 (assume n ih, show ℕ, from n)
+
+#reduce new_pred 4
+
+def new_sub (n m : ℕ) : ℕ :=
+    nat.rec_on m n (assume m ih, show ℕ, from pred ih)
+
+#reduce new_sub 4 9
+
+def new_exp (n m : ℕ) : ℕ :=
+    nat.rec_on m 1 (assume m ih, show ℕ, from new_mul n ih)
+
+#reduce new_exp 4 4
+
+theorem any_numb_to_zero_one (n : ℕ) : new_exp n 0 = 1 := rfl
+
+-- start with by definition properties
+theorem any_numb_times_zero_is_zero (n : ℕ) : new_mul 0 n = 0 := rfl
+theorem any_numb_times_one_is_numb (n : ℕ) : new_mul 1 n = n := rfl
+theorem succ_plus_other_numb (n : ℕ) (m : ℕ) : new_mul (succ n) m = m + (new_mul n m) := rfl
+
+theorem any_numb_times_zero_is_zero_rev (n : ℕ) : new_mul n 0 = 0 :=
+nat.rec_on n rfl
+(assume n ih, show new_mul (succ n) 0 = 0, from calc
+    new_mul (succ n) 0 =  0 + new_mul n 0 : by rw succ_plus_other_numb
+    ... = new_mul n 0 : by rw nat.zero_add
+    ... = 0 : by rw ih)
+
+theorem any_numb_times_one_is_numb_rev (n: ℕ) : new_mul n 1 = n :=
+    nat.rec_on n
+    rfl
+    (assume n ih, show new_mul (succ n) 1 = (succ n), from
+        calc
+        new_mul (succ n) 1 = 1 + new_mul n 1 : by rw succ_plus_other_numb
+        ... = 1 + n : by rw ih
+        ... = n + 1 : by rw nat.add_comm
+        ... = succ (n + 0) : by rw nat.add_succ
+        ... = succ n : by rw nat.add_zero)
+
+theorem succ_plus_other_numb_rev (n : ℕ) (m : ℕ) : new_mul n (succ m) = n + (new_mul n m) :=
+    nat.rec_on n rfl
+    (assume n ih, show new_mul (succ n) (succ m) = (succ n) + (new_mul (succ n) m), from calc
+        new_mul (succ n) (succ m) = (succ m) + (new_mul n (succ m)) : by rw succ_plus_other_numb
+        ... = (succ m) + (n + new_mul n m) : by rw ih
+        ... =  (n + new_mul n m) + (succ m) : by rw nat.add_comm
+        ... = n + (succ m) + (new_mul n m) : by rw nat.add_right_comm
+        ... = succ (n + m) + (new_mul n m) : by rw nat.add_succ
+        ... = ((succ n) + m) + (new_mul n m) : by rw ←nat.succ_add
+        ... = (succ n) + (m + (new_mul n m)) : by rw nat.add_assoc
+         ... = (succ n) + (new_mul (succ n) m) : by rw succ_plus_other_numb)
+
+
+theorem new_mul_comm (n m : ℕ) : new_mul n m = new_mul m n :=
+    nat.rec_on n
+    (show new_mul 0 m = new_mul m 0, from calc
+        new_mul 0 m = 0 : by rw any_numb_times_zero_is_zero
+        ... = new_mul m 0 : by rw any_numb_times_zero_is_zero_rev)
+    (assume n ih, show new_mul (succ n) m = new_mul m (succ n), from calc
+        new_mul (succ n) m = m + new_mul n m : by rw succ_plus_other_numb
+        ... = m + new_mul m n : by rw ih
+        ... = new_mul m (succ n) : by rw succ_plus_other_numb_rev)
+ 
+end hidden_1

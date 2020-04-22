@@ -100,3 +100,47 @@ The questions states a number that appears **more** than $n/2$ times in a list. 
 Tetris.   GeeksForGeeks had solution for n/k.
 
 <!--  -->
+
+**4-12**
+
+Devise an algorithm for finding the $k$ smallest elements of an unsorted set of $n$ integers in $O(n + k \ log \ n)$.
+
+Construct an min-heap in $n$ time.  Then look at the root in constant time and remove the root and reorder in $O(log \ n)$ time.
+
+**4-13**
+
+You wish to store a set of $n$ numbers in either a max-heap or sorted array.  For each applications below, state which data structure is better, or if it does not matter.  Exmplain your answers.\
+($a$) Want to find maximum element quickly.\
+($b$) Want to be able to delete an element quickly.\
+($c$) Want to be able to form the structure quickly.\
+($d$) Want to find the minimum element quickly.\
+
+($a$) Either, works since each is a constant time operation to look up the max element.\
+($b$) Heap, since we can swap the element with the last item in the array and correct the heap in $log \ n$ time, an array require shifting up to $O(n)$ elements.\
+($c$) Heap, since the construction is in $n$ time, verses the lowerbound of $n \ log \ n$ sorting.\
+($d$) Sorted srray, since the heap we are considering is a *max*-heap, we cannot gurantee a constant time look like we can with a sorted array.
+
+**4-14**
+
+Give an $O(n \ log \ k)$-time algorithm that merges $k$ sorted lists with a total of $n$ elements into one sorted list.  (Hint use a heap to speed up the elementry $O(kn)$-time algorithm).
+
+(Assume ascending order of sorted array)
+We know that for a heap insertion is $O(log \ n)$(in this case $k$ dictates the size of our heap).  We take the first item of every array and insert it into a min-heap. We then take the min value of the heap and write it to our result array of $O(n)$ space.  After we take the min out of the heap we insert the next item from the array where the min element was orignally from.  We need some sort of mechanism to know which item came from which of the $k$ arrays.  We can accomplish by wrappping each record in the heap with a struct, with a field indexing into $k$.  This creates an additional $O(k)$ space. Thus we are mantaining a heap with one item from every sorted array.  Since we are returning the min element of the heap which always has the least elements of every sorted array, the correctness of order is guaranteed. We only intialize our heap once, with time complexity of $O(k)$, which will quickly be dominated by $log k$ insertions by $n$.  If any of the sorted arrays runs out of numbers before the others, we simply call min again and proceed as if $k$ was one less.
+
+**4-15**
+
+($a$) Give an efficient algorithm to find the second-largest key among $n$ keys. You can do better than $2n - 3$ comparisons.\
+($b$) Then give an efficient algorithm to find the third-largest key amoung $n$ keys. How many key comparisons does your algorithm do in the worst case? Must your algorithm determine which key is largest and second-largest in the process.
+
+<!-- First attempt, and fail -->
+<!-- ($a$) Store two constant numbers set the maximum number to the first element.  Iterate through the array and compare every element to the stored maximum.  If a number is greater than the stored maximum, set the second stored number to the maximum, and the maxium to the greater number.\
+($b$) Same as above execpt with three constant stored values, shifting down. for a single pass. Yes indeed.\
+***NOTE** For both algorithms at the very begining when the second and third items are unset, if an item is less than the max set it to the third or second stored number. -->
+
+<!-- The trivial 'scan and compare' approach is by far the most likely approach that any real piece of software is likely to use. Its average compare count on random data is going to be similar to that of heapify, but without the complex logic and nested loops. Further, it won't have to reorder the data or keep additional storage around. It also has excellent cache locality. -->
+
+($a$) Using the tournament algorithm we compare pairs of two elements and discard the smaller number.  We repeat this process recursively with all the winners.  This is similiar to how we construct a heap.  This gives us $n+log(n)$ time with $n + lg \ n \ – \ 2$ comparisons.\
+($b$) We use the same above and choose the third highest loser. Yes, though not explicitly.
+
+**4-16**
+

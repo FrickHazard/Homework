@@ -169,3 +169,18 @@ Consider any open cover $c$ of $K$. The cover $c$ must have an element $c_0$ tha
 
 **13.**
 
+Construct a compact set of real numbers whose limit points form a countable set.
+
+Consider the set $\{ 1/n \} \ \cup 0$ for $n : \mathbb{N}$ in $\mathbb{R}^1$.  As shown above we know that $\{ 1/n \} \ \cup 0$ is compact.  It only has a finite set of limit points, specifically $0$.  Since every finite set is countable this meets the criteria.
+
+This defintion is rather boring and we now attempt to construct an example with countablely infinite limit points. Extending the previos example, consider the set $\{ 1/n \} \cup 0 \cup \ V$ for $V = \cup_n^{\infin} V_n = \ (n+m)/2mn$ where $(n, m: \mathbb{N})$ in $\mathbb{R}^1$.  The set $V$ is equal to the union of the average of $1/m$ and $n$ for all $m$ on a particular $n$. A particular $V_n$ is essentialy the simple case above scaled down around a particular $1/n$ point.  Since every point $1/n$ is included in the set every $V_n$ has their respective limit points, making the set closde.  Clearly the entire set is bounded as well.  We may induct the arguments provided previously to show this set is compact. Therefore the set is compact and has countablely infinite many limit points.  I like to imagine a cloud of points getting denser proprtional to how close a point $1/n$ is converging to $0$.
+
+**14.**
+
+Give an example of an open cover of the segment $(0, 1)$ which has no finite sub-cover.
+
+
+Consider the following collection $\{ V_n \}$ where $n : \mathbb{N}$ and $V_n = (1/n - 1/(2n) \ \ , \ \ 1/n +1/(2n) )$. (This corresponds to a ball around a point $1/n$ with $1/n$ radius). The infinite union of $V_n$ covers every point, since every point can be mapped to an open ball.  However for any finite subset $V_s = \{ V_i ... V_m \}$ we choose, it can be shown that $V_s$ cannot cover every point in $(0, 1)$.  Proof. Consider the open ball $c$ with the least radius $r$ of $V_s$. This open ball must be around the point $(r)$. (This is reason why we defined the radius to be the same as the position of a point).  We know that there is a point at $1/(r+1)$ which is not covered by $c$ or any of the other balls, for any other ball has at least a distance of $1/r$ from the point $1/(r+1)$, by our definition.  Thus there is always a point closer to zero that is not covered by any finite subset of $V$.  Thus there exist an opencover $V$ with no finite subcover on $(0, 1)$.
+
+**15.**
+
