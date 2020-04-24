@@ -509,5 +509,99 @@ theorem new_mul_comm (n m : ℕ) : new_mul n m = new_mul m n :=
         new_mul (succ n) m = m + new_mul n m : by rw succ_plus_other_numb
         ... = m + new_mul m n : by rw ih
         ... = new_mul m (succ n) : by rw succ_plus_other_numb_rev)
+
+theorem new_mul_distribute_l (n m l : ℕ) : new_mul (m + n) l = (new_mul m l) + (new_mul n l) :=
+    nat.rec_on m
+    (show new_mul (0 + n) l = (new_mul 0 l) + (new_mul n l), from calc
+        new_mul (0 + n) l = new_mul n l : by rw nat.zero_add
+        ... = 0 + new_mul n l : by rw nat.zero_add
+        ... = (new_mul 0 l) + (new_mul n l) : by rw any_numb_times_zero_is_zero)
+    (assume m ih, show new_mul ((succ m) + n) l = (new_mul (succ m) l) + (new_mul n l), from calc
+        new_mul (succ m + n) l = new_mul (succ (m + n)) l : by rw nat.succ_add
+        ... = l + new_mul (m + n) l : by rw succ_plus_other_numb
+        ... = l + (new_mul m l + new_mul n l) : by rw ih
+        ... = (l + new_mul m l) + new_mul n l : by rw nat.add_assoc
+        ... = (new_mul (succ m) l + new_mul n l) : by rw succ_plus_other_numb)  
  
+theorem new_mul_distribute_r (n m l : ℕ) : new_mul l (m + n) = (new_mul l m) + (new_mul l n) :=
+begin
+    rw [new_mul_comm, new_mul_distribute_l, new_mul_comm, new_mul_comm l n]
+end
+
+-- theorem pred_new_order (n : ℕ) (pred n) : n + n = 2 :=
+
+theorem new_mul_assoc (n m l : ℕ) : new_mul (new_mul n m) l = new_mul n (new_mul m l) :=
+    nat.rec_on n
+    rfl
+    (assume n ih, show new_mul (new_mul (succ n) m) l = new_mul (succ n) (new_mul m l), from calc
+        new_mul (new_mul (succ n) m) l = new_mul (m + new_mul n m) l : by rw succ_plus_other_numb
+        ... = (new_mul m l) + new_mul (new_mul n m) l : by rw new_mul_distribute_l
+        ... = (new_mul m l) + new_mul n (new_mul m l) : by rw ih
+        ... = new_mul (succ n) (new_mul m l) : by rw succ_plus_other_numb)
+-- 
+theorem pred_zero (n : ℕ) : pred 0 = 0 := rfl
+theorem pred_succ (n: ℕ) : nat.pred (nat.succ n) = n := rfl
+
+theorem succ_pred (n: ℕ) (h : n ≠ 0) : nat.succ (pred n) = n := 
+begin
+  cases n with m,
+  -- first goal: h : 0 ≠ 0 ⊢ succ (pred 0) = 0
+    { apply (absurd rfl h) },
+  -- second goal: h : succ m ≠ 0 ⊢ succ (pred (succ a)) = succ a
+  reflexivity
+end
+
+theorem pred_add (n m : ℕ) (h : n ≠ 0) : (pred n + m) = pred (n + m) :=
+begin
+    cases n with n_,
+    { apply (absurd rfl h) },
+    apply (show pred (succ n_) + m = pred (succ n_ + m), from calc
+        pred (succ n_) + m = n_ + m : by rw pred_succ
+        ... = pred (succ (n_ + m)) : by rw pred_succ
+        ... = pred (succ n_ + m) : by rw nat.succ_add)
+end
+
+theorem sub_zero (n : ℕ) : new_sub n 0 = n := rfl
+-- theorem sub_ (n m : ℕ) : new_sub n 1 = pred n := rfl
+theorem sub_succ (n m: ℕ) : new_sub n (succ m) = pred (new_sub n m) := rfl
+
+theorem succ_sub (n m: ℕ) : (new_sub n m) = pred (new_sub (succ n) m):= 
+nat.rec_on m (show new_sub n 0 = pred (new_sub (succ n) 0), from rfl)
+(assume m ih, show new_sub n (succ m) = pred (new_sub (succ n) (succ m)), from calc
+    new_sub n (succ m ) = pred (new_sub n m) : by rw sub_succ
+    ... = pred (pred (new_sub (succ n) m)) : by rw ih
+    ... = pred (new_sub (succ n) (succ m)) : by rw sub_succ)
+
+theorem sub_zero_trunc_is_zero (n : ℕ) : new_sub 0 n = 0 := 
+nat.rec_on n (show new_sub 0 0 = 0, from rfl)
+(assume n ih, show new_sub 0 (succ n) = 0, from calc
+    new_sub 0 (succ n) =  pred (new_sub 0 n): by rw sub_succ
+    ... = pred 0 : by rw ih)
+
+theorem sub_self_n (n : ℕ) : new_sub n n = 0 := 
+nat.rec_on n rfl (assume n ih, show new_sub (succ n) (succ n) = 0, from calc
+    new_sub (succ n) (succ n) = pred(new_sub (succ n) n) : by rw sub_succ
+    ... = new_sub n n : by rw ←succ_sub
+    ... = 0 : by rw ih) 
+
+example (m n : ℕ) : m - n = 0 ∨ m ≠ n :=
+begin
+  cases decidable.em (m = n) with heq hne,
+  { rw heq,
+    left, exact nat.sub_self n },
+  right, exact hne
+end
+
+-- theorem sub_grtr_thn (n m: ℕ) (h : m > n) : new_sub n m = 0 :=
+-- nat.rec_on m (show new_sub n 0 = 0, from )
+
+-- theorem sub_zero_trunc_is_zero (n : ℕ) : new_sub 0 n = 0 := 
+-- begin
+-- cases n with n_,
+-- reflexivity,
+-- apply (show  new_sub 0 (succ n_) = 0, from calc 
+-- new_sub 0 (succ n_) = new_sub 0 pred (succ(succ n_)
+-- )
+-- end
+
 end hidden_1

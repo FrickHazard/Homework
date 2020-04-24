@@ -184,3 +184,12 @@ Consider the following collection $\{ V_n \}$ where $n : \mathbb{N}$ and $V_n = 
 
 **15.**
 
+Show that Theorem 2.36 and its Collary become false (in $\mathbb{R}^1$, for example) if the word "compact" is replaced by "closed" or by "bounded".
+
+The proof given for Theorem 3.36 relies on every element of the collection $\{K_\alpha\}$ having a finite subcover.  Neither of these conditions are guarenteed exclusively by closedness or boundedness.  Since the qualifier of the proof applies to **all** collections $\{K_\alpha\}$ such that the intersection of *every finite* subcollection of $\{K_\alpha\}$ is nonempty, we may produce a counter example to disprove both closedness and boundedness.
+
+Consider in the case of boundedness, a collection $\{O_\alpha\}$ in $\mathbb{R}^1$ of open balls with radius $\alpha < 1$ around a point $p$.  Every ball has an offset of ($1-\alpha$) from $p$.  This way any finite subcollection of balls must have a nonempty intersection, since the ball with the min radius of the subcollection must be contained in the ball with the max radius.  However $\cap \ O_\alpha$ is empty.
+Thus there exists a set of which the property does not hold.
+
+Consider in the case of closedness, a collection $\{C_\alpha\}$ in $\mathbb{R}^1$ where every element is defined as $[\alpha, \infin)$ where $\alpha : \mathbb{N}$.
+Every finite subset must have a point in common since there is a point in every set beyond the min $\alpha$.  However $\cap \ C_\alpha$ is empty. Thus there exists a set of which the property does not hold.

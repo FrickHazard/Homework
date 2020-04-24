@@ -144,3 +144,46 @@ We know that for a heap insertion is $O(log \ n)$(in this case $k$ dictates the 
 
 **4-16**
 
+Use the partitionin idea of quicksort to give an algorithm that finds the *median* element of an array of $n$ integers in expected $O(n)$ time. (Hint must you look at both sides of the partition?)
+
+Start the partition process around an arbituary element $x$. Once the partion process is complete we partition the side with more elements. We continue this untill we have reached the element we wish to find.  This algorithm has an expected average running time of $O(n)$ time (derived from $O(n) + O(n/2) + O(n/4) = O(2n)$).  Its worst case however is still $n^2$.
+
+**4-17**
+
+The medain of a set of $n$ values is the $\lceil n/2 \rceil$th smallets value.\
+($a$) Supose quicksort always pivoted on the median of the current sub-array. How many comparisons would Quicksort make then in the worst case?\
+($b$) Suppose quicksort were always to pivot on the $\lceil n/3 \rceil$th smallest value of the current sub-array.  How many comparisons would be made then in the worst case?
+
+($a$) The sequence of $n + \frac{n}{2} + \frac{n}{2} + \frac{n}{4} +\frac{n}{4} + \frac{n}{4} + \frac{n}{4}  + \frac{n}{8} + \frac{n}{8}...$ converges to $(n \ \lceil lg \rceil \ n)$.  This can be seen visually by drawing out a tree for the Divide-and-Conquer Recurrences. with $T(n) = T(n/2) + T(n/2)$. So therefore there are $n \ log \ n$ comparisons.\
+($b$) Consider the following recurrence relationship = $T(n) = T(n/3) + T(2n/3)$.  Every level of this tree has work $\leq n$.  The height of the tree is  ($log_3 \ 2n$). This implies that the total comparisons will be less than or equal to $n \ log_3 \ 2n$.  It should be noted that any fraction we choose will result in logarithmic time abliet a different base.
+
+**4-18**
+<!-- Not rigorous proved, very sure this work -->
+Suppose an array $A$ consists of $n$ elements, each of which is *red*, *white* or *blue*.  We seek to sort the elements so that all the *reds* come before all the *whites*, which come before the *blues*.  The only operations permitted on the keys are
+* *Examine($A, i$)* - report the color of the $i$th element of $A$.
+* *Swap($A, i, j$)* - swap the $i$th element of $A$ with the $j$th element.
+
+Find a correct and effcient algorithm for red-white-blue sorting. There is a linear-time solution.
+
+Yes this can be done using partitioning as in quicksort. Pick a random element and partition with the rule $red < white < blue$.  That way after every partition we know that there is entire ordered color to one side of the partition. In total we do this twice array will be sorted.
+
+This requires a trick, depending of the color of the pivot element we consider elements of that element less than or greater than that element. For example we always presumse for a red pivot all red items are less than red.  For a blue pivot we treat blue items as if they are always greater than the pivot.  If the pivot is white and we are on the first partition we presume other white elements are less than the pivot.  Other wise if we are the second partition then treat white elements as greater than partition.
+
+Here is an example of how this would work.  We start with a pivot of white. After the partition all the reds are past the pivot.  We then partition the pivot and everything less than it.  Say on the second partition we happen to also choose white. We then split the blues from the whites and we are done.
+
+**4-19**
+
+An *inversion* of a permutation is a pair of elements that are out of order.
+
+* ($a$) Show that a permutation of $n$ items has at most $n(n - 1)/2$ inversions. Which permutation(s) have exactly $n(n-1)/2$ inversions?
+
+* ($b$) Let $P$ be a permutation and $P^r$ be the reversal of this permutation.  Show that $P$ and $P^r$ have a total of exactly $n(n-1)/2$ inversions.
+
+* ($c$) Use the previous result to argue that the expected number inversions in a random permutation is $n(n - 1)/4$
+
+($a$) The words used in this question are extremely distraccting to someone who know what permutation means in a mathematical context. Consider an **Ordered List**.  Now consider how many possible ways there are to swap two elements.  Intuitively this should be close to $n^2$.  For every element we compare it to every other element so we have $n(n-1)$.  However for every element there will be an overlap, since swapping any element $a$ and $b$ is the same permutation as swapping $b$ and $a$.  So we divide the entire result by $2$ giving us $n(n - 1)/2$.
+
+**4-20**
+
+Give an efficent algorithm to rearrange an array of $n$ keys so that all the negative keys precede all the nonegative keys. Your algorithm ust be in-place, meaning you cannot allocate another array to temporarily hold the items.  How fast is your algorithm?
+
