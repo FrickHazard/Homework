@@ -193,3 +193,17 @@ Thus there exists a set of which the property does not hold.
 
 Consider in the case of closedness, a collection $\{C_\alpha\}$ in $\mathbb{R}^1$ where every element is defined as $[\alpha, \infin)$ where $\alpha : \mathbb{N}$.
 Every finite subset must have a point in common since there is a point in every set beyond the min $\alpha$.  However $\cap \ C_\alpha$ is empty. Thus there exists a set of which the property does not hold.
+
+**16.**
+
+Regard $\bold{Q}$, the set of all rational numbers, as a metric space, with $d(p, q) = |p-q|$. Let $E$ be the set of all $p \in \bold{Q}$ such that $2 < p^2 < 3$. Show that $E$ is closed and bounded in $Q$, but that $E$ is not compact. Is $E$ open in $\bold{Q}$?
+
+The set $E$ is clearly bounded since $p$ must be greater than $-3/2$ and less than $2$(These bounds are arbiturarily picked).
+
+In order to prove that $E$ is closed, we must show that every limit point of $E$ must be a point in $E$.  Consider a point $q$ in $E^c$. If $q$ is in $E^c$ then one of the following is true, $q^2 \leq 2$ or $q^2 \geq 3$.  If $q^2$ is not exactly equal to the boundary($2$ or $3$) then the distance between $q^2$ and the boundary implies the exist of rationals whose square is between $q^2$ and the boundary point.  Thus in the case where $q^2 < 2$ or $q^2 > 3$, $q$ cannot be a limit point of $E$. We now consider where $q^2$ is equal to the boundary point of either $2$ or $3$. However we know that no rational $r$ exists such that $r^2 = 2$ or $r^2 =3$!  Thus every point of $E^c$ cannot be a limit point of $E$.  So every limit point of $E$ is a point of $E.$
+
+ In order to show that $E$ is not compact it suffices to produce a counter example.  Consider the open cover $\{U_\alpha\}$, defined by an open ball $(3/2 -\alpha \ , \ 3/2 + \alpha )$ (Think exercise **2.14**), where $2 < (3/2 -\alpha)^2$ and $(3/2 + \alpha)^2 < 3$.  The union of this collection clearly covers all of $E$. However, for any finite subset set of $\{U_\alpha\}$, we may take the minimum radius and show that there is a point between the least covered point and the boundary in $E$.
+
+ Yes since we approach arbituarily close to the boundary point and any point we consider has other points in $E$ in both directions.
+
+ **17.**

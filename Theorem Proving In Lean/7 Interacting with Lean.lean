@@ -562,7 +562,6 @@ begin
 end
 
 theorem sub_zero (n : ℕ) : new_sub n 0 = n := rfl
--- theorem sub_ (n m : ℕ) : new_sub n 1 = pred n := rfl
 theorem sub_succ (n m: ℕ) : new_sub n (succ m) = pred (new_sub n m) := rfl
 
 theorem succ_sub (n m: ℕ) : (new_sub n m) = pred (new_sub (succ n) m):= 
@@ -571,6 +570,16 @@ nat.rec_on m (show new_sub n 0 = pred (new_sub (succ n) 0), from rfl)
     new_sub n (succ m ) = pred (new_sub n m) : by rw sub_succ
     ... = pred (pred (new_sub (succ n) m)) : by rw ih
     ... = pred (new_sub (succ n) (succ m)) : by rw sub_succ)
+
+theorem pred_sub_assoc (n m : ℕ) : pred (new_sub n m) = (new_sub (pred n) m) :=
+nat.rec_on m
+(show pred (new_sub n 0) = (new_sub (pred n) 0), from
+    begin apply sub_zero, end)
+(assume m ih, show pred (new_sub n (succ m)) = (new_sub (pred n) (succ m)), from
+calc
+pred (new_sub n (succ m)) = pred(pred(new_sub n  m)) : by rw sub_succ
+... = pred(new_sub (pred n)  m) : by rw ih
+... = (new_sub (pred n) (succ m)) : rfl)
 
 theorem sub_zero_trunc_is_zero (n : ℕ) : new_sub 0 n = 0 := 
 nat.rec_on n (show new_sub 0 0 = 0, from rfl)
@@ -584,13 +593,24 @@ nat.rec_on n rfl (assume n ih, show new_sub (succ n) (succ n) = 0, from calc
     ... = new_sub n n : by rw ←succ_sub
     ... = 0 : by rw ih) 
 
-example (m n : ℕ) : m - n = 0 ∨ m ≠ n :=
+example (m n : ℕ) : new_sub m n = 0 ∨ m ≠ n :=
 begin
   cases decidable.em (m = n) with heq hne,
   { rw heq,
-    left, exact nat.sub_self n },
+    left, exact sub_self_n n },
   right, exact hne
 end
+
+
+theorem sub_pseudo_assoc (n m l : ℕ) : new_sub (new_sub n m) l = new_sub (new_sub n l) m :=
+nat.rec_on m
+(show new_sub (new_sub n 0) l = new_sub( new_sub n l) 0, from calc
+   new_sub (new_sub n 0) l = new_sub n l : by rw sub_zero)
+(assume m ih, show new_sub (new_sub n  (succ m)) l = new_sub (new_sub n l) (succ m), from calc
+    new_sub (new_sub n (succ m)) l = new_sub (pred (new_sub n m)) l : by rw sub_succ
+    ... = pred (new_sub (new_sub n m) l) : by rw ←pred_sub_assoc
+    ... = pred (new_sub (new_sub n l) m) : by rw ih
+    ... = new_sub (new_sub n l) (succ m) : rfl)
 
 -- theorem sub_grtr_thn (n m: ℕ) (h : m > n) : new_sub n m = 0 :=
 -- nat.rec_on m (show new_sub n 0 = 0, from )
