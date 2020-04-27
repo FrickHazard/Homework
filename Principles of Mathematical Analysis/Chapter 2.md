@@ -207,3 +207,18 @@ In order to prove that $E$ is closed, we must show that every limit point of $E$
  Yes since we approach arbituarily close to the boundary point and any point we consider has other points in $E$ in both directions.
 
  **17.**
+
+ Let $E$ be the set of all $x \in [0, 1]$ whose decimal expansion contains only the digits $4$ and $7$. Is $E$ countable? Is $E$ dense in $[0, 1]$. Is $E$ compact? Is $E$ perfect?
+
+$E$ is not countable.  We may use the diagnolization argument switching $7$ with $4$ for every digit we run across.  The set $E$ cannot be dense in $[0, 1]$. The sup of $E$ is $0.777777777777...$, so if we consider any point greater say $0.81$ then there is at least a distance of $0.1$ between the two points.
+
+Lemma : only members of $E$ with infinte digits are limit points.
+For any point with finite digits there exists a radius where no other points of the set can dwell.  For example if a point $p$ has the decimal representation of $0.747$ the closest point will be $0.7474$.  Then there is neighboorhood around $p$ with radius less than $0.0004$ that only contains  $0.7474$, and thus the point cannot be a limit point.
+
+$E$ Is compact, since if a point $p$ was a limit point of $E$ and not in the set then, $p$ must contain another digit besides $7$ or $4$.  And if that is the case we cannot approach arbituarly close to that point.  This implies that $E$ is closed, and since it is bounded and in $R^1$ we know it must be compact.  
+
+$E$ Is perfect because it is closed and because, for any neighboorhood we choose with radius $r$, it is possible to find a number with a change in a digit that is less than 
+$r$.  Note if we allowed finitely many digits of $7$ and $4$, such as $0.747747\overline{0}$. we could not make this claim.
+
+**18.**
+

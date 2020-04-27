@@ -193,3 +193,20 @@ Give an efficent algorithm to rearrange an array of $n$ keys so that all the neg
 
 
 Consider a single partition step from quicksort.  This is the same as the color problem except with two colors.  Simply partition the array based on an arbituary pivot element. If the pivot is positive consider all other positive numbers greater than the pivot.  If the pivot is negative consider all other negative numbers less than the pivot.  Clearly this has $O(n)$ running time.
+
+
+**4-21**
+
+Stable sorting algorithms leave equal-key items in the same relative order as in the original permutation. Explain what must be done to ensure that mergesort is a stable sorting algorithm.
+
+The key of this question is to consider how mergesort's merge process resolves.  We guarantee stability by two conditiions.
+
+First when we are merging two arrays we need to know which sub array was initially on the left side of the array.  Then when any two elements are equal we always write the one from the left array before the right one.
+
+Secondly we require mergesort to merge only pairs of subarrays locally adjacent in memory(This is how the default implementation works anyway).  This is so that every merge has no gaps, which would break stability even with the above.
+
+**4-22**
+
+Show that $n$ positive integers in the range $1$ to $k$ can be sorted in $O(n \ log\  k)$ time. The interesting case is when $k << n$.
+
+There are multiple ways to do this. One way would be to do this would be building a binary tree of size $k$. And adding a counter field to every node to handle equality.  We insert every item from $n$ into this tree in $log k$ time. Afterwards for every node in $k$ we use in order traversal to write out every item per counter.
