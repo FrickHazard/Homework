@@ -210,3 +210,37 @@ Secondly we require mergesort to merge only pairs of subarrays locally adjacent 
 Show that $n$ positive integers in the range $1$ to $k$ can be sorted in $O(n \ log\  k)$ time. The interesting case is when $k << n$.
 
 There are multiple ways to do this. One way would be to do this would be building a binary tree of size $k$. And adding a counter field to every node to handle equality.  We insert every item from $n$ into this tree in $log k$ time. Afterwards for every node in $k$ we use in order traversal to write out every item per counter.
+
+Alternatively use the use the typical application of radix sort, or counting sort.
+
+**4-23**
+
+We seek to sort a sequence $S$ of $n$ integers with many duplications such that the number of distinct integers in $S$ is $O(log \ n)$. Give an $O(n \log \log n)$ worst-case time algorithm to sort such sequences. Consider the algorithm above that runs in $O( n \log k)$ time.  Since there are $O(log \ n)$ distinct integers we could set $k = \log n$.  This matches what the inteded time of the algorithm would be.  So again we construct a balanced binary tree of size $\log n= k$, and store a counter on every node.  The we pass over every item and we search and update the counter on that node.  At the end we make another n pass to write to the resulting array.
+
+**4-24**
+
+Let $A[1..n]$ be an array such that the first $n- \sqrt{n}$ elements are already sorted(though we know nothing about the remaining elements).  Give an algorithm that sorts $A$ in substantially better than $n \log n$ steps.  First we can use any sorting algorithm to sort the $\sqrt{n}$ section of the array. Next we need to merge the sorted array with first part, since there could be elements in  the unsorted $\sqrt{n}$ part of the array that belong in already sorted block of the array.  Using a merge subroutine from mergesort we sort the array.  That leaves us with a $O(\sqrt{n} \log \sqrt{n} + n)$ worse case running algorithm, where $\sqrt{n} \log \sqrt{n}$ is the sort, and $n$ the merge step. And of course $n$ dominates this expression leaving us with $O(n)$.
+
+**4-25**
+
+Assume that the array $A[1..n]$ only has numbers from $\{1,...,n^2\}$ but that at most $\log \log n$ of these numbers ever appear.  Devise an algorithm that sorts $A$ in substantially less time than $O(n \log n)$.
+
+Again using a balanced binary tree with counters we can achieve $O(n \log \log \log n)$ worst case running time.
+
+**4-26**
+Consider the problem of sorting a sequence of $n$ $0$'s and $1$'s using the comparisons. For each comparison of two values $x$ and $y$, the algorithm learns which of $x < y$, $x = y$ or $x > y$ holds.
+
+($a$) Give an algorithm to sort in $n-1$ comparisons in the worst case.  Show that your algorithm is optimal.
+
+($b$) Give an algorithm to sort in $2n/3$ comparisons in the average case (assuming each of the $n$ inputs is $0$ or $1$ with equal probability). Show that your algorithm is optimal.
+
+($a$) Compare every element with the first element then write the elements that are less than it to left, or the elements that greater to it to the right.  Since we are only dealing with binary numbers if one number is greater than the another, we know the greater number is $1$ and the lesser $0$. There is no way achieve less than $n-1$ comparisons in the worst case.  The reason for this is in the worst case every comparison we make is equal, so we know that either $1 = 1$ or $0 = 0$, but not both.  In this worse case scenario we would need to compare a element from the tie to a reference number to identify the number. So if we compare $n/2$ pairs of elements we will need to compare $n/2 - 1$ times to a reference number(The minus one comes from either the odd element out, our a number from an arbiturary pair).
+
+($b$)  Take every two sequential pairs of numbers and compare them.  Since we are assuming that both $1$ and $0$ appear with equal probability, then there should be an equal probabiliy that the result of comparison of a pair is different, or the same.
+For evey pair of numbers that are not the same we immediatly know which is which.
+So on average after we compared every pair of numbers we have $n/2$ sorted numbers and $n/2$ unsorted numbers.  Since we know the remaining pairs are the same we compare an element from any pair to element in another pair tournament algorithm style.  We repeat this process until every group is compared.  Again applying average case logic, we formulate the total number of comparisons as $n/2 + n/8 + n/32 = n(1/2^1 + 1/2^3 + 1/2^4)$ which is bounded by $2n/3$.  The is the optimal expected average, because we maxmize all possible information from a comparison, given the random distribution.  To do any better would imply that the array did not have a random distribution.
+
+
+**4.27**
+
+Let $P$ be a simple, but not necessarily convex polygon and $q$ and arbitrary point not necessarily in $P$.  Design an efficient algorithm to find a line segment originating from $q$ that intersects the maximum number of edges of $P$. In other words, if standing at point $q$, in what direction should you aim a gun so the bullet will go through the largest number of walls. A bullet through a vertex $P$ gets credit for only one wall.  An $O(n \log n)$ algorithm is possible.

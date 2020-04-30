@@ -212,13 +212,43 @@ In order to prove that $E$ is closed, we must show that every limit point of $E$
 
 $E$ is not countable.  We may use the diagnolization argument switching $7$ with $4$ for every digit we run across.  The set $E$ cannot be dense in $[0, 1]$. The sup of $E$ is $0.777777777777...$, so if we consider any point greater say $0.81$ then there is at least a distance of $0.1$ between the two points.
 
-Lemma : only members of $E$ with infinte digits are limit points.
-For any point with finite digits there exists a radius where no other points of the set can dwell.  For example if a point $p$ has the decimal representation of $0.747$ the closest point will be $0.7474$.  Then there is neighboorhood around $p$ with radius less than $0.0004$ that only contains  $0.7474$, and thus the point cannot be a limit point.
+<!-- Lemma : only members of $E$ with infinte digits are limit points.
+For any point with finite digits there exists a radius where no other points of the set can dwell.  For example if a point $p$ has the decimal representation of $0.747$ the closest point will be $0.7474$.  Then there is neighboorhood around $p$ with radius less than $0.0004$ that only contains  $0.7474$, and thus the point cannot be a limit point. -->
 
-$E$ Is compact, since if a point $p$ was a limit point of $E$ and not in the set then, $p$ must contain another digit besides $7$ or $4$.  And if that is the case we cannot approach arbituarly close to that point.  This implies that $E$ is closed, and since it is bounded and in $R^1$ we know it must be compact.  
+$E$ Is compact, since if a point $p$ was a limit point of $E$ and not in the set then, $p$ must contain another digit besides $7$ or $4$.  And if that is the case we cannot approach arbituarly close to that point.  This implies that $E$ is closed, and since $E$ is bounded and in $R^1$ we know it must be compact.  
 
 $E$ Is perfect because it is closed and because, for any neighboorhood we choose with radius $r$, it is possible to find a number with a change in a digit that is less than 
 $r$.  Note if we allowed finitely many digits of $7$ and $4$, such as $0.747747\overline{0}$. we could not make this claim.
 
 **18.**
 
+Is there a nonempty perfect set in $R^1$ which contains no rational number?
+
+Yes, Motivation
+
+Consider the set defined in problem **17**.
+This set is perfect, and avoids many rational numbers, however any rational number, which must have a repeating sequence of digits, with $7$ or $4$, is a limit point in this set. (Consider $7/9 = 0.\overline{7}$). So we seek construct a set of real numbers such that their digits do not repeat and every neighboorhood of every point has infinitely many points.
+
+Proof
+
+Let $D$ be the set of all $x \in [0, 1]$ whose decimal expansion contains only the digits $4$ and $7$.  Let $x_0 = 0.01001100011100001111...$.  Now consider a set $E$ defined as $E = D + x_0= \{d + x_0| d \in D \}$.  We may use the above proofs to derive the same conclusions for $E$, since $E$ is only shifted by a fixed amount. We know that $x + d, d \in D$ must be irrational, since $d$ is restricted to only $7$ and $4$ in its decimal places, and cannot cancels $x_0$ irrationality.  Thus $E$ contains no rationals, is closed and perfect.
+
+<!-- No.
+
+Proof by contradiction
+
+Assume there exists some set $E$ with properties described above. Since we are in $R^1$ and $E$ is non empty and perfect, $E$ must contain infintely many points.
+Since $E$ is perfect than every point must be a limit point. Now consider a limit $p$ in $E$.   Next consider a point $q$ in a neighboorhood $N_p$ of $p$. Because $E$ is perfect then $q$ must be a limit point as well. Using the triangle inequality we may consider a neighboorhood $N_q$ around $q$ contained in $N_p$.  Since $\mathbb{Q}$ is dense in the rationals there exists a rational between $p$ and $q$.  If we induct on the size $N_t$ -->
+
+<!-- Since $\mathbb{Q}$ is dense in the rationals for any point $q$ in the neighboorhood of $p$ there exists a rational between them.  -->
+
+<!-- Since the rationals are dense in $R^1$ even if we exclude rationals from our set definition  -->
+
+<!-- Consider the set $E$ defined as the set of all real numbers in $[0, 1]$. This implies that $E$ must be compact -->
+
+<!-- Consider the set $E$ defined as the set $0.A_1A_2A_3A_4A_5A_6$ where $\cap A = \empty$ and $(A_i : \mathbb{N})$. For any $A_i$ we write all digits.  For example if $A_5 = 1, A_6 = 45$ then $0.A_5A_6 = 0.145$. The set $E$ cannot contain any rational numbers since the decimal expansion of rational numbers must repeat. The set $E$ must be bounded since every point starts with the digit $0$.
+
+What remains to be shown is that  $E$ is closed and perferct.  Consider a=
+ -->
+
+**19.**
