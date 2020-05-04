@@ -238,9 +238,68 @@ Consider the problem of sorting a sequence of $n$ $0$'s and $1$'s using the comp
 
 ($b$)  Take every two sequential pairs of numbers and compare them.  Since we are assuming that both $1$ and $0$ appear with equal probability, then there should be an equal probabiliy that the result of comparison of a pair is different, or the same.
 For evey pair of numbers that are not the same we immediatly know which is which.
-So on average after we compared every pair of numbers we have $n/2$ sorted numbers and $n/2$ unsorted numbers.  Since we know the remaining pairs are the same we compare an element from any pair to element in another pair tournament algorithm style.  We repeat this process until every group is compared.  Again applying average case logic, we formulate the total number of comparisons as $n/2 + n/8 + n/32 = n(1/2^1 + 1/2^3 + 1/2^4)$ which is bounded by $2n/3$.  The is the optimal expected average, because we maxmize all possible information from a comparison, given the random distribution.  To do any better would imply that the array did not have a random distribution.
+So on average after we compared every pair of numbers we have $n/2$ sorted numbers and $n/2$ unsorted numbers.  Since we know the remaining pairs are the same we compare an element from any pair to element in another pair tournament algorithm style.  We repeat this process until every group is compared.  Again applying average case logic, we formulate the total number of comparisons as$n/2 + n/8 + n/32 = n(1/2^1 + 1/2^3 + 1/2^4)$ which is bounded by $2n/3$, by the following geometric series $\sum_{n=0}^\infin 2^{-2 n - 1} = 2/3$ The is the optimal expected average, because we maxmize all possible information from a comparison, given the random distribution.  To do any better would imply that the array did not have a random distribution.
 
 
 **4.27**
 
 Let $P$ be a simple, but not necessarily convex polygon and $q$ and arbitrary point not necessarily in $P$.  Design an efficient algorithm to find a line segment originating from $q$ that intersects the maximum number of edges of $P$. In other words, if standing at point $q$, in what direction should you aim a gun so the bullet will go through the largest number of walls. A bullet through a vertex $P$ gets credit for only one wall.  An $O(n \log n)$ algorithm is possible.
+
+<!-- First we need a mechanism to determine whether two segments can both be hit by a ray.  To do this we construct a triangle from $q$ and the two points of a line segment.  If any two triangles overlap then there is a ray from $q$ that intersects both segments.  This works with any number of segments, as long as all triangles overlap then there is ray from $q$ that intersects all of them.  Whether triangles overlap can be computed in constant time.
+
+First a $O(n^)2$ algortihm compare  a segment traingle with every other seg-triangle, repeat for $O((n-1) + $(n-2) + (n-3) ...) = O(n)^2$.
+
+Another attempt convert every point into polar coordinates. Build a binary tree based on the angle from $q$.  For every intersection find the nodes between, the angle coordinates of both ends of the segment, ie get a count of how many nodes are betweem the polar coordinates.  Then based on the line segment with the most points between them construct the ray by finding the smallest difference among angles in the. -->
+
+
+Final answer : take the polar coordinate of every point with regard to $q$.  Sort these points by angle.  Then traversing counter clockwise match up nested pairs of points, by line segments. Think nested parenthesis pair counting.
+
+
+**4.28**
+
+In one of my research papers [Ski88], I discovered a comparison-based sorting algorithm that runs in $O(n \log(\sqrt{n}))$ Given the existence of an $\Omega(n \log n)$ lower bound for sorting, how can this be possible?
+
+Using properties of logs, $n \log \sqrt{n} = n \log n^{1/2} = n (1/2) \log n$ and since $1/2$ is merely a constant then $O(n \log \sqrt{n}) = O(n \log n)$.
+
+**4.29**
+
+Mr. B. C. Dull claims to have developed a new data structure for priority queues that supports the operations Insert, Maximum, and Extract-Max—all in $O(1)$ worstcase time. Prove that he is mistaken. (Hint: the argument does not involve a lot of gory details—just think about what this would imply about the $\Theta(n \log n)$ lower bound for sorting.)
+
+That would imply sorting in $O(n)$ time which is false since the lower bound of sorting is $O(n \log n)$.  The reason for this is we could call Maximum, and Extract-Max, for every item, sorting linearly.
+
+**4.30**
+
+A company database consists of $10,000$ sorted names, $40\%$ of whom are known as good customers and who together account for $60\%$ of the accesses to the database.  There are two data structure options to consider for representing the database:
+
+* Put all the names in a single array and use binary search.
+* Put the good customers in one array and the rest of them in a second array. Only if we do not find the query name on a binary search of the first array do we do a binary search of the second array.
+
+Demonstrate whcih option gives better expected performance. Does this change if linear search on an unsorted array is used instead of binary search for both options?
+
+The first option takes $\log 10,000$ time. The second option takes $\log 4,000$ for the good customers, and $\log 4,000 + \log 6,000$ for other customers.  The expected time for the first option is  $\log 10,000$, where as the expected time for the second option is $0.6(\log 4,000) + 0.4(\log 4,000 + \log 6,000) = \log 4,000 + 0.4(\log 6,000)$
+
+The first option is better. The overhead of searching in two arrays will always be greater with the $60\%$ split.  Another way to think about it, logs grow continually slower, so splitting up inputs is like reseting that slow growth. For linear search we have the following $0.6(4,000) + 0.4(10,000) = 6400$ this has a better expected time that a straight $10000$ search.
+
+**4.31**
+
+Suppose you are given an array of $A$ of $n$ sorted numbers that has been *circularly shited* $k$ positions to the right.  For example, $\{35, 42, 5, 15, 27, 29\}$ is a sorted array that has been circularly shifted $k=2$ positions, while $\{27, 29, 35, 42, 5, 15\}$ has been shifted $k=4$ positions.
+* Suppose you know what $k$ is. Give an $O(lg n)$ algorithm to find the largest numbers in $A.
+* Suppose you *do not* know that $k$ is.  Give and $O(lg n)$ algorithm to find the largest number in $A$. For partial credit, you may give an $O(n)$ algorithm.
+
+
+If $k$ is known then $A[mod((n-1)+k, n)]$ is the greates element which can be computed in constant time.
+
+First we define a comparison test.  Compare two elements if the right one is less than the left one, we know that largest element must be between them.  We use this comparison to conduct a  binary search where we compare the first element to the middle element, then repeat as we recursively split the problem in half.
+
+**4.32**
+
+Consider the numerical $20$ Questions game. In this game, Player $1$ thinks of a number in the range $1$ to $n$.  Player $2$ has to figure out this number by asking the fewest number of true/false questions.  Assume that nobody cheats.
+
+* ($a$) What is an optimal strategy if $n$ is known?
+* ($b$) What is a good strategy is $n$ is not known?
+
+($a$)  Split $n$ in half with every question.
+
+($b$)  Use a oned sided binary doubling the size of the number, ie "Is the number less than 2", "less than 4", "less than 8".. and so on. Once a number that is less than is do a proper binary search between the last number and the first less than number.
+
+

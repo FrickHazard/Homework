@@ -615,13 +615,20 @@ nat.rec_on m
 -- theorem sub_grtr_thn (n m: ℕ) (h : m > n) : new_sub n m = 0 :=
 -- nat.rec_on m (show new_sub n 0 = 0, from )
 
--- theorem sub_zero_trunc_is_zero (n : ℕ) : new_sub 0 n = 0 := 
--- begin
--- cases n with n_,
--- reflexivity,
--- apply (show  new_sub 0 (succ n_) = 0, from calc 
--- new_sub 0 (succ n_) = new_sub 0 pred (succ(succ n_)
--- )
--- end
+def nat_to_power (n m :ℕ) : ℕ := 
+nat.rec_on m 1 (assume m ih, show ℕ, from new_mul ih n)
+
+theorem nat_to_power_1 (n : ℕ) : (nat_to_power n 1) = n := rfl
+theorem any_power_of_zero_is_one (n : ℕ) : (nat_to_power n 0) = 1 := rfl
+theorem succ_power_mul (n m : ℕ) : (nat_to_power n (succ m)) = new_mul (nat_to_power n m) n := rfl
+
+theorem nat_to_power_1_rev (n : ℕ) : (nat_to_power 1 n) = 1 :=
+nat.rec_on n
+(show (nat_to_power 1 0) = 1, from  calc 
+   (nat_to_power 1 0) = 1 : by rw any_power_of_zero_is_one)
+(assume n ih, show nat_to_power 1 (succ n) = 1, from calc 
+    nat_to_power 1 (succ n) = new_mul (nat_to_power 1 n) 1 : by rw succ_power_mul
+    ... = (nat_to_power 1 n) : by rw any_numb_times_one_is_numb_rev
+    ... = 1 : by rw ih)
 
 end hidden_1

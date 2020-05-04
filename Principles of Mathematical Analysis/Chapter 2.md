@@ -250,5 +250,39 @@ Since $E$ is perfect than every point must be a limit point. Now consider a limi
 
 What remains to be shown is that  $E$ is closed and perferct.  Consider a=
  -->
-
+ sdf
 **19.**
+
+($a$) If $A$ and $B$ are disjoint closed sets in some metric space $X$, prove that they are seperated.
+
+($b$) Prove the same for disjoint open sets.
+
+($c$) Fix $p \in X, \delta > 0$, define $A$ to be the set of all $q \in X$ for which $d(p, q) < \delta$, define $B$ similiarly, with $>$ in place of $<$.  Prove that $A$ and $B$ are seperated.
+
+($d$) Prove that every connected metric space with at least two points is uncountable.  *Hint:* Use($c$)
+
+($a$)  We know that if any set $E$ is closed then $E = \overline{E}$. Since both $A$ and $B$ are disjoint and closed, then $(\overline{A} = A) \cap (\overline{B} = B) = \empty$. Thus $A \cap \overline{B} = \empty$ and $\overline{A} \cap B = \empty$ are true and the criteria for a seperated set is met.
+
+($b$) Since $A$ and $B$ are disjoint sets, then $A \cap B = \empty$.
+
+Proof by Contradiction
+
+Suppose the set $A \cap \overline{B}$ was non empty.  Then any point $p$ must be in both $A$ and $\overline{B}$.  Since $A \cap B = \empty$, then $p$ must be a limit point of $B$, but not in $B$.  But this means that $p$ cannot be an interior point of $A$, since every neighboorhood contains a point of $B$.  So thus we have a contradiction.  The same argument can be made with  $\overline{A} \cap B$.  So both $A \cap \overline{B}$ and $\overline{A} \cap B$ are empty, and thus $A$ and $B$ are seperated.
+
+($c$)  $A$ and $B$ are disjoint, since a point $q \in A$ implies that $d(p, q) < \delta$ which excludes it from $B$.  Both $A$ and $B$ are open, since they approach $\delta$ but do not include it. We also note that both $\overline{A} = B^c$ and $\overline{B} = A^c$ hold.  Since  $A$ and $B$ are disjoint and open we apply ($b$).
+
+($d$) 
+
+Proof by Contradiction
+
+Suppose a connected metric space $X$ with at least two points is countable. Since there are at least two points, let us call one $p$.  Let us construct two sets $A \cup B = X$, where $A = \{p\}$ and $B \{q \in X \ | \ q \notin A\}$. In order to prove a contradiction we wish to show that $A$ and $B$ are seperated.  Since there are finitly many points in $X$ and thus $B$. We take the min distance from $d(p, q) \ \ q \in B$.  We set delta to this distance and apply ($c$), showing that $X$ must be seperated which is a contradiction.
+
+**20.**
+
+Are closures and interiors of connected sets always connected? (Look at subsets of $\mathbb{R}^2$.)
+
+The Closure of a connected set will always be connected. Every new point added by the closure of $\overline{E}$ is a limit point of $E$, so that for any $A \cap B = \empty$, $A \cup B = E$, then $A \cap \overline{B}$ and $\overline{A} \cap B$ are non empty.  This is because if any point $q$ is a limit point of $E$ then $q$ must  be a limit point in $A$ or $B$. Then it must be a point in $\overline{A}$ or $\overline{B}$. So neither $A \cap \overline{B}$ nor $\overline{A} \cap B$ can be empty.
+
+The interior of connected sets is not necessarily connected.  Consider the counter example of $E = A \cup B$, where $A = \{ \ p \in X \ | \ d(p, 1/2) < 1/2 \ \}$ and $B = \{ \ q \in X \ | \ d(q, 3/2) \leq 1/2 \ \}$.  The motivation for this set is a 2D version of $(0, 1) \cup [1, 2]$ constructed from balls. The interior of this set is equal to $E = A \cup B_i$, where $B_i$ is the interior of $B$ equal to $\{ \ q \in X \ | \ d(q, 3/2) < 1/2 \ \}$ ($\mathbb{R}^1$ collary $(0, 1) \cup (1, 2)$).  Note that the interior of $E$ does not include $1.$, Since in the $y$-axis there is always a point above the point $1$ that is not in $E$, so $1$ cannot be an interior point. This implies that the interior of $E$ is seperated. Since the only limit point shared between $A$ and $B$ is $1$. Writing this explicitly we see that $A \cap \overline{B_i} = \empty$ and $\overline{A} \cap B_i = \empty$, since $1 \notin A, 1 \notin B_i$ and we know that $1$ is othe only limit shared between $B_i$ and $A$.
+
+**21.**
