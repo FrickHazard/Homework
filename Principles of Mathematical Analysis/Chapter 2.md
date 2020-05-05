@@ -286,3 +286,26 @@ The Closure of a connected set will always be connected. Every new point added b
 The interior of connected sets is not necessarily connected.  Consider the counter example of $E = A \cup B$, where $A = \{ \ p \in X \ | \ d(p, 1/2) < 1/2 \ \}$ and $B = \{ \ q \in X \ | \ d(q, 3/2) \leq 1/2 \ \}$.  The motivation for this set is a 2D version of $(0, 1) \cup [1, 2]$ constructed from balls. The interior of this set is equal to $E = A \cup B_i$, where $B_i$ is the interior of $B$ equal to $\{ \ q \in X \ | \ d(q, 3/2) < 1/2 \ \}$ ($\mathbb{R}^1$ collary $(0, 1) \cup (1, 2)$).  Note that the interior of $E$ does not include $1.$, Since in the $y$-axis there is always a point above the point $1$ that is not in $E$, so $1$ cannot be an interior point. This implies that the interior of $E$ is seperated. Since the only limit point shared between $A$ and $B$ is $1$. Writing this explicitly we see that $A \cap \overline{B_i} = \empty$ and $\overline{A} \cap B_i = \empty$, since $1 \notin A, 1 \notin B_i$ and we know that $1$ is othe only limit shared between $B_i$ and $A$.
 
 **21.**
+
+Let $A$ and $B$ be seperated subsets of some $\mathbb{R}^k$, suppose $\bold{a} \in A, \bold{b} \in B,$ and define
+
+$$\bold{p}(t) = (1-t)\bold{a} + t\bold{b}$$
+
+for $t \in \mathbb{R}^1$. Put $A_o = \bold{p}^{-1}(A), B_o = \bold{p}^{-1}(B).$ [Thus $t \in A_o$ if and only if $\bold{p}(t) \in A$]
+
+($a$) Prove that $A_o$ and $B_o$ are separated subsets of $\mathbb{R}^1$.\
+($b$) Prove that there exists $t_o \in (0, 1)$ such that $\bold{p}(t_o) \notin A \cup B$.\
+($c$) Prove that every convex subset of $\mathbb{R}^k$ is connected.
+
+First note that $\bold{p}^{-1}$ indicates the reverse image of $\bold{p}$. We also note the $\bold{p}$ is a linear interpolation between vectors $\bold{a}$ and $\bold{b}$.
+
+($a$) In order to prove that $A_o$ and $B_o$ are seperated sets, we must show that $\overline{\bold{p}^{-1}(A)} \cap \bold{p}^{-1}(B)$ and $\bold{p}^{-1}(A) \cap \overline{\bold{p}^{-1}(B)}$ are empty. The seat $A_o$ only has elements where $p(t) \in A$ and likewise $B_o$ only has elements where $p(t) \in B$.  Since $A$ and $B$ are seperated, $A \cap B = \empty$, which implies $\bold{p}^{-1}(A) \cap \bold{p}^{-1}(B) = \empty$.  This leaves us only to consider the limit points in the closure of $A_o$ and $B_o$.  Consider a real number $t_l$ which is a limit point of $A_o$ not in $A_o$. If $t_l$ were a point in $B_o$ then $\bold{p}(t_l) \in B$.  But this is a contradiction since any limit point of $\bold{p}(t_l)$ with respect to $B$ cannot be a point in $A$ and thus cannot have an associated limit point in $A_o$.  So then any limit point of $A_o$ cannot be a point in $B_o$. We make the exact same argument from the perspective of $B_o$.  This allows us to make the statement $\overline{A_o} \cap B_o = \empty$ and $A_o \cap \overline{B_o} = \empty$, which is the definition of $A_o$ and $B_o$ being seperated.
+
+($b$) Since we know that $A_o$ and $A_b$ are seperated and in $\mathbb{R}^1$.  We know from inversion of the if and only if of theorem $2.47$ that there exists $x \ y, \in A_o \cup B_o$ such that there exists  $z$, where $x < z <y$ and $z \notin A_o \cup B_o$. This implies that $\bold{p}(z)$ cannot be in $A \cup B$. All that is left is to prove is that $0 < z < 1$ must hold. Consider $p(0)$ which is equal to some $a \in A$. Since $z$ is not in $A_o$ and every other $p(k)$ where $k \in A_o$ and $k < 0$ cannot be in $B$, then $z$ must be greater than $0$.  We make a similiar argument from the perspective of $B$ showing that $z$ must be less than $1$.  So then there must exist some real number $z$ in the interval $(0, 1)$, such that $\bold{p}(z) \notin A \cup B$, since $z$ is not in $A_o$ or $B_o$.
+
+($c$)
+A set $E$ in $\mathbb{R}^k$ is convex if $(1- \lambda)\bold{x} + \lambda\bold{y}  \in E$  whenever $\bold{x} \in E, \bold{y} \in E$ and $0 < \lambda < 1$. With what we have shown in ($a$) and ($b$) we can prove the theorem by contradiction.  Suppose a convex set $E$ was seperated.  Then we could construct a $z$ in the interval $(0, 1)$ of which $\bold{p}(z)$ is not a member of $E$ via ($b$), but this is a contradiction, since for any number in the interval $0 < \lambda < 1$, $\bold{p}(\lambda)$ must be a member in $E$. And so every convex set in $\mathbb{R}^k$ must be connected.
+
+
+
+
