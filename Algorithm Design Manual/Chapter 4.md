@@ -302,4 +302,74 @@ Consider the numerical $20$ Questions game. In this game, Player $1$ thinks of a
 
 ($b$)  Use a oned sided binary doubling the size of the number, ie "Is the number less than 2", "less than 4", "less than 8".. and so on. Once a number that is less than is do a proper binary search between the last number and the first less than number.
 
+**4.33**
 
+Suppose that you are given a sorted sequence of *distinct* integers $\{a_, a_2, ..., a_n\}$.  Give an $O(\lg n)$ algorithm to determine whether there exists an $i$ index such as $a_i = i$.  For example, in $\{-10, -3, 3, 5, 7\}$, $a_3 = 3$.  In $\{2, 3, 4, 5, 6, 7\}$, there is no such $i$.
+
+We can use a binary search like algorithm. Whenever we check a number at a index $i$ if that number is greater than $i$ we know that every item to the right of it cannot contain an element satisfying $a_i = i$. A consequance of a distinct sorted array is that evey subsequent element must be at least one greater than the previous element.  Likewise if an element $a_i$ we check is less than $i$ we know every element at an index less than $i$ cannot satisfy $a_i = i$.  With both of these facts we can effectively split the array in half, until we find a valid $a_i = i$ or show that none exists.  Where $n$ is unknown a one sided binary search works.
+
+**4.34**
+
+Suppose that you are given a sorted sequence of *distinct* integers $\{a_, a_2, ..., a_n\}$, drawn from $1$ to $m$ where $n < m$. Give an $O(\lg n)$ algorithm to find an integer $\leq m$ that is not present in $a$. For full credit, find the smallest such integer.
+
+Building on **4.33** for an element at $a_i$ we can determine whether or not there is a gap to to the left of $a_i$.  If $a_i > i$ than there must be a number in $m$ not in $a$ less than $a_i$. The element $a_i$ can never be less than $i$ and if it is equal to $i$ then there is no gaps to the left.  We use this comparison to conduct a binary search for the smallest gap of in $m$.
+
+**4.35**
+
+Let $M$ be $n \times m$ integer matrix in which the entries of each row are sorted in increasing order (from left to right) and the entries in each column are in increasing order (from top to bottom).  Give an effcient algorithm to find the position of an integer $x$ in $M$, or to determine that $x$ is not there.  How many comparisons of $x$ with matrix entries does your algorithm use in worst case?
+
+First we notice a key invariant property: every cell $c_{gh}$ is greater than the rectangle formed from all cells $c_{ij}$ where $i < g$ and $j < h$. We can use this to identify a rectangular region to cut the problem in half.
+
+<!-- 
+ The first cell we choose is $c_ij$, where $h = \lfloor mn/2 \rfloor$, $i = mod(h, n)$,  $j= \lfloor (h/n) \rfloor$. This cuts our problem in half.  However subsequent divisions are not so easy. In order to further divide the problem in half we need to find a cell that must be greater than half of the remaining squares.  This is the same of the first division but we must account for an uneven squares.  So then $h = \lfloor r/2 \rfloor$, $i = mod(h, n)$,  $j= \lfloor (h/n) \rfloor$
+
+We define a subroutine *next_split_cell($ij, \ kl$)* which takes two pairs of indices for two cells and finds the intermediate splitting cell.
+
+*next_split_cell($ij, \ kl$)* =\
+{
+    A[]
+}
+
+
+This gives us a worst case running time of $O(\log(nm))$.
+
+
+$\lfloor a/n \rfloor$  -->
+
+Finding the square that effectively cuts the problem in half is quit difficult. For a matrix where the first element is $c_{00}$.  We can cut the matrix in half by the following.
+
+$$i = min(mod(a-1, n) + \left\lfloor \frac{a-1}{n} \right\rfloor, n-1)$$
+
+and
+
+$$j = \left\lfloor \frac{a-1}{n} \right\rfloor$$
+
+where $a$ is half the number of cells.
+
+After we sample this cell we may  divide this problem into smaller matrices, since for any subset matrix in $A$, the invarient property holds.  Sometimes this will divide the problem into an L shaped space of remaining squares.  We divide this further into two squares.
+
+```C
+find_index_sub_matrix(int top, int bottom, int left, int right)
+{
+    int n = ((top - bottom) + 1);
+    int m = ((right - left) + 1);
+    int sub_mat_size = n * m;
+    int i = min(mod(sub_mat_size-1, n) + (a-1)/n, n-1);
+    int j = (a - 1 / n);
+
+    // index_offsets defining this sub matrix 
+    if (A[i][j] == x) return (i, j);
+    if (A[i][j] < x)
+    {
+        find_index_sub_matrix(0 + top, n + bottom, j + left, m - j + right);
+        if (i < n)
+        {
+            find_index_sub_matrix(i + top, n + bottom, 0 + left, j + right);
+        }
+    }
+    else
+    {
+        find_index_sub_matrix(0 + top, i + bottom, 0 + left, j + right);
+    }
+}
+```

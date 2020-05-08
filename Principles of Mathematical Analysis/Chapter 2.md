@@ -306,6 +306,23 @@ First note that $\bold{p}^{-1}$ indicates the reverse image of $\bold{p}$. We al
 ($c$)
 A set $E$ in $\mathbb{R}^k$ is convex if $(1- \lambda)\bold{x} + \lambda\bold{y}  \in E$  whenever $\bold{x} \in E, \bold{y} \in E$ and $0 < \lambda < 1$. With what we have shown in ($a$) and ($b$) we can prove the theorem by contradiction.  Suppose a convex set $E$ was seperated.  Then we could construct a $z$ in the interval $(0, 1)$ of which $\bold{p}(z)$ is not a member of $E$ via ($b$), but this is a contradiction, since for any number in the interval $0 < \lambda < 1$, $\bold{p}(\lambda)$ must be a member in $E$. And so every convex set in $\mathbb{R}^k$ must be connected.
 
+**2.22**
+
+A metric space is *separable* if it contains a countable dense subset.  Show that $R^k$ is separable. Hint: Consider the set of points which have only rational coordinates.
+
+Consider the set $E$ in $\mathbb{R}^k$ composed of all points that can be expressed as tuples of rational numbers. In order to show that $E$ is dense in $\mathbb{R}^k$ we need to show that every point in $\mathbb{R}^k$ is a limit point of $E$. Consider a neighboorhood $N_r$ with radius $r$ around an arbituary point $p$ in $\mathbb{R}^k$. The set $N_r$ contains an infinite amount of real numbers, let us call one of them $q$. We know that for any two real numbers we can find a rational number inbetween them.  For each coordinate let us consider a rational number $d_i$ between $p_i$ and $q_i$.  Presuming the Euclidean metric, we can express the distance as the following.
+
+$$\sqrt{\sum_{i=1}^{k} d_i^2}$$
+
+Since $d$ is between $p$ and $q$, using facts about Euclidean distance, we know that $0 < d(d, p) < d(p,q)$, and thus $d$ must be contained in the neighborhood $N_r$.  Since we can find a rational number in every neighboorhood of any point in $\mathbb{R}^k$, every point in $\mathbb{R}^k$ must be a limit point of $\mathbb{Q}^k$, thus $\mathbb{Q}^k$ is dense in $\mathbb{R}^k$.  Since $\mathbb{Q}^k$ is countable, we have reached our conclusion.
+
+
+
+**2.23**
+
+A collection $\{V_{\alpha}\}$ of open subsets of $X$ is said to be a *base* for $X$ if the following is true : For every $x \in X$ and every open set $G \subset X$ such that $x \in G$, we have $x \in V_{\alpha \subset G}$ for some $\alpha$. In other words every open set in $X$ is the union of a subcollection $\{V_{\alpha}\}$.
+
+Prove that every seperable metric space has a *countable* base.  *Hint*: Take all the neigborhoods with rational radius and center in some countable dense subset of $X$.
 
 
 

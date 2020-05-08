@@ -622,7 +622,6 @@ theorem nat_to_power_1 (n : ℕ) : (nat_to_power n 1) = n := rfl
 theorem any_power_of_zero_is_one (n : ℕ) : (nat_to_power n 0) = 1 := rfl
 theorem succ_power_mul (n m : ℕ) : (nat_to_power n (succ m)) = new_mul (nat_to_power n m) n := rfl
 
-
 theorem group_power_in_mul (n m l : ℕ) : (new_mul (nat_to_power m l) (new_mul m n)) = (new_mul (nat_to_power m (succ l)) n) :=
 nat.rec_on l
 (show new_mul (nat_to_power m 0) (new_mul m n) = (new_mul (nat_to_power m (succ 0)) n), from calc
@@ -663,5 +662,35 @@ nat.rec_on l
     ... = new_mul (nat_to_power n l) (new_mul n (nat_to_power m (succ l))) : by rw new_mul_comm n
     ... = new_mul (new_mul (nat_to_power n l) n) (nat_to_power m (succ l)) : by rw new_mul_assoc
     ... = (new_mul (nat_to_power n (succ l)) (nat_to_power m (succ l))) : by rw (succ_power_mul n l))
+
+theorem nat_product_addition (n m l : ℕ) : new_mul (nat_to_power n m) (nat_to_power n l) = nat_to_power n (m + l) :=
+nat.rec_on m
+(show  new_mul (nat_to_power n 0) (nat_to_power n l) = nat_to_power n (0 + l), from calc
+new_mul (nat_to_power n 0) (nat_to_power n l) = new_mul 1 (nat_to_power n l) : by rw any_power_of_zero_is_one
+... = (nat_to_power n l) : by rw any_numb_times_one_is_numb
+... = (nat_to_power n (0 + l)) : by rw nat.zero_add)
+(assume m ih, show new_mul (nat_to_power n (succ m)) (nat_to_power n l) = nat_to_power n ((succ m) + l), from calc
+    new_mul (nat_to_power n (succ m)) (nat_to_power n l) = new_mul (new_mul (nat_to_power n m) n) (nat_to_power n l) : by rw succ_power_mul
+    ... = new_mul (new_mul n (nat_to_power n m)) (nat_to_power n l) : by rw new_mul_comm n
+    ... = new_mul n (new_mul (nat_to_power n m) (nat_to_power n l)) : by rw new_mul_assoc
+    ... =  new_mul n (nat_to_power n (m + l)) : by rw ih
+    ... =  new_mul (nat_to_power n (m + l)) n : by rw new_mul_comm
+    ... =  (nat_to_power n (succ (m + l))) : by rw succ_power_mul  
+    ... =  (nat_to_power n  ((succ m) + l)) : by rw nat.succ_add)
+
+theorem nat_exponent_product (n m l : ℕ) : nat_to_power (nat_to_power n m) l = nat_to_power n (new_mul m l) :=
+nat.rec_on l
+(show nat_to_power (nat_to_power n m) 0 = nat_to_power n (new_mul m 0), from calc
+    nat_to_power (nat_to_power n m) 0 = 1 : by rw any_power_of_zero_is_one
+    ... = nat_to_power n 0 : by rw ←any_power_of_zero_is_one
+    ... = nat_to_power n (new_mul m 0) : by rw any_numb_times_zero_is_zero_rev)
+(assume l ih, show nat_to_power (nat_to_power n m) (succ l) = nat_to_power n (new_mul m (succ l)), from calc
+   nat_to_power (nat_to_power n m) (succ l) = 
+        new_mul (nat_to_power (nat_to_power n m) l) (nat_to_power n m) : by rw succ_power_mul
+   ... = new_mul (nat_to_power n (new_mul m l)) (nat_to_power n m): by rw ih
+   ... = nat_to_power n ( (new_mul m l) + m) : by rw nat_product_addition
+   ... = nat_to_power n ( m + (new_mul m l) ) : by rw nat.add_comm 
+   ... = nat_to_power n (new_mul m (succ l)) : by rw succ_plus_other_numb_rev)
+
 
 end hidden_1
