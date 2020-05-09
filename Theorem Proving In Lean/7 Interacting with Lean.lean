@@ -187,7 +187,7 @@ inductive list (α : Type u)
 | nil {} : list
 | cons : α → list → list
 
-variable {α : Type}
+variable {α : Type u}
 
 local notation h :: t  := list.cons h t
 
@@ -195,12 +195,12 @@ def append (s t : list α) : list α :=
 list.rec t (λ x l u, x::u) s
 
 local notation s ++ t := append s t
+local notation `[` l:(foldr `,` (h t, list.cons h t) list.nil) `]` := l
 
 theorem nil_append (t : list α) : list.nil ++ t = t := rfl
 theorem cons_append (x : α) (s t : list α) :
   x::s ++ t = x::(s ++ t) := rfl
-
-local notation `[` l:(foldr `,` (h t, list.cons h t) list.nil) `]` := l
+theorem cons_to_append (t : list α) (itm : α): itm::t = [itm]++t := rfl 
 
 section
   open nat
@@ -257,6 +257,8 @@ list.rec_on l 0 (assume itm lst ih, show nat, from nat.succ ih))
 -- Implict length exercise
 theorem nil_zero_length : length_list (@list.nil α) = 0 := rfl
 theorem length_plus_one (r : list α) (itm: α) : length_list (itm::r) = (length_list r) + 1 := rfl
+theorem length_of_one_item (itm :α) : length_list [itm] = 1 := rfl
+
 
 example (r s : list α) : (length_list r) + (length_list s) = length_list (r++s) :=
 list.rec_on r 
@@ -269,11 +271,82 @@ list.rec_on r
     show (length_list (itm::r)) + (length_list s) = length_list (itm::r++s), from
     calc
     (length_list (itm::r)) + (length_list s) = (length_list r) + 1 + (length_list s) : by rw length_plus_one
-   ... = (length_list r + length_list s) + 1 : by rw nat.add_right_comm
+    ... = (length_list r + length_list s) + 1 : by rw nat.add_right_comm
     ... = length_list (r ++ s) + 1 : by rw ih
     ... = length_list (itm::(r++s)) : by rw length_plus_one
     ... = length_list (itm::r++s) : by rw cons_append
 )
+
+-- exercises 2
+
+def reverse : list α → list α :=
+(assume l, show list α, from 
+    list.rec_on l list.nil
+        (assume itm lst ih, show list α, from ih++(itm::list.nil)))
+
+#reduce (reverse (reverse ([1, 2, 3, 4, 5])) : C.list int)
+
+
+theorem reverse_list_add_item (t : list α) (itm : α) : reverse (itm::t) = (reverse t)++[itm] := rfl
+theorem reverse_nil_list {z : Type u}: reverse (@list.nil z) = (@list.nil z) := rfl
+
+
+theorem reverse_append (t u : list α) : (reverse (t++u)) = (reverse u) ++ (reverse t) :=
+list.rec_on t
+(show (reverse (list.nil++u) = reverse u ++ reverse list.nil), from calc 
+    reverse (list.nil++u) = reverse u : by rw nil_append
+    ... =  reverse u ++ list.nil : by rw append_nil
+    ... =  reverse u ++ reverse list.nil : rfl)
+(assume itm lst ih, show (reverse (itm::lst++u)) = (reverse u) ++ (reverse (itm::lst)), from calc
+    (reverse (itm::lst++u)) = (reverse (itm::(lst++u))) : by rw cons_append
+    ... = (reverse (lst++u))++[itm] : by rw reverse_list_add_item
+    ... = ((reverse u) ++ (reverse lst))++[itm] : by rw ih
+    ... = (reverse u) ++ ((reverse lst)++[itm]) : by rw append_assoc
+    ... = (reverse u) ++ (reverse (itm::lst)) : by rw reverse_list_add_item)
+
+theorem append_length (t u : list α) : length_list (t++u) = (length_list t) + (length_list u) :=
+list.rec_on t
+(show length_list (list.nil++u) = length_list list.nil + length_list u, from calc
+    length_list (list.nil++u) = length_list u : rfl
+    ... = length_list u + length_list list.nil : rfl
+    ... =  length_list list.nil + length_list u : by rw nat.add_comm)
+-- (show length_list (list.nil++u) = length_list list.nil + length_list u, from rfl)
+(assume itm lst ih, show length_list ((itm::lst)++u) = length_list (itm::lst) + length_list u, from calc
+    length_list ((itm::lst)++u) = length_list (itm::(lst++u)) : by rw cons_append
+     ... = length_list (lst++u) + 1 : by rw length_plus_one
+     ... = (length_list lst + length_list u) + 1 : by rw ih
+     ... = (length_list u + length_list lst) + 1 : by rw nat.add_comm (length_list lst)
+     ... = length_list u + (length_list lst + 1) : by rw nat.add_assoc
+     ... = length_list u + length_list (itm::(lst)) : by rw ←(length_plus_one lst itm)
+     ... = length_list (itm::(lst)) + length_list u  : by rw nat.add_comm)
+
+
+
+theorem length_reverse_identity (t: list α) : length_list (reverse t) = length_list t :=
+list.rec_on t 
+rfl
+(assume itm lst ih, show length_list (reverse (itm::lst)) = (length_list (itm::lst)), from calc
+    length_list (reverse (itm::lst)) = length_list ((reverse lst)++[itm]): by rw reverse_list_add_item
+    ... = length_list (reverse lst) + length_list [itm] : by rw append_length
+    ... = length_list lst + length_list [itm] : by rw ih
+    ... = length_list lst + 1 : by rw length_of_one_item
+    ... = length_list (itm::lst): by rw length_plus_one)
+
+example (t: list α) : reverse (reverse t) = t :=
+list.rec_on t
+(show reverse (reverse list.nil) = list.nil, from calc
+reverse (reverse list.nil) = reverse list.nil : rfl
+... = list.nil : rfl)
+(assume itm lst ih, show reverse (reverse (itm::lst)) = (itm::lst), from calc
+    reverse (reverse (itm::lst)) = reverse ((reverse lst) ++ [itm]) : by rw reverse_list_add_item
+    ... =  ((reverse [itm]) ++ reverse (reverse lst)): by rw reverse_append
+    ... = (reverse [itm]) ++ lst: by rw ih
+    ... = (reverse (itm::list.nil)) ++ lst: by rw reverse_list_add_item
+    ... = (reverse list.nil)++[itm] ++ lst: by rw reverse_list_add_item
+    ... = (list.nil)++[itm] ++ lst: by rw (@reverse_nil_list α)
+    ... = [itm]++lst : by rw nil_append
+    ... = itm::lst : by rw ←cons_to_append)
+
 end
 end C
 
@@ -443,6 +516,8 @@ by injections; simp *
 
 -- 7.10. Exercises
 namespace hidden_1
+
+#reduce nat.mul 4 5
 
 def new_mul (n m : ℕ) : ℕ  := 
     nat.rec_on n 0 (assume n ih, show ℕ, from m + ih)
@@ -694,3 +769,4 @@ nat.rec_on l
 
 
 end hidden_1
+-- Excersize 4 ↑ above with list stuff

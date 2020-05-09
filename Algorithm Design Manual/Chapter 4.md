@@ -346,30 +346,44 @@ $$j = \left\lfloor \frac{a-1}{n} \right\rfloor$$
 
 where $a$ is half the number of cells.
 
-After we sample this cell we may  divide this problem into smaller matrices, since for any subset matrix in $A$, the invarient property holds.  Sometimes this will divide the problem into an L shaped space of remaining squares.  We divide this further into two squares.
+After we sample this cell we may  divide this problem into smaller matrices, since for any subset matrix in $A$, the invarient property holds.  Sometimes this will divide the problem into an L shaped space of remaining squares.  We divide this further into two rectangular matrices.
 
-```C
-find_index_sub_matrix(int top, int bottom, int left, int right)
+```C++
+std::pair<int,int> find_index_sub_matrix(int bottom, int top, int left, int right, int x)
 {
     int n = ((top - bottom) + 1);
     int m = ((right - left) + 1);
+    if (n == 1 && m == 1)
+    {
+        if (matrix[bottom][left] == x) return std::make_pair(bottom, left);
+        else return std::make_pair(-1, -1);
+    }
+    if (n <= 0 || m <= 0) return std::make_pair(-1, -1);
     int sub_mat_size = n * m;
-    int i = min(mod(sub_mat_size-1, n) + (a-1)/n, n-1);
-    int j = (a - 1 / n);
+    int half = sub_mat_size / 2;
+    int i = bottom + std::min<int> ( ((half - 1) % n) + (half - 1) / n, n - 1);
+    int j = left + ((half - 1) / n);
 
     // index_offsets defining this sub matrix 
-    if (A[i][j] == x) return (i, j);
-    if (A[i][j] < x)
+    if (matrix[i][j] == x) return std::make_pair(i, j);
+    if (matrix[i][j] < x)
     {
-        find_index_sub_matrix(0 + top, n + bottom, j + left, m - j + right);
-        if (i < n)
+        std::pair<int, int> pair = find_index_sub_matrix(bottom, top, j + 1,  right, x);
+        if (pair.first > -1 && pair.second > -1)
         {
-            find_index_sub_matrix(i + top, n + bottom, 0 + left, j + right);
+            return pair;
         }
+        if (i < top)
+        {
+            return find_index_sub_matrix(i + 1, top, left, right, x);
+        }
+        return std::make_pair(-1, -1);
     }
     else
     {
-        find_index_sub_matrix(0 + top, i + bottom, 0 + left, j + right);
+        return find_index_sub_matrix(bottom, i, left, j, x);
     }
 }
 ```
+
+The code for this algorithm is messy but correct.  One intersting thing
