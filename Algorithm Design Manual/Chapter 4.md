@@ -386,4 +386,4 @@ std::pair<int,int> find_index_sub_matrix(int bottom, int top, int left, int righ
 }
 ```
 
-The code for this algorithm is messy but correct.  One intersting thing
+The code for this algorithm is messy but correct.

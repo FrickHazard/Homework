@@ -314,7 +314,7 @@ Consider the set $E$ in $\mathbb{R}^k$ composed of all points that can be expres
 
 $$\sqrt{\sum_{i=1}^{k} d_i^2}$$
 
-Since $d$ is between $p$ and $q$, using facts about Euclidean distance, we know that $0 < d(d, p) < d(p,q)$, and thus $d$ must be contained in the neighborhood $N_r$.  Since we can find a rational number in every neighboorhood of any point in $\mathbb{R}^k$, every point in $\mathbb{R}^k$ must be a limit point of $\mathbb{Q}^k$, thus $\mathbb{Q}^k$ is dense in $\mathbb{R}^k$.  Since $\mathbb{Q}^k$ is countable, we have reached our conclusion.
+Since $d$ is between $p$ and $q$, using facts about Euclidean distance, we know that $0 < d(d, p) < d(p,q)$, and thus $d$ must be contained in the neighborhood $N_r$.  Since we can find a rational number in every neighborhood of any point in $\mathbb{R}^k$, every point in $\mathbb{R}^k$ must be a limit point of $\mathbb{Q}^k$, thus $\mathbb{Q}^k$ is dense in $\mathbb{R}^k$.  Since $\mathbb{Q}^k$ is countable, we have reached our conclusion.
 
 
 
@@ -324,5 +324,47 @@ A collection $\{V_{\alpha}\}$ of open subsets of $X$ is said to be a *base* for 
 
 Prove that every seperable metric space has a *countable* base.  *Hint*: Take all the neigborhoods with rational radius and center in some countable dense subset of $X$.
 
+Consider a collection $\{V_{\alpha}\}$ that is a base of the seperable metric space $X$. Since $X$ is seperable, it contains a countably dense subset, let us call this countable dense subset $D$. Consider the collection of open sets $\{C_\beta\}$ composed of neighborhoods with rational radius around every point in $D$.  Consider a point $x \in X$ and an arbituary open set $G$, such that $x \in G$.  Since $\{C_\beta\}$ was construted from $D$, there must exist a neighborhood which is a subset of $G$. Since $D$ contains neighborhoods with rational radius around a limit point of $x$, we can always find a openball that fits inside $G$. Thus $D$, which is countable, since it is a union of countable sets, statisfies the requirment of a base.
 
+**2.24**
+
+Let $X$ be a metric space in which every infinite subset has a limit point.  Prove that $X$ is seperable.  *Hint* Fix $\delta > 0$, and pick $x_1 \in X$.  Having choosen $x_1, ..., x_j \in X$, choose $x_{j+1} \in X$, if possible, so that $d(x_i, x_{j+1}) \geq \delta$ for $i=1,...,j$. Show that this process must stop after a finite number of steps, and that $X$ can therefore be covered by finitely many neighborhoods of radius $\delta$. Take $\delta = 1/n (n = 1, 2,3,...),$ and consider the centers of the corresponding neighborhoods. 
+
+<!-- 
+Let $X$ be a metric space with the following property, every infinite subset has a limit point.
+
+Let $\delta > 0$ be a real number.
+
+Let $x_1 \in X$ be an arbituary point.
+
+Let $B \subset X$ be a bounded subset of $X$, with point $q$ and real number $M$ such that $d(p, q) < M$ for all $p \in B$
+
+**Lemma 1**
+
+Consider a sequence of numbers $x_1 ..., x_j \in X$ such that $d(x_i, x_j) \geq \delta$ for $i=1,...,j-1$. In other words every point in $x_{1 ... j}$ is at least $\delta$ distance away from every other point.  Consider adding another point $x_{j}$ such that the property of this sequence is maintained.  We wish to show that this process must terminate in finitely many additions of points for $B$.  Proof by contradiction, suppose that we could always add another $x_{j+1}$ to the sequence $x_{1...j}$. That would imply that there is always a point we can add such that $d(x_i, x_{j+1}) \geq \delta$. However this is contradiction since by inducting on $q$ and the triangle inequality, we would eventually add a point where $M < d(p, x_{j+1})$.
+
+Using lemma 1, for any arbituary point in any arbituary bounded subset of $X$, we can find a finite sequence of points such that no other point exists satisfying $d(x_i, x_{j+1}) \geq \delta$ for $i=1,...,j$.  Thus if we consider $X$ as the infinite union of infinte bounded sets, we know that $X$ must therefore be covered by infinitely many neighborhoods of radius $\delta$.  In order to finish our proof we must show that th -->
+
+Let $X$ be a metric space with the following property, every infinite subset has a limit point.
+
+Let $\delta > 0$ be a real number.
+
+Let $x_1 \in X$ be an arbituary point.
+
+Consider a sequence of numbers $x_1 ..., x_j \in X$ such that $d(x_i, x_j) \geq \delta$ for $i=1,...,j-1$. In other words every point in $x_{1 ... j}$ is at least $\delta$ distance away from every other point.  Consider adding another point $x_{j}$ such that the property of this sequence is maintained.  We wish to show that this process must terminate in finitely many additions of points for $B$.  Proof by contradiction, suppose that we could always add another $x_{j+1}$ to the sequence $x_{1...j}$. That would imply an infinite set of points $x_k$, $j = 1, 2, 3, ....$, such that $d(x_i, x_j) \geq \delta$ for all unique pairs of $i$ and $j$.   It would then follow that certain inifinte subsets would not contain a limit point, for example consider the open ball $B_{\frac{\delta}{2}}(x)$, for any $x \in X$. This open ball  contains at most one point of the sequence, which implies that $x$ cannot be a limit point of the sequence.  We make this argument for every point $X$, showing that the infinite sequence has no limit points, which is a contradiction of the given property of $X$.  Since $\delta$ is arbituary, consider then the set $E = \cup \ \{ x_{1...j} | \delta : \frac{1}{n}\}$ where $n : \mathbb{N}$.  So that were are taking a countable union of sets such that each set in the sequence of a different delta.  We wish to show that this set is countable and dense in $X$.  It is countable by theorem $2.12$.  It is dense since for any $p \in x$ and neighborhood  $N_r$ we consider, since  $E$ is an open cover we may choose an $n < r/2$ so that there must exist a point of $E$ in $N_r$, since if it did not exist, it would no longer be an open cover.  And thus we have constructed a countable dense set, for $X$, which by definition is seperable.
+
+**2.25**
+
+Prove that every compact metric space $K$ has a countable base, and that $K$ is therefore separable  *Hint:* For every positive integer $n$, there are finitely many neighborhoods of radius $1/n$  whose union covers $K$.
+
+
+A compact metric space $K$ is compact if every cover contains a finite subcover.
+Consider a finite subcover $\{D_n\}$ in $K$ composed of open balls of size $1/n$.
+Now consider $\{S_\alpha\} = \{ d \in D_n \ | \ n : \mathbb{N} \}$. The set $\{S_\alpha\}$ must be countable by $2.12$, since it is the union of finite sets mapped from the natrual numbers which are countable.
+
+Now consider an arbituary $x \in K$ and an arbituary open set $G \sub K$, such that $x \in G$.  We wish to show that $x \in S_\alpha \sub G$.  Since the collection $\{S_\alpha\}$ is a cover of $K$, then $x \in S_\alpha$ for some $\alpha$ holds.  Next since $G$ is open we may consider the distance $d_G$ from $x$ to the closest point not in $G$, if it exists.  Since $\{S_\alpha\}$ is constructed from $1/n$ open balls, and $\mathbb{Q}$ is dense in $R$, we may always produce an open ball $S_\alpha$ of radius less than $d_G$. This implies that  $S_\alpha$ must be a subset of $G$ by the trianlge inequality.  Therefore $K$, which is an arbituary compact metric space, has a countable base.
+
+Applying the theorem from **2.23**, we know that $K$ must be separable.
+
+**2.26**
 
