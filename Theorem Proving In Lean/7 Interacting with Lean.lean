@@ -769,4 +769,21 @@ nat.rec_on l
 
 
 end hidden_1
--- Excersize 4 ↑ above with list stuff
+
+
+
+-- Excersize 2 ↑ above with list stuff
+
+inductive expression : Type 
+| nil {} : expression
+| const : ℕ → expression
+| var : ℕ → expression
+| plus : expression → expression → expression
+| times : expression → expression → expression 
+
+def evaluate (e : expression) : ℕ :=
+expression.rec_on e
+0
+(assume n, show ℕ , from n)
+(assume n, show ℕ , from n) 
+
