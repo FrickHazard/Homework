@@ -324,6 +324,8 @@ A collection $\{V_{\alpha}\}$ of open subsets of $X$ is said to be a *base* for 
 
 Prove that every seperable metric space has a *countable* base.  *Hint*: Take all the neigborhoods with rational radius and center in some countable dense subset of $X$.
 
+(Note* Rudin should have shown this is a both ways theorem)
+
 Consider a collection $\{V_{\alpha}\}$ that is a base of the seperable metric space $X$. Since $X$ is seperable, it contains a countably dense subset, let us call this countable dense subset $D$. Consider the collection of open sets $\{C_\beta\}$ composed of neighborhoods with rational radius around every point in $D$.  Consider a point $x \in X$ and an arbituary open set $G$, such that $x \in G$.  Since $\{C_\beta\}$ was construted from $D$, there must exist a neighborhood which is a subset of $G$. Since $D$ contains neighborhoods with rational radius around a limit point of $x$, we can always find a openball that fits inside $G$. Thus $D$, which is countable, since it is a union of countable sets, statisfies the requirment of a base.
 
 **2.24**
@@ -368,3 +370,23 @@ Applying the theorem from **2.23**, we know that $K$ must be separable.
 
 **2.26**
 
+Let $X$ be a metric space in which every infinite subset has a limit point.  Prove that $X$ is compact.  *Hint:* By Exercises $23$ and $24$, $X$ has a countable base.  It follows that every open cover of $X$ has a *countable* subcover $\{ G_n \}, n=1, 2, 3,...$ If no finite subcollection of $\{G_n\}$ covers $X$, then the complement $F_n$ of $G_1 \cup ... \cup G_n$ is nonempty for each $n$, but $\cap F_n$ is empty. If $E$ is a set which contains a point from each $F_n$, consider a limit point of $E$, and obtain a contradiction.
+
+Consider a metric space $X$ in which every infinite subset has a limit point.  Applying  **2.24**, we know that $X$ is seperable. Next since $X$ is seperable applying **2.23**, we know $X$ must have a countable base. We may further determine that every cover of $X$ has then a countable subcover(Otherwise we could show a contradiction, since every open set in $X$ is the union of the countable base, then the union of the opencover must have a countable base).
+
+Establishing these preliminary facts, let us embark upon a proof by contradiction.  Suppose there existed an infinite cover $\{V_\alpha \}$ of $X$, such that no finite subcollection  exists which covers $X$ (The negation of compactness).  The set $\{V_\alpha \}$ has a countable subcover $\{G_n\}, n=1, 2, 3,...$ using the fact from above.  Consider then $F_n = ( G_1 \cup ... \cup G_n)^c$. This set is nonempty
+because there is no finite subcover of $\{V_\alpha \}$, so there must exist $x \in X$ and $x \in F_n$, for any finite index.  Consider then the intersection of every $F_n$ then $F_n \cap = \empty$, because for $F_n$ there is a point not in $F_n$ that must be in some $F_m$ where $m > n$. Considser a set $E \subset X$ that has a point in every $F_n$.  The set $E$ is therefore a countably infinite set, and due to the property of $X$, $E$ must contain a limit point  $z$.  So then $z$ must belong to some $G_n$, since all of $\{G_n\}$ covers the metric space. Every $G_n$ is an open set, and therefore every point in $E$ is an interior point of some $G_n$. This in turn implies some $\delta > 0$ such that $B_\delta(z) \subseteq G_n$.  But then $B_\delta$ cannot contain $x_m$ if $m \geq n$, and so $z$ cannot be a limit point of any $F_m$.  We now have reached a contradiction.  The metric space $X$ must contain a finite subcover for every open cove and is therefore compact.
+
+
+
+
+
+
+
+
+
+
+
+**2.27**
+
+Let $X$ be a metric space to be a *condensation* point of a set $E \sub X$ if every neighborhood of $p$ contains uncountably many points of $E$.  Suppose $E \subset \mathbb{R}^k$, $E$ is uncountable, and let $P$ be the set of all condensation points of $E$.  Prove that $P$ is perfect and that at most countably many points of $E$ are not in $P$. In other words, show that $P^c \cap E$ is at most countable.  *Hint*:  Let $\{ V_\alpha \}$ be a countable base of $\mathbb{R}^k$, let $W$ be the union of those $V_n$ for which $E \cap V_n$ is at most countable, and show that $P = W^c$.
