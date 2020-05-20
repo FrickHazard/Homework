@@ -377,16 +377,9 @@ Consider a metric space $X$ in which every infinite subset has a limit point.  A
 Establishing these preliminary facts, let us embark upon a proof by contradiction.  Suppose there existed an infinite cover $\{V_\alpha \}$ of $X$, such that no finite subcollection  exists which covers $X$ (The negation of compactness).  The set $\{V_\alpha \}$ has a countable subcover $\{G_n\}, n=1, 2, 3,...$ using the fact from above.  Consider then $F_n = ( G_1 \cup ... \cup G_n)^c$. This set is nonempty
 because there is no finite subcover of $\{V_\alpha \}$, so there must exist $x \in X$ and $x \in F_n$, for any finite index.  Consider then the intersection of every $F_n$ then $F_n \cap = \empty$, because for $F_n$ there is a point not in $F_n$ that must be in some $F_m$ where $m > n$. Considser a set $E \subset X$ that has a point in every $F_n$.  The set $E$ is therefore a countably infinite set, and due to the property of $X$, $E$ must contain a limit point  $z$.  So then $z$ must belong to some $G_n$, since all of $\{G_n\}$ covers the metric space. Every $G_n$ is an open set, and therefore every point in $E$ is an interior point of some $G_n$. This in turn implies some $\delta > 0$ such that $B_\delta(z) \subseteq G_n$.  But then $B_\delta$ cannot contain $x_m$ if $m \geq n$, and so $z$ cannot be a limit point of any $F_m$.  We now have reached a contradiction.  The metric space $X$ must contain a finite subcover for every open cove and is therefore compact.
 
-
-
-
-
-
-
-
-
-
-
 **2.27**
 
-Let $X$ be a metric space to be a *condensation* point of a set $E \sub X$ if every neighborhood of $p$ contains uncountably many points of $E$.  Suppose $E \subset \mathbb{R}^k$, $E$ is uncountable, and let $P$ be the set of all condensation points of $E$.  Prove that $P$ is perfect and that at most countably many points of $E$ are not in $P$. In other words, show that $P^c \cap E$ is at most countable.  *Hint*:  Let $\{ V_\alpha \}$ be a countable base of $\mathbb{R}^k$, let $W$ be the union of those $V_n$ for which $E \cap V_n$ is at most countable, and show that $P = W^c$.
+Define a point $p$ in a metric space $X$ to be a *condensation* point of a set $E \sub X$ if every neighborhood of $p$ contains uncountably many points of $E$.  Suppose $E \subset \mathbb{R}^k$, $E$ is uncountable, and let $P$ be the set of all condensation points of $E$.  Prove that $P$ is perfect and that at most countably many points of $E$ are not in $P$. In other words, show that $P^c \cap E$ is at most countable.  *Hint*:  Let $\{ V_\alpha \}$ be a countable base of $\mathbb{R}^k$, let $W$ be the union of those $V_n$ for which $E \cap V_n$ is at most countable, and show that $P = W^c$.
+
+Given a set $E \subset \mathbb{R}^k$ which is uncountable and a set $P$ consisting of all the condensation points of $E$. Every point $p$ in $P$ is a limit point of $P$, as every $N_r(p)$ contains uncountably many points. Next to show that $P$ is closed, consider a limit point $e$ of $P$ not in $P$.  Since $N_r(e)$ has a point $q \in P$, and $N_{(r-d(e, q))/2}(q)$ has uncountably many points of $P$(by the triangle inequality), then $e$ cannot be a point in $E$ otherwise it would be a condensation point of $E$ and thus a point in $P$.  Because $\mathbb{R}^k$ is separable, we know that there exists a countable base $\{V_\alpha \}$.  Let $W$ be the union of those $V_n$ for which $E \cap V_n$ is at most countable.  The set $W$ is countable by construction as it is the countable union of countable sets.  A point $p$ in $P$ could not be a point $w$ in $W$, because then a neighborhood around $p$ would have countably many points of $E$, since $p$ would be an interior point of $W$.  Going the other way, $w$ could not be in $P$ because $w$ is an interior point of some $V_n$, and thus $E \cap V_n$ would contain uncountably many points.  So then $P^c = W$(or rather $E = P \cup W$, and $P \cap W = \empty$ ),  since $W$ is open $P$ must be closed, and thus $P$ is a perfect set.  Again there are at most countably many points of $E$ that are not in $P$ since the set $W$ is countable by construction as it is the countable union of countable sets.
+

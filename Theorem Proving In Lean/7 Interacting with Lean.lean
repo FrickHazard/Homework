@@ -772,18 +772,66 @@ end hidden_1
 
 
 
--- Excersize 2 ↑ above with list stuff
+-- Excercise 2 ↑ above with list stuff
 
+-- Excercise 3
 inductive expression : Type 
-| nil {} : expression
 | const : ℕ → expression
 | var : ℕ → expression
 | plus : expression → expression → expression
 | times : expression → expression → expression 
 
-def evaluate (e : expression) : ℕ :=
+def evaluate (e : expression) (var_map: ℕ → ℕ) : ℕ :=
 expression.rec_on e
-0
 (assume n, show ℕ , from n)
-(assume n, show ℕ , from n) 
+(assume n, show ℕ , from (var_map n))
+(assume e1 e2 n2 n3, show ℕ , from n2 + n3)
+(assume e1 e2 n2 n3, show ℕ , from n2 * n3)
 
+#reduce evaluate (expression.times (expression.var 1) (expression.plus (expression.const 5) (expression.const 5))) (λ s : ℕ, s)
+
+-- Excercise 4
+
+-- Could also define this by well-known complete set of connectives { AND, NOT }, { NAND }, { NOR } then use definitions to define the rest
+inductive prop_expression : Type
+| prop : Prop → prop_expression
+--  The order here Matters! ℕ comes after prop constructor
+| var : ℕ  → prop_expression
+| not : prop_expression → prop_expression
+| and : prop_expression → prop_expression → prop_expression
+| or : prop_expression → prop_expression → prop_expression
+
+def evaluate_p (e : prop_expression) (var_map: ℕ → Prop) : Prop :=
+prop_expression.rec_on e
+(assume p, show Prop, from p)
+(assume n, show Prop, from (var_map n))
+(assume e1 p, show Prop, from ¬p)
+(assume e1 e2 p1 p2, show Prop, from p1 ∧ p2)
+(assume e1 e2 p1 p2, show Prop, from p1 ∨ p2)
+
+#reduce evaluate_p (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (λ n : ℕ, n == 2)
+
+
+def complexity_p (e : prop_expression) : ℕ :=
+prop_expression.rec_on e
+(assume p, show ℕ, from 1)
+(assume n, show ℕ, from 1)
+(assume e1 ih, show ℕ, from succ ih)
+(assume e1 e2 ih1 ih2, show ℕ, from ih1 + ih2)
+(assume e1 e2 ih1 ih2, show ℕ, from ih1 + ih2)
+
+#reduce complexity_p (prop_expression.or (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (prop_expression.prop true))
+
+def substitute_p_var (e : prop_expression) (var_index : ℕ) (subsitutee : prop_expression) : prop_expression :=
+prop_expression.rec_on e
+(assume p, show prop_expression, from prop_expression.prop p)
+(assume n, show prop_expression, from or.by_cases (decidable.em (var_index = n))
+    (assume eq : var_index = n, show prop_expression, from subsitutee)
+    (assume neq : var_index ≠ n, show prop_expression, from prop_expression.var n)
+)
+(assume e1 ep, show prop_expression,  from prop_expression.not ep)
+(assume e1 e2 ih_ep1 ih_ep2, show prop_expression, from prop_expression.and ih_ep1 ih_ep2)
+(assume e1 e2 ih_ep1 ih_ep2, show prop_expression, from prop_expression.or ih_ep1 ih_ep2)
+
+#reduce (prop_expression.or (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (prop_expression.prop true))
+#reduce substitute_p_var (prop_expression.or (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (prop_expression.prop true)) 1 (prop_expression.prop true)
