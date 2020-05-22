@@ -83,5 +83,31 @@ In breadth-first and depth-first search, an undiscovered node is marked *discove
 ($c$)  Consider a tree where of node height $n/2$. Let $v$ be the root node. with two nodes attached to it, and every other parent node only having one child.  We could think of this as a bifurcated linked list.  Afte the first iteartion of DFS resovle,s all the nodes on once side will be processed, while half the nodes on the other side will be undiscovered.  Since $\Theta(n/2) = \Theta(n)$, and our tree is $n/2$ node height tall, or discovered and processed nodes are both $\Theta(n)$.
 
 
+**5.7**
 
+Given pre-order and in-order traversals of a binary tree, is it possible to reconstruct the tree? Is so, sketch an algorithm to do it.  If not give a counterexample. Repeat the problem if you are given the pre-order and post-order traversals.
+We are give two lists representing the nodes as they were traversed.  In the first case with pre-order $A_p$ and in-order  $A_i$ traversal lists, a tree reconstruction is possible.  The first element of the pre-order list will be the root node $A_p[0] = n_r$.  We can then iterate the in-order list until we find $n_r$.  Once we find that node we know $A[0, ... \ (\text{index\_of}(n_r) - 1)]$ must be to the left of $n_r$.  Recursively we can look at $A_p[1]$ which will correspond to the left node at node level $1$. (Note * we are presuming every traversal computes left before right!).  This should split $A[0, ... \ (\text{index\_of}(A_p[1]) - 1)]$ into nodes that are leftwards of $A_p[1]$.  At this point we should be confident of this process.  In other words for each item in $A_p$ we split elements in $A_i$ until a split has one node in which case the node is a leaf node.
 
+For the second case we are give pre-order and post-order traversal lists.  We cannot determine some cases.  For example we cannot resolve leftness or rightness of $B$ on the tree $A$, left child $B$, vs $A$ right child, $B$.  The pre-order list looks like $[A,B]$ and post-order $[B, A]$ for both lists.
+
+The key take away is that in-order traversal preserves leftness vs rightness information which is absent in both pre and post traversal.
+
+**5.8**
+
+Present correct and effcient algorithms to convert an undirected graph $G$ between the following graph data structures.  You must give the the time complexity of each algorithm, assuming $n$ vertices and $m$ edges.
+
+($a$) Convert from an adjacency matrix to adjacency lists.
+
+($b$) Convert from an adjacency list to an incidence matrix.  An incidence matrix $M$ has a row for each vertex and a column from each edge, such that $M[i, j] = 1$ if vertex $i$ is part of edge $j$, otherwise $M[i,j]=0$.
+
+($c$) Convert from an incidence matrix to adjacency lists.
+
+($a$) To convert from an adjacency matrix to adjacency list, we will need to scan each vertex row for every connection.  Unfortunately there is no other way to find every edge in an adjacency matrix.  For every cell that constitutes a valid edge, we create and append a item to the linked list corresponding to the row we are on. This algorithm is $O(n^2)$, and we cannot do any better.
+
+($b$) To convert from an adjacency list to an incidence matrix, we first allocate a $2D$ array of $e \times v$, where $e$ is the number of edges and $v$ is the number of vertices. Then we traverse every vertex linked list, using the edge struct to write in every edge column.  We could use a jump table or an index for every vertex, to write the other related vertex in constant time.  This algorithm is $O(e)$, or $O(en)$ if we include the allocation of the $2D$ array.
+
+($c$) To convert from an incidence matrix to an adjacency list we scan a column for every *edge*. Using a jump table we choose the first vert we ran into and append the edge to that vert's linked list, in constant time.  This algorithm is $O(en)$ and optimal in terms of $O$ notation, as there is a necessity to evaluate every cell (- a vert row, still $O(n)$, in the worse case, in order to determine what a connection actually is.
+
+What is interesting is when $e << n$.
+
+**5.9**

@@ -835,3 +835,39 @@ prop_expression.rec_on e
 
 #reduce (prop_expression.or (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (prop_expression.prop true))
 #reduce substitute_p_var (prop_expression.or (prop_expression.or (prop_expression.var 1) (prop_expression.prop true)) (prop_expression.prop true)) 1 (prop_expression.prop true)
+
+-- exercise 5
+
+inductive vvvector (α : Type u) : nat → Type u
+| nil {}                                : vvvector zero
+| cons {n : ℕ} (a : α) (v : vvvector n) : vvvector (succ n)
+
+mutual inductive even, odd
+with even : ℕ → Prop
+| even_zero : even 0
+| even_succ : ∀ n, odd n → even (n + 1)
+with odd : ℕ → Prop
+| odd_succ : ∀ n, even n → odd (n + 1)
+
+
+-- inductive even_ : ℕ → Prop
+-- | zero : even_ 0
+-- | even_succ : ∀ n, odd_ n → even_ (n + 1)
+
+-- inductive odd_ : ℕ → Prop
+-- | odd_succ : ∀ n, even_ n → odd_ (n + 1)
+
+inductive o_e : Prop → ℕ → Prop
+| zero : o_e true 0
+| even_succ {n : ℕ}:  o_e false n → o_e true  (succ n)
+| odd_succ  {n : ℕ}:  o_e true  n → o_e false (succ n)
+
+#reduce o_e.even_succ (o_e.odd_succ o_e.zero)
+
+
+-- inductive o_e : ℕ \
+
+
+-- #reduce even_odd.even_succ (even_odd.even_zero)
+-- #check  even_odd.even_succ (even_odd.even_zero)
+-- #check even_odd.odd_succ (even_odd.even_zero)
