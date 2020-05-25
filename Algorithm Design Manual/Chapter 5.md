@@ -111,3 +111,13 @@ Present correct and effcient algorithms to convert an undirected graph $G$ betwe
 What is interesting is when $e << n$.
 
 **5.9**
+
+Suppose an arithmetic expression is given as a tree.  Each leaf is an integer and each internal node is one of the standard arithmetical operators (+, -, * /). For the expression $2 + 3 *4 + (3 * 4) / 5$ is represented by the tree in Figure 5.17($a$). Give an $O(n)$ algorithm for evaluating such an expression, where there are $n$ nodes in the tree.
+
+Consider a DFS, post process traversal. That way if we are given a valid tree, then every node with children will have each child resolved to a number by the time we process that node.  Since this traversal traverses over every node, this algorithm is $O(n)$.
+
+
+**5.10**
+Suppose an arithmetic expression is give as a DAG (directed acyclic graph) with common subexpressions removed. Each leaf is an integer and each internal node is one of the standard arithmetical operations (+, -, *, /). For example, the expression $2 + 3 ∗ 4 + (3 ∗ 4)/5$ is represented by the DAG in Figure 5.17($b$). Give an $O(n + m)$ algorithm for evaluating such a DAG, where there are $n$ nodes and $m$ edges in the DAG. Hint: modify an algorithm for the tree case to achieve the desired efficiency.
+
+Consider a DFS traversal of DAG graph.  We store the list of already explored nodes, as well as $E$ an array of numbers, with one number per node.  Since each leaf node is an integer, for an arbituary starting node we use a post process DFS traversal to write the evaluated number for every node to $E$.  We then pick another unvisted node, and traverse checking if a node we visted already has a value.  The guarante of this algorithm is that every visted node will have a corresponding computed number, at the end of a traversal step.  This guarante allows us to classify the algorithm as $O(n + m)$(just like a DFS graph traversal, with some added baggage).
