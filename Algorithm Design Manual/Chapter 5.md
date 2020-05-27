@@ -121,3 +121,17 @@ Consider a DFS, post process traversal. That way if we are given a valid tree, t
 Suppose an arithmetic expression is give as a DAG (directed acyclic graph) with common subexpressions removed. Each leaf is an integer and each internal node is one of the standard arithmetical operations (+, -, *, /). For example, the expression $2 + 3 ∗ 4 + (3 ∗ 4)/5$ is represented by the DAG in Figure 5.17($b$). Give an $O(n + m)$ algorithm for evaluating such a DAG, where there are $n$ nodes and $m$ edges in the DAG. Hint: modify an algorithm for the tree case to achieve the desired efficiency.
 
 Consider a DFS traversal of DAG graph.  We store the list of already explored nodes, as well as $E$ an array of numbers, with one number per node.  Since each leaf node is an integer, for an arbituary starting node we use a post process DFS traversal to write the evaluated number for every node to $E$.  We then pick another unvisted node, and traverse checking if a node we visted already has a value.  The guarante of this algorithm is that every visted node will have a corresponding computed number, at the end of a traversal step.  This guarante allows us to classify the algorithm as $O(n + m)$(just like a DFS graph traversal, with some added baggage).
+
+**5.11**
+
+The war story of Section **5.4** (page **158**) describes an algorithm for constructing the dual graph of the triangulation effciently, although it does not guarantee linear time.  Give a worst-case linear algorithm for the problem.
+
+Create a adjacency data structure where every item in the array is a triangle edge(a pair of two indices).  Then in each array we store a linked list of the indices of triangles that have a matching edge. The first step is constructing an array from triangle edges.  There are a few ways to do this as we need every pair of indices to map in constant time to a position in an array bounded by the number unique edges of the triangles (max size equal to 3 * count of triangles). The options are using a hashtable, an $O(n^2)$ 2 dimensional array, or by a pre pass with $O(n)$ counters.
+Next we pass over the triangles accessing the head of the linked list for each edge in constant time and append the triangle to the end of the linked list.  This is our desired data structure.
+
+So in total we pass over the data twice, the first time constructing an constant time access edge structure, and then using this structure to build the desired adjacency list.  This algorithm has an $O(n)$, because in the worst case where every triangle is isolated, we have at most 3 edges per triangle.
+
+The counter setup looks like this, using a counting sort like rountine where the number of vertices is the upperbound.  Construct an array of linked lists for every vert with a structure that contains the triangle index and other edge index.  Populate the structure in $O(n)$ by a first pass.  Next for every linked list use an in place vetrex size array and a counter and write to a triangle sized array so that every triangle edge has an index to jump to on the final pass.   Essentialy we are performing several count sort type passes. This is more convoluted than any of the either methods, but requires less than $O(n^2)$ space which would take $O(n^2)$ running time to allocate.  The hashing method deals in atomized time, so this method is the only pure $O(n)$ of the three.
+
+In practice I would always use hashing for this problem, unless I hit a point where even that was insufficent.
+
