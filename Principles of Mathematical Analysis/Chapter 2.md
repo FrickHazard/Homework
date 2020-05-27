@@ -324,7 +324,7 @@ A collection $\{V_{\alpha}\}$ of open subsets of $X$ is said to be a *base* for 
 
 Prove that every seperable metric space has a *countable* base.  *Hint*: Take all the neigborhoods with rational radius and center in some countable dense subset of $X$.
 
-(Note* Rudin should have shown this is a both ways theorem)
+(Note* Rudin should have shown this is a both ways($\iff$) theorem)
 
 Consider a collection $\{V_{\alpha}\}$ that is a base of the seperable metric space $X$. Since $X$ is seperable, it contains a countably dense subset, let us call this countable dense subset $D$. Consider the collection of open sets $\{C_\beta\}$ composed of neighborhoods with rational radius around every point in $D$.  Consider a point $x \in X$ and an arbituary open set $G$, such that $x \in G$.  Since $\{C_\beta\}$ was construted from $D$, there must exist a neighborhood which is a subset of $G$. Since $D$ contains neighborhoods with rational radius around a limit point of $x$, we can always find a openball that fits inside $G$. Thus $D$, which is countable, since it is a union of countable sets, statisfies the requirment of a base.
 
@@ -387,6 +387,22 @@ Given a set $E \subset \mathbb{R}^k$ which is uncountable and a set $P$ consisti
 
 Prove that every closed set in a separable metric space is the union of a (possibly empty) perfect set and a set which is at most countable. (*Corollary:* Every countable closed set in $\mathbb{R}^k$ has isolated points.)  *Hint:* Use exercise $27$.
 
-Consider a closed set $E$ of a separable metric space $X$. Since $E$ is closed it contains all its limit points and hence its condensation points.  Consider two cases either $E$ is countable or it is uncountable (em).  If $E$ is uncountable then we apply theorem **2.27** (*Note* that **2.27** has no dependancy on $\mathbb{R}^k$) and then we have our conclustion.  If $E$ is countable then wish to show that no condensation points exist in $E$.  Proof by falsity, Suppose a point $c$ of $E$ was an condensation point of $E$, then every neighborhood contains uncountably mainy points of $E$ which is a contradiction.  We may then easily show that $E$ is the is the union of an empty set and a set which is at most countable $E = E \cup \empty$.
+Consider a closed set $E$ of a separable metric space $X$. Since $E$ is closed it contains all its limit points and hence its condensation points.  Consider two cases either $E$ is countable or it is uncountable (em).  If $E$ is uncountable then we apply theorem **2.27** (*Note* that **2.27** has no dependancy on $\mathbb{R}^k$) and then we have our conclustion.  If $E$ is countable then wish to show that no condensation points exist in $E$.  Proof by falsity, Suppose a point $c$ of $E$ was an condensation point of $E$, then every neighborhood contains uncountably mainy points of $E$ which is a contradiction.  Then $E$ is the is the union of an empty set and a set which is at most countable $E = E \cup \empty$.
 
  <!-- their are further two cases, either $X$ is itself countable in which case $E$ must be the union $E \cup \empty$. Otherwise if $X$ is uncountable, -->
+
+**2.29**
+
+Prove that every open set in $\mathbb{R}^1$ is the union of an at most countable collection of disjoint segments.  *Hint:* Use exercise $22$.
+
+By exercise **22** we know that $\mathbb{R}^1$  is separable. 
+
+Applying a very similiar idea from  the theorem of **23**, consider the countable dense subset $D$ of $\mathbb{R}^1$.  Given an arbituary open set $G$, consider the set $C$ with the condition $x \in G$ and $x \in D$. 
+Consider a countable collection $I$ of open intervals $(a, b)$ such that $a \in C$ and $b \in C$ and every point in $(a, b)$ is a point in $G$.  
+Split $I$ into at most countably many subcollection $S_\alpha$ such that each interval has one element in common with another interval.  $S_\alpha = \{ a \}$, where $(a_1,a_2) \in I$ and $b \neq a$ and $\exists \ c, \ c \in b, \ c \in a$. We are effectively grouping these sets by overlap.  Therefore $I = \cup \ S_\alpha$.  Finally consider then $E =\{ (inf(S_\alpha), sup(S_\alpha) \}$, for every $S_\alpha$. We now wish to show that $G = E$.  Since $E$ was cosntructed from points of $G$ every point in $E$ is a point in $G$.  Consider a point $g$ in $G$.  The point $g$ is either contained in some $S_alpha$ or it is not.  If $g$ is not contained in some $S_\alpha$, then it is not between any two points of $D$. If that is the case then either $g$ is the $sup$ or $inf$ of some interval in $E$ or $g$ violates the dense property of $D$.  In either case $g$ must be a member of $E$.  Since $E$ was constructed from countable unions of sets that are nessecarily disjoint, $E$ has all the properties we need.
+
+<!-- Consider the collection of open sets $\{C_\beta\}$ composed of neighborhoods with rational radius around every point in $D$. Consider a point $x\in X$ and an arbituary open set $G$, such that $x \in G$. Next consider the following set $B = \cup \ (a, b)$ where $a \in D$ and $b \in D$ where -->
+
+<!-- We know that $\mathbb{R}^1$ has a countable base, In other words every open set in $X$ is the union of a countable subcollection of $\{ V_\alpha \}$.
+
+Given an open set $G$ of $\mathbb{R}^1$, consider a countable subcollection of open -->
