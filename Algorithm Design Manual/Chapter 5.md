@@ -135,3 +135,61 @@ The counter setup looks like this, using a counting sort like rountine where the
 
 In practice I would always use hashing for this problem, unless I hit a point where even that was insufficent.
 
+**5.12**
+
+The *square* of a directed graph $G = (V,E)$ is the graph $G^2=(V, E^2)$ such that $(v, w) \in E^2$ if there exists $v \in V$ such that $(u, v) \in E$ and $(u, w) \in E$ i.e. there is a path of exactly two edges from $u$ to $w$.
+Give efficient algorithms for both adjacency lists and matrices.
+
+Adjacency List :
+
+We first create an array $A$ of size $V$.  We store in $A$ every connected vert that appears in a particular vert $v$'s linked list.  For every linked list of $v$ we do a first pass filling $A$ with every node that is at the end of a directed edge from $v$.
+Then we do a second pass over $v$'s linked list, and for each item we go to that vertex's linked list and append that node as an edge from a $v$, using $A$ to exclude duplicates.  We append all these nodes to a seperate Adjacency structure $T$.  Once we have done this for every $v \in V$, we Append $T$ to the original adjacency list.  This algorithm taks $O(V)$ space, and $O(E^2 + V)$ running time.  Where $O(E^2)$ is going to be optimal, since a worst case input will require close to $E^2$ new edges. 
+
+Adjacency matrix :
+
+We first allocate a new Adjacency matrix $A$ of size $V^2$. For each column of a vert $v$ (column vert being the head of a directed edge) we traverse down the column. For every cell marked as an edge we write that edge in $A$ and jump to that corresponding column of a vert $v_2$.  We traverse down the $v_2$ column and for every edge cell in $v_2$ we write the index into $A[v]$. We do this for every $v_2$ of the column $v$.  The running time of this algorithm is $N(V^3)$.  The matrix $A$ now has all the valid $E^2$ connections.
+
+**5.13**
+
+A *vertex cover* of a graph $G = (V, E)$ is a subset of vertices $V'$ such that each edge in $E$ is incident on at least one vertex of $V'$.
+
+($a$) Give an efficient algorithm to find a minimum-size vertex cover if $G$ is a tree.
+
+($b$) Let $G = (V, E)$ be a tree such that the weight of each vertex is equal to the degree of that vertex.  Give an efficient algorithm to find a minimum-weight vertex cover of $G$.
+
+($c$) Let $G = (V, E)$ be a tree with arbitrary weights associated with the vertices. Give an efficient algorithm to find a minimum-weight vertex cover of $G$.
+
+($a$) We conduct a traversal(DFS or BFS) starting from the root node. For every node we traverse that has only one child or no children, we mark that  node for deletion. Once a node is marked for deletion we dont delete any of that nodes descendants. The following is the reason why this simple algorithm is the minimum vertex cover.  Consider any node  $n$ with more than $1$ children.  If we delete $n$  than we must keep both children, as the edges need to have one node. Were as if we delete both children then we always have fewer nodes in $V'$.  Inducting on an arbituary tree this reasoning works all the way down to the leaf depth.
+
+<!-- ($b$) Conduct a BFS search starting from the root node.  For each depth compare the weight of the $p$ node to the sum of its children nodes.  If the weight of $p$ is greater delete the parent, otherwise keep the parent and delete all of $p$'s children.
+There also seems to always two ways to reach a minimum weight, strange. -->
+($b$)
+It actually seems like marking every other height level for deletion always works.  Ok yes, consider the following induction. Consider two scenarios, one we mark the root node for deletion the other we dont. Our invariance is that deleting every other level the weighted sum of remaining nodes will be the same. 
+
+Base Case : A tree with root $d_r$ and $n$ children $c_{1-n}$.  Deleting all the children has the same total score as deleting the root.
+
+Inductive Step : Consider adding $n$ nodes to any child.  If the previous level was marked for deletion this will add $n$ points, one for each child to the total.  Otherwise if the previous level was active then all the children will be marked for deletion.  However the degree of the parent node changes by exactly $n$.  Meaning that the score will be the same.
+
+We mark the root node for deletion.  
+
+<!-- Consider the following important fact : For every node $d$ with $n$ children, besides the root, the weight of $d = n + 1$, meaning that deleting $d$ is always beneficial. -->
+
+
+($c$) It all boils down to a single choice of odd or ever. IE should we delete the root node or not? Using A DFS traversal we keep a summed record of the weights as we traverse down the tree. When we have processed the sums of all the children of a node.
+
+When reach a leaf node  $l$ we need the weight of its parent and grandparent.  This allows us to determine the minimum weight at the localized extremities of the tree.
+Consider the following either we delete the leaf node or we dont.  If we do delete the leaf node then we must keep the parent otherwise the constraint of the cover will be violated.
+
+Using A DFS traversal we record the impact of every choice of a node. When we choose to remove a node it means that we must keep any other nodes connected to the deletee. This requires us to cascade down essentially a giant or exclusive or expression.
+
+We use a post process calculation where every sub tree returns two values.  The first number we call $R\_sum$ which represents the summed weight when that node is deleted. $L\_sum$ is the summed weight when we keep that node.
+
+A Leaf node $l$ returns $[0, weight(l)]$.
+
+Parent nodes are a little more complicated, $[L\_sum, min(weight(q_1) + L\_sum, weight(q_1) + R\_sum)]$.
+
+For example consider a parent  $p$ node with $n$ leaf nodes.  There are two possibilties here. Either we delete the parent node or we delete all its children.  No matter which case we end up choosing, one of these two options will be optimal.  We take the total weight for each option and bubble both up to the parent of $p$.  This process is then repeated for parent nodes nof subtrees.
+
+We store the two choices in an auxillary array of size $O(n)$.  Once we have traversed every node and are in the postprocess part of the root node, we make our final choice and and use that result to resolves all the stored options.  This results in a full traversal and then a resolution of choices for a total of $O(2n) = O(n)$.
+
+

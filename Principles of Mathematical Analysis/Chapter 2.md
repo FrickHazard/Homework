@@ -406,3 +406,24 @@ Split $I$ into at most countably many subcollection $S_\alpha$ such that each in
 <!-- We know that $\mathbb{R}^1$ has a countable base, In other words every open set in $X$ is the union of a countable subcollection of $\{ V_\alpha \}$.
 
 Given an open set $G$ of $\mathbb{R}^1$, consider a countable subcollection of open -->
+
+**30.**
+
+Imitate the proof of Theorem **2.43** to obtain the following result:
+
+If $\mathbb{R}^k = \cup^{\infin}_1 F_n$, where each $F_n$ is a closed subset of $\mathbb{R}^k$, then at least one $F_n$ has a nonempty interior.
+
+*Equivalent statement:* If $G_n$ is a dense open subset of $R^k$, for $n = 1, 2, 3...$ then $\cap^{\infin}_{1} G_n$ is not empty (in fact, it is dense in $\mathbb{R}^k$).
+
+(This is a special case of Baire's theorem; see Exercise **22**, Chap. **3**, for the general case.)
+
+<!-- Let $P$ be a nonempty perfect set in $\mathbb{R}^k$.  Since $P$ has limit points, $P$ must be infinite.  Suppose $P$ is countable, and denoted the points of $P$ by $\bold{x}_1, \bold{x}_2, \bold{x}_3, ...$ We shall contruct a sequence $\{V_\alpha \}$ of neighborhoods, as follows.  Let $V_1$ be any neighborhood of $\bold{x}_1$. If $V_1$ consists of all $\bold{y} \in \mathbb{R}^k$ such that $|\bold{y} - \bold{x}_1| < r$, the closure $\overline{V}_1$ of $V_1$ is the set of all $\bold{y} \in \mathbb{R}^k$ such that $|\bold{y} - \bold{x}_1| \leq r$. 
+
+Suppose $V_n$ has been constructed, so that $V_n \cap P$ is not empty.  Since every point of $P$ is a limit point of $P$, there is a neighborhood $V_{n+1}$ such that $(i)$ $\overline{V}_{n+1} \subset V_n$, $(ii)$ $\bold{x}_n \notin \overline{V}_{n+1}$ $(iii)$ $V_{n+1} \cap P$ is not empty.  By $(iii)$, $V_{n+1}$ satisfies our induction hypothesis and the construction can proceed.  Put $K_n = \overline{V}_n \cap P$. Since $\overline{V}_n$ is closed and bounded, $\overline{V}_n$ is compact. Since $\bold{x}_n \notin K_{n+1}$, no point of $P$ lies in $\cap^{\infin}_{1} K_n$. Since $K_n \subset P$, this implies that $\cap_{1}^{\infin} K_n$ is empty.  But each $K_n$ is nonempty, by $(iii)$, and $K_n \supset K_{n+1}$, by $(i)$; this contradicts the collary to Theorem **2.36**. -->
+
+Consider the sequence $F_n$, such that $\mathbb{R}^k = \cup^{\infin}_1 F_n$, where each $F_n$ is a closed subset of $\mathbb{R}^k$.  Proof by contradiction suppose every $F_n$ had an empty interior, that is to say for every point $x \in F_n$ $\nexists \  N(x) \subset F_n$.  We shall contruct a sequence $\{V_\alpha \}$ of neighborhoods, as follows.  Let $V_1$ be an open ball covering all of $F_1$.
+
+Then the sequence of $\{V_\alpha \}$ satisfies $(i)$ $\overline{V}_{n+1} \subset V_n$, $(ii)$ $F_n \notin \overline{V}_{n+1}$.  We use the fact that no interiors points exist for any $F_n$, then we may always find an open covering satisfying these conditions, so by completing our induction.
+Put $K_n = \overline{V}_n \cap \mathbb{R}^k$. Since $\overline{V}_n$ is closed and bounded, $\overline{V}_n$ is compact. Since $F_n \notin K_{n+1}$, no point of $\mathbb{R}^k$ lies in $\cap^{\infin}_{1} K_n$. Since $K_n \subset \mathbb{R}^k$, this implies that $\cap_{1}^{\infin} K_n$ is empty.  But each $K_n$ is nonempty, and $K_n \supset K_{n+1}$, by $(i)$; this contradicts the collary to Theorem **2.36**.
+
+
