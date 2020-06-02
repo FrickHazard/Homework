@@ -865,6 +865,8 @@ inductive o_e : Prop → ℕ → Prop
 #reduce o_e.even_succ (o_e.odd_succ o_e.zero)
 
 
+
+
 -- inductive o_e : ℕ \
 
 

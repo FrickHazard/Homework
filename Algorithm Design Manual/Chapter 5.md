@@ -94,7 +94,7 @@ The key take away is that in-order traversal preserves leftness vs rightness inf
 
 **5.8**
 
-Present correct and effcient algorithms to convert an undirected graph $G$ between the following graph data structures.  You must give the the time complexity of each algorithm, assuming $n$ vertices and $m$ edges.
+Present correct and efficient algorithms to convert an undirected graph $G$ between the following graph data structures.  You must give the the time complexity of each algorithm, assuming $n$ vertices and $m$ edges.
 
 ($a$) Convert from an adjacency matrix to adjacency lists.
 
@@ -124,7 +124,7 @@ Consider a DFS traversal of DAG graph.  We store the list of already explored no
 
 **5.11**
 
-The war story of Section **5.4** (page **158**) describes an algorithm for constructing the dual graph of the triangulation effciently, although it does not guarantee linear time.  Give a worst-case linear algorithm for the problem.
+The war story of Section **5.4** (page **158**) describes an algorithm for constructing the dual graph of the triangulation efficiently, although it does not guarantee linear time.  Give a worst-case linear algorithm for the problem.
 
 Create a adjacency data structure where every item in the array is a triangle edge(a pair of two indices).  Then in each array we store a linked list of the indices of triangles that have a matching edge. The first step is constructing an array from triangle edges.  There are a few ways to do this as we need every pair of indices to map in constant time to a position in an array bounded by the number unique edges of the triangles (max size equal to 3 * count of triangles). The options are using a hashtable, an $O(n^2)$ 2 dimensional array, or by a pre pass with $O(n)$ counters.
 Next we pass over the triangles accessing the head of the linked list for each edge in constant time and append the triangle to the end of the linked list.  This is our desired data structure.
@@ -159,7 +159,7 @@ A *vertex cover* of a graph $G = (V, E)$ is a subset of vertices $V'$ such that 
 
 ($c$) Let $G = (V, E)$ be a tree with arbitrary weights associated with the vertices. Give an efficient algorithm to find a minimum-weight vertex cover of $G$.
 
-($a$) We conduct a traversal(DFS or BFS) starting from the root node. For every node we traverse that has only one child or no children, we mark that  node for deletion. Once a node is marked for deletion we dont delete any of that nodes descendants. The following is the reason why this simple algorithm is the minimum vertex cover.  Consider any node  $n$ with more than $1$ children.  If we delete $n$  than we must keep both children, as the edges need to have one node. Were as if we delete both children then we always have fewer nodes in $V'$.  Inducting on an arbituary tree this reasoning works all the way down to the leaf depth.
+($a$) We conduct a traversal(DFS or BFS) starting from the root node. For every node we traverse that has only one child or no children, we mark that  node for deletion. Once a node is marked for deletion we preserve that nodes descendants. The following is the reason why this simple algorithm is the minimum vertex cover.  Consider any node  $n$ with more than $1$ children.  If we delete $n$  than we must keep all children, as edges need to have at least one node. If we delete every child then we always have fewer nodes in $V'$.  Inducting on an arbituary tree this reasoning works all the way down to the leaf depth.
 
 <!-- ($b$) Conduct a BFS search starting from the root node.  For each depth compare the weight of the $p$ node to the sum of its children nodes.  If the weight of $p$ is greater delete the parent, otherwise keep the parent and delete all of $p$'s children.
 There also seems to always two ways to reach a minimum weight, strange. -->
@@ -192,4 +192,37 @@ For example consider a parent  $p$ node with $n$ leaf nodes.  There are two poss
 
 We store the two choices in an auxillary array of size $O(n)$.  Once we have traversed every node and are in the postprocess part of the root node, we make our final choice and and use that result to resolves all the stored options.  This results in a full traversal and then a resolution of choices for a total of $O(2n) = O(n)$.
 
+**5.14**
+
+A *vertex cover* of a graph $G = (V,E)$ is a subset of vertices $V' \in V$ such that every edge in $E$ contains at least one vertex from $V'$. Delete all the leaves from any depth-first search tree of $G$. Must the remaining vertices from a vertex cover of $G$? Give a proof or counterexample.
+
+Consider the following for an *undirected* graph $G$, in order for a deletion of leaf nodes to form an invalid cover, two leaf nodes must be connected.  This means that if we can prove for any DFS step, no two leaf nodes are connected, then any case will be a valid cover.  Consider then two leaf nodes $l_1$ and $l_2$ from a DFS.  If $l_1$ was connected to $l_2$ by an undirected connection then $l_2$ could not be a leaf node, since if it was already discovered it would not be a leaf node, because it it connected to $l_1$.  We can make the same symmetric argument for $l_2$.
+
+For *directed* graphs we cannot make this argument, and we can in fact show this is not true by a simple counter example.  Consider the graph $G$, composed of three verts $v_1$, $v_2$, $v_3$, and directed edges $(v_1, v_2)$, $(v_1, v_3)$, $(v_3, v_2)$, where the first component of the tuple is the base of the edge.  A DFS step starting at $v_1$ will first go to $v_2$ then stop.  Then it will traverse to $v_3$, realize that $v_2$ is already discovered and terminate.  Both $v_2$ and $v_3$ are leaf nodes, and since there is a directed edge $(v_3, v_2)$, the deletion cannot form a valid cover.
+
+**5.15**
+
+A *vertex cover* of a graph $G = (V, E)$ is a subset of vertices $V' \in V$ such that every edge in $E$ contains at least one vertex from $V'$. An *independent set* of graph $G = (v,E)$ is a subset of vertices $V' \in V$ such that no edge in $E$ contains both vertices from $V'$. An *indepedent vertex cover* is a subset of vertices that is both an independent set and a vertex cover of $G$.  Give an efficient algorithm for testing whether $G$ contains an independent vertex cover.  What classical graph problem does this reduce to?
+
+Use a DFS search starting by setting an arbituary color on a node.  We traverse through the trre labeling every node we traverse with the color opposite of its parent.  When we reach a leaf node, if there are already connected nodes that are already discovered, then we check to see if the colors match up.  If they don't we know that it is impossible for the graph to meet the criteria.  This because by the *indepenent* requirement, we are effectively limited to two colors, which means it does not matter which color we start with.
+
+The problem reduces to determing whether you can color a graph with two colors, also kwown as determing whether a graph is bipartite.
+
+**5.16**
+
+An *independent set* of an undirected graph $G = (V, E)$ is a set of verteices $U$ such that no edge in $E$ is incident on two vertices of $U$.
+
+($a$) Give an efficient algorithm to find a maximum-size independent set if $G$ is a tree.
+
+($b$) Let $G = (V,E)$ be a tree with weights associated with the vertices such that the weight of each vertex is equal to the degree fo that vertex.  Give an efficient algorithm to find a maximum independent set of $G$.
+
+($c$) Let $G = (V, E)$ be a tree with arbitrary weights associated with the vertices.
+Give and efficient algorithm to find a maximum independent set of $G$.
+
+($a$)  This is effectively the inverse of  **5.13**, where we have a perfect inversion of conditions.
+
+
+Consider a DFS traversal with a post-processing component. In the post processing step we consider two outcomes one in which the parent is colored and another in which it is not.  This requires either an storage array of size $O(n)$ or augmenting the node structs with a coloring field. Similiar to **5.13** we compare the sum of children nodes and bubble up which alternating color has the highest scores.  When we reach the root we make the final decision, which alternating series maximizes.
+
+($b$) 
 
