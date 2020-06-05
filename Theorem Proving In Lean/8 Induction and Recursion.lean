@@ -197,3 +197,78 @@ variable (C : ℕ → Type)
 
 #check (@nat.brec_on C :
   Π (n : ℕ), (Π (n : ℕ), nat.below C n → C n) → C n)
+
+def ack : nat → nat → nat
+| 0     y     := y+1
+| (x+1) 0     := ack x 1
+| (x+1) (y+1) := ack x (ack (x+1) y)
+
+mutual def even, odd
+with even : nat → bool
+| 0     := tt
+| (a+1) := odd a
+with odd : nat → bool
+| 0     := ff
+| (a+1) := even a
+
+example (a : nat) : even (a + 1) = odd a :=
+by simp [even]
+
+example (a : nat) : odd (a + 1) = even a :=
+by simp [odd]
+
+lemma even_eq_not_odd : ∀ a, even a = bnot (odd a) :=
+begin
+  intro a, induction a,
+  simp [even, odd],
+  simp [*, even, odd]
+end
+
+
+inductive vector (α : Type u) : nat → Type u
+| nil {} : vector 0
+| cons   : Π {n}, α → vector n → vector (n+1)
+
+namespace vector
+
+local notation h :: t := cons h t
+
+def map {α β γ : Type} (f : α → β → γ) :
+  Π {n}, vector α n → vector β n → vector γ n
+| 0     nil       nil       := nil
+| (n+1) (a :: va) (b :: vb) := f a b :: map va vb
+
+#check map._main
+
+example (n: ℕ) (a : (vector α n)): (vector α n) :=
+vector.rec_on a
+(show vector α 0, from vector.nil)
+(assume n itm vec ih, show vector α (succ n), from vec.cons itm) 
+
+
+-- def map1 {α β γ : Type} (f : α → β → γ) :
+--   Π {n}, vector α n → vector β n → vector γ n :=
+-- (assume n a b, show vector γ n, from 
+--     nat.rec_on n
+--     (vector.nil)
+--     (assume n ih, show vector γ (succ n), from ih.cons (f
+--         (show α, from sorry)
+--         (show β, from sorry)
+--     ))
+-- )    
+
+def map1 {α β γ : Type} (f : α → β → γ) :
+  Π {n}, vector α n → vector β n → vector γ n :=
+(assume n a b, show vector γ n, from
+    nat.rec_on n
+    (show vector γ 0, from vector.nil)
+    (assume n ih, show vector γ (succ n), from ih.cons (f
+        (show α, from vector.rec_on a
+            (show α, from sorry)
+            (assume n1 itm vec ih, show α, from itm)
+        )
+        (show β, from sorry))
+    )
+)
+
+end vector

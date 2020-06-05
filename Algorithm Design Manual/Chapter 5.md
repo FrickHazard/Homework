@@ -159,6 +159,8 @@ A *vertex cover* of a graph $G = (V, E)$ is a subset of vertices $V'$ such that 
 
 ($c$) Let $G = (V, E)$ be a tree with arbitrary weights associated with the vertices. Give an efficient algorithm to find a minimum-weight vertex cover of $G$.
 
+<!-- Parts of this are wrong. See the inverse of 5.16 -->
+
 ($a$) We conduct a traversal(DFS or BFS) starting from the root node. For every node we traverse that has only one child or no children, we mark that  node for deletion. Once a node is marked for deletion we preserve that nodes descendants. The following is the reason why this simple algorithm is the minimum vertex cover.  Consider any node  $n$ with more than $1$ children.  If we delete $n$  than we must keep all children, as edges need to have at least one node. If we delete every child then we always have fewer nodes in $V'$.  Inducting on an arbituary tree this reasoning works all the way down to the leaf depth.
 
 <!-- ($b$) Conduct a BFS search starting from the root node.  For each depth compare the weight of the $p$ node to the sum of its children nodes.  If the weight of $p$ is greater delete the parent, otherwise keep the parent and delete all of $p$'s children.
@@ -180,7 +182,7 @@ We mark the root node for deletion.
 When reach a leaf node  $l$ we need the weight of its parent and grandparent.  This allows us to determine the minimum weight at the localized extremities of the tree.
 Consider the following either we delete the leaf node or we dont.  If we do delete the leaf node then we must keep the parent otherwise the constraint of the cover will be violated.
 
-Using A DFS traversal we record the impact of every choice of a node. When we choose to remove a node it means that we must keep any other nodes connected to the deletee. This requires us to cascade down essentially a giant or exclusive or expression.
+Using A DFS traversal we record the impact of every choice of a node. When we choose to remove a node it means that we must keep any other nodes connected to the deletee. This requires us to cascade down essentially a giant exclusive or expression.
 
 We use a post process calculation where every sub tree returns two values.  The first number we call $R\_sum$ which represents the summed weight when that node is deleted. $L\_sum$ is the summed weight when we keep that node.
 
@@ -219,10 +221,29 @@ An *independent set* of an undirected graph $G = (V, E)$ is a set of verteices $
 ($c$) Let $G = (V, E)$ be a tree with arbitrary weights associated with the vertices.
 Give and efficient algorithm to find a maximum independent set of $G$.
 
-($a$)  This is effectively the inverse of  **5.13**, where we have a perfect inversion of conditions.
+($a$) Consider the leaf nodes. We should keep ever leaf node in the set, remove all the parent nodes, then repeat for the now smaller tree.
+
+($b$) Consider $n$ leaf nodes of a parent node.  The parent has a weight of $n + 1$ and each child leaf node has a weight of $1$.  In this case we want to keep the parent and remove all the children.  This also means we musk mark the parent of the parent node for deletion.  However since we are working from the bottom up, this will always be equal to or greater than alternative in terms of weight.
+
+($c$) We know we will be able to keep at most one every other node(we can delete two adjacent nodes, and the node set will still be a valid *independent set*).  Very similiar to *5.13* we use a DFS with a post-process step and use either a storage array or a coloring to compare the sum of keeping children vs throwing them away.  In fact every question thus far was essentialy an inverse of $5.13$.
 
 
-Consider a DFS traversal with a post-processing component. In the post processing step we consider two outcomes one in which the parent is colored and another in which it is not.  This requires either an storage array of size $O(n)$ or augmenting the node structs with a coloring field. Similiar to **5.13** we compare the sum of children nodes and bubble up which alternating color has the highest scores.  When we reach the root we make the final decision, which alternating series maximizes.
+**5.17**
 
-($b$) 
+Consider the problem of determining whether a given undirected graph $G=(V,E)$ contains a *triangle* or cycle of length $3$.
+
+($a$) Give an $O(|V|^3)$ to find a triangle if one exists.
+
+($b$) Improve your algorithm to run in time $O(|V| \cdot |E|)$. You may assume $|V| \leq |E|$.
+
+Observe that these bounds gives you time to convert between the adjacency matrix and adjacency list representations of $G$.
+
+($a$) For every vert $v$ loop through all the connected vertices which are at most $V$.  For each of those vertices $v_2$ loop through all the connections of $v_2$ to find whether any of them are $v_1$.
+
+($b$) For every vert $v_1$ allocate a storage buffer $A$ equal to the size of all immediatly connected vertices.  Then do a DFS from $v_1$ with a depth cap of 2. For each node at depth $2$ check to see if that node is in $A$. If it is then we have found a triangle cycle.  The running time $O(|V| \cdot |E|)$ since the DFS will never exceed $O(|E|)$.  * Note we have to reset this buffer per node. which ends up being potentially another $E$, but still reduces by $O(E) = O(2E)$. 
+
+**5.18**
+
+
+
 
