@@ -244,6 +244,9 @@ Observe that these bounds gives you time to convert between the adjacency matrix
 
 **5.18**
 
+Consider a set of movies $M_1, M_2, ... M_k$.  There is a set of customers, each one of which indicates the two movies they would like to see this weekend. Movies are shown on Saturday evening and Sunday evening. Multiple movies may be screened at the same time.  You must decide which movies should be televised on Saturday and which on Sunday, so that every customer gets to see the two movies they desire.  Is there a schedule where each movie is shown at most once? Design an efficient algorithm to find such a schedule if one exists.
 
+There cannot always be an efficient schedule, consider the following tuples $(A, B)$ $(B, C)$ and $(A, C)$. There is no way only show a movie once to satisfy this input.  This is an equivalent of a directed triangle.  The two movies each customer wants represent an edge of a graph.  This problem is very similiar to a coloring problem, where each color represents a slot that a movie could be in.  Conisder a DFS, mark a the inital node as starting on Saturday(Notice for any valid result we could swap the movies on saturday and sunday and the solution would still be valid).  We then mark every other node a different "color", this allows to determine whether we need to repeat a node or a valid conifguration exists.  This Traversal is $O(E + V)$ or $O(C + M)$, where $C$ is a customers tuple of preferred movies.
 
+**5.19**
 

@@ -272,3 +272,15 @@ def map1 {α β γ : Type} (f : α → β → γ) :
 )
 
 end vector
+
+open function
+
+#print surjective
+
+universes w
+variables {γ : Type w}
+open function
+
+lemma surjective_comp {g : β → γ} {f : α → β}
+  (hg : surjective g) (hf : surjective f) :
+surjective (g ∘ f) := (assume a, show )

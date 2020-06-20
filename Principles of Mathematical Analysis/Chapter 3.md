@@ -9,3 +9,15 @@ Fix $\epsilon > 0$.  Since we know that $\{s_n\}$ is convergent we may produce a
 The converse is false, consider the counter example of $\{ 1, -1, 1, -1, 1, -1, ... \}$ 
 
 **3.2**
+
+Calculate $\lim_{n\to\infty} (\sqrt{n^2 + n} - n)$.
+
+$$\sqrt{n^2 + n} - n$$
+
+$$\frac{\sqrt{n^2 + n} + n}{\sqrt{n^2 + n} + n} \cdot \frac{\sqrt{n^2 + n} - n}{1}$$
+$$\frac{n}{\sqrt{n^2 + n} + n}$$
+$$\frac{1}{\sqrt{1 + \frac{1}{n}} + 1}$$
+$$\frac{1}{\sqrt{1} + 1}$$
+$$\frac{1}{2}$$
+
+**3.3**
