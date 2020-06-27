@@ -21,3 +21,7 @@ $$\frac{1}{\sqrt{1} + 1}$$
 $$\frac{1}{2}$$
 
 **3.3**
+
+If $s_1$ = $\sqrt{2}$, and $s_n +1 = \sqrt{2 + \sqrt{s_n}}$ $(n= 1, 2, 3, ...),$ prove that $\{s_n\}$ converges, and that $s_n < 2$ for $n = 1,2,3...$ .
+
+Fix $\epsilon > 0$
