@@ -32,3 +32,7 @@ Ideas
 * Since $\mathbb{R}^k$ is complete, proving the sequence is Cauchy will be sufficent.
 * Proof by induction that $s_n < 2$ for $(n = 1,2,3...)$, should be easy enough since every term beneath square root bar has to be less than 4 and thus less than 2.
 
+**Proof by induction** on $n$, that every $s_n$ is less than $2$.\
+**Base case** : $\sqrt{2}$ is less than $2$.\
+**Induction step** : We are given $s_n < 2$. Using the definition of $s$ we know that $s_{n + 1}= \sqrt{2 + \sqrt{s_n}}$ since $s_n < 2 \implies$ $\sqrt{s_n} < 2 \implies$ $2 + \sqrt{s_n} < 4 \implies$ $\sqrt{2 + \sqrt{s_n}} < 2$.  All of this stems from the fact the square roots do not change inequailties and futher more, are determined by a unique root. 
+
