@@ -22,6 +22,13 @@ $$\frac{1}{2}$$
 
 **3.3**
 
-If $s_1$ = $\sqrt{2}$, and $s_n +1 = \sqrt{2 + \sqrt{s_n}}$ $(n= 1, 2, 3, ...),$ prove that $\{s_n\}$ converges, and that $s_n < 2$ for $n = 1,2,3...$ .
+If $s_1$ = $\sqrt{2}$, and $s_{n +1} = \sqrt{2 + \sqrt{s_n}}$ $(n= 1, 2, 3, ...),$ prove that $\{s_n\}$ converges, and that $s_n < 2$ for $n = 1,2,3...$ .
 
 Fix $\epsilon > 0$
+
+Ideas
+
+* Examine $d(s_n, s_{n - 1})$, $n > 1$ $d = | \sqrt{2 + \sqrt{s_n}} - \sqrt{2 + \sqrt{s_{n-1}}}|$ $= |\sqrt{2 + \sqrt{2 + \sqrt{s_{n-1}}}} - \sqrt{\sqrt{2 + \sqrt{s_{n-1}}}}| = |\sqrt{2 + \sqrt{a}} - a|$
+* Since $\mathbb{R}^k$ is complete, proving the sequence is Cauchy will be sufficent.
+* Proof by induction that $s_n < 2$ for $(n = 1,2,3...)$, should be easy enough since every term beneath square root bar has to be less than 4 and thus less than 2.
+
