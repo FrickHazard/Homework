@@ -24,19 +24,30 @@ $$\frac{1}{2}$$
 
 If $s_1$ = $\sqrt{2}$, and $s_{n +1} = \sqrt{2 + \sqrt{s_n}}$ $(n= 1, 2, 3, ...),$ prove that $\{s_n\}$ converges, and that $s_n < 2$ for $n = 1,2,3...$ .
 
+Fix $\epsilon > 0$
+
+Ideas
+
+* Examine $d(s_n, s_{n - 1})$, $n > 1$ $d = | \sqrt{2 + \sqrt{s_n}} - \sqrt{2 + \sqrt{s_{n-1}}}|$ $= |\sqrt{2 + \sqrt{2 + \sqrt{s_{n-1}}}} - \sqrt{\sqrt{2 + \sqrt{s_{n-1}}}}| = |\sqrt{2 + \sqrt{a}} - a|$
+* Since $\mathbb{R}^k$ is complete, proving the sequence is Cauchy will be sufficent.
+* Proof by induction that $s_n < 2$ for $(n = 1,2,3...)$, should be easy enough since every term beneath square root bar has to be less than 4 and thus less than 2.
 
 **Proof by induction** on $n$, that every $s_n$ is less than $2$.\
 **Base case** : $\sqrt{2}$ is less than $2$.\
 **Induction step** : We are given $s_n < 2$. Using the definition of $s$ we know that $s_{n + 1}= \sqrt{2 + \sqrt{s_n}}$ since $s_n < 2 \implies$ $\sqrt{s_n} < 2 \implies$ $2 + \sqrt{s_n} < 4 \implies$ $\sqrt{2 + \sqrt{s_n}} < 2$.  All of this stems from the fact the square roots do not change inequailties and futher more, are determined by a unique root. 
 
-We wish to show that $s_n$ is monotonically increasing, and since it is bounded by $2$, must converge.
+**3.4**
 
-**Proof by induction** on $n$, that $s_n < s_{n + 1}$\
-**Base Case** : $\sqrt{2} < \sqrt{2 + \sqrt{2}}$ for $s_1$ and $s_2$\
-**Induction Step** Given $s_n$ and the proposition $s_{n - 1} < s_n$, we then construct the following inequality.
+Find the upper and lower limits of the sequence $\{s_n\}$ defined by 
 
-$s_{n-1} < \sqrt{2 + \sqrt{s_{n - 1}}} = s_n \implies$ $\sqrt{s_{n-1}} < \sqrt{\sqrt{2 + \sqrt{s_{n - 1}}}} \implies$ $2 + \sqrt{s_{n-1}} < 2 + \sqrt{\sqrt{2 + \sqrt{s_{n - 1}}}} \implies$ $\sqrt{2 + \sqrt{s_{n-1}}} = s_n < \sqrt{2 +\sqrt{\sqrt{2 + \sqrt{s_{n - 1}}}}} = s_{n+1}$  So thus our series is monotonically increasing.
+$$s_1 = 0;  s_{2m} = \frac{s_{2m - 1}}{2}; s_{2m+1} = \frac{1}{2} + s_{2m}$$
 
-Since our series is monotonically increasing and is bounded by $0$ and $2$. Then $s$ must converge.
+The upper limit of $s$ is $1$. the lower limit of $s$ is $0$.
 
-And in fact this series converges to $\sqrt{2 + \sqrt{2}}$.  Which can be constructed from an inequality of $s_n$ and $s_{n+1}$
+Since every element of $\{ s_n\}$ is greater than zero except $s_1$, then $0$ must be the infimum. 
+
+For any $\epsilon > 0$ we can find a number whose distance to $1$ is less than $\epsilon$. This can be seen by considering the $0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{3}{8}, \frac{7}{8}, \frac{7}{16}, \frac{15}{16} ...$
+
+Since $s$ approaches arbituarly close to $1$, in fact it is the limit of $s$, we know that $1$ must the lower limit since any number greater than $1$ has number less than it not in $s$, and every number less than $1$ must be in $s$ or less than another number in $s$.
+
+So therefore $1$ is the supremum of $s$.
