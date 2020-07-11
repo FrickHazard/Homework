@@ -42,12 +42,49 @@ Find the upper and lower limits of the sequence $\{s_n\}$ defined by
 
 $$s_1 = 0;  s_{2m} = \frac{s_{2m - 1}}{2}; s_{2m+1} = \frac{1}{2} + s_{2m}$$
 
-The upper limit of $s$ is $1$. the lower limit of $s$ is $0$.
+The upper limit of $s$ is $1$. the lower limit of $s$ is $\frac{1}{2}$.
 
-Since every element of $\{ s_n\}$ is greater than zero except $s_1$, then $0$ must be the infimum. 
+For any $\epsilon > 0$ we can find a number whose distance to $1$ is less than $\epsilon$. This can be seen by considering by the pattern of $0, \frac{1}{2},$ $\frac{1}{4}$, $\frac{3}{4}$, $\frac{3}{8}$, $\frac{7}{8}$, $\frac{7}{16}$, $\frac{15}{16}$ $....$. Likewise for any $\epsilon > 0$ we can find an arbituarily close element in $S$ less than $\frac{1}{2}$(The odd terms). 
 
-For any $\epsilon > 0$ we can find a number whose distance to $1$ is less than $\epsilon$. This can be seen by considering the $0, \frac{1}{2}, \frac{1}{4}, \frac{3}{4}, \frac{3}{8}, \frac{7}{8}, \frac{7}{16}, \frac{15}{16} ...$
+**3.5**
 
-Since $s$ approaches arbituarly close to $1$, in fact it is the limit of $s$, we know that $1$ must the lower limit since any number greater than $1$ has number less than it not in $s$, and every number less than $1$ must be in $s$ or less than another number in $s$.
+For any two real sequences $\{a_n\}$, $\{b_n\}$, prove that
 
-So therefore $1$ is the supremum of $s$.
+$$\lim_{n \to \infin} sup (a_n + b_n) \leq \lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$$,
+
+provided the sum on the right is not of the form $\infin - \infin$.
+
+
+**Lemma 1**
+
+Every sub sequence $\{s_i\}$ of $\lim_{n \to \infin} sup (a_n + b_n)$ cannot be greater than $\lim_{n \to \infin} \sup a_n +$ $\lim_{n \to \infin} \sup b_n$.
+
+Consider then any subsequence $\{ s_i \} \to s$ of $(a_n + b_n)$.  The limit $s$ of $\{ s_i \}$ cannot be greater than $\lim_{n \to \infin} \sup a_n +$ $\lim_{n \to \infin} \sup b_n$, since $\lim (s_n + t_n) = t + s$ holds, for any two convergent sequences, and since $\sup a_n$ and $\sup b_n$ are the supremum of subsequences, then their sum must be at least that of $s$. (We use the assumption in the problem statement to handle the $\infin - \infin$ scenario.  We also are using the property of $\mathbb{R}$ that a $\sup$ always exists.)
+
+**Proof by negation**
+
+Suppose that 
+$$\lim_{n \to \infin} sup (a_n + b_n)> \lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$$
+were true.  However this leads to a contradiction, since we may show that this violates the leastness criteria of sup. Using the lemma above, we have effectively shown that $\lim_{n \to \infin} \sup a_n +$ $\lim_{n \to \infin} \sup b_n$ is a bound for every sequence in $\lim_{n \to \infin} sup (a_n + b_n)$.  And since our negation hypothesis assumes that $\lim_{n \to \infin} sup (a_n + b_n)$ is greater than $\lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$, the $\sup$ of the convergences of the subsequences of  $\lim_{n\to\infin}(a_n + b_n)$ cannot be a supremum since it is not the smallest upper bound.  The negation of $>$ implies $\leq$, and our proof is done∎
+
+**Examples**
+
+Consider the following two pairs of sequences.
+
+$$0, 1, 0, 1, 0, 1, ...$$
+$$1, 0, 1, 0, 1, 0, ...$$
+
+$\lim_{n \to \infin} sup (a_n + b_n) = 1 < 2 = \lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$
+
+$$0, 1, 0, 1, 0, 1, ...$$
+$$0, 1, 0, 1, 0, 1, ...$$
+
+$\lim_{n \to \infin} sup (a_n + b_n) = 2 = 2 = \lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$
+
+As a interesting note, I conjecture when $a = b$, then equality always holds.
+
+
+
+
+
+
