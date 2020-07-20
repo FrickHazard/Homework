@@ -83,8 +83,27 @@ $\lim_{n \to \infin} sup (a_n + b_n) = 2 = 2 = \lim_{n \to \infin} \sup a_n + \l
 
 As a interesting note, I conjecture when $a = b$, then equality always holds.
 
+**3.6**
+
+Investigate the behaviour (convergence or divergence) of $\sum a_{n}$ if
+
+($a$) $$a_n = \sqrt{n + 1} - \sqrt{n}$$
+
+($b$) $$a_n = \frac{\sqrt{n+1} - \sqrt{n}}{n}$$
+
+($c$) $$a_n = (\sqrt[n]{n} -1)^n$$
+
+($d$) $$a_n = \frac{1}{1+z^n}$$
+
+For complex values of $z$.
 
 
+($a$)
 
+$$\frac{\sqrt{n+1} +\sqrt{n}}{\sqrt{n+1} +\sqrt{n}} \cdot \frac{\sqrt{n+1} -\sqrt{n}}{1}$$
+
+$$\frac{1}{\sqrt{n+1} +\sqrt{n}}$$
+
+We know that $\frac{1}{n}$ diverges and $n > \sqrt{n + 1} + \sqrt{n}$ where $n \geq 5$, we may apply the contrapositive of the, comparison test since $|a_n| \leq \frac{1}{n}$, for $N_0 = 5$ thus the series diverges.
 
 
