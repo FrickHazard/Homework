@@ -257,19 +257,19 @@ vector.rec_on a
 --     ))
 -- )    
 
-def map1 {α β γ : Type} (f : α → β → γ) :
-  Π {n}, vector α n → vector β n → vector γ n :=
-(assume n a b, show vector γ n, from
-    nat.rec_on n
-    (show vector γ 0, from vector.nil)
-    (assume n ih, show vector γ (succ n), from ih.cons (f
-        (show α, from vector.rec_on a
-            (show α, from sorry)
-            (assume n1 itm vec ih, show α, from itm)
-        )
-        (show β, from sorry))
-    )
-)
+-- def map1 {α β γ : Type} (f : α → β → γ) :
+--   Π {n}, vector α n → vector β n → vector γ n :=
+-- (assume n a b, show vector γ n, from
+--     nat.rec_on n
+--     (show vector γ 0, from vector.nil)
+--     (assume n ih, show vector γ (succ n), from ih.cons (f
+--         (show α, from vector.rec_on a
+--             (show α, from sorry)
+--             (assume n1 itm vec ih, show α, from itm)
+--         )
+--         (show β, from sorry))
+--     )
+-- )
 
 end vector
 
@@ -277,10 +277,28 @@ open function
 
 #print surjective
 
+
 universes w
 variables {γ : Type w}
 open function
+#print surjective
 
 lemma surjective_comp {g : β → γ} {f : α → β}
   (hg : surjective g) (hf : surjective f) :
-surjective (g ∘ f) := (assume a, show )
+surjective (g ∘ f) :=
+begin
+    intros h1,
+    cases (hg h1) with hb hbp,
+    cases (hf hb) with ha hap,
+    apply exists.intro ha,
+    apply (eq.subst hbp),
+    apply eq.symm,
+    apply eq.trans (show g hb = g (f ha), from (eq.subst hap (eq.refl (g (f ha))))),
+    apply rfl
+end
+
+lemma surjective_comp_i {g : β → γ} {f : α → β}
+  (hg : surjective g) (hf : surjective f)
+  | 
+
+  end 
