@@ -107,3 +107,17 @@ $$\frac{1}{\sqrt{n+1} +\sqrt{n}}$$
 We know that $\frac{1}{n}$ diverges and $n > \sqrt{n + 1} + \sqrt{n}$ where $n \geq 5$, we may apply the contrapositive of the, comparison test since $|a_n| \leq \frac{1}{n}$, for $N_0 = 5$ thus the series diverges.
 
 
+($c$)
+
+Consider a geometric series $\sum_{n=0}^{\infin} x^n$, we know that when $x < 1$ the series converges.  We combine this fact with the comparison test to show that
+
+$$a_n = (\sqrt[n]{n} -1)^n$$
+
+does indeed converge.
+
+Consider when $x = 0.99$, and when $n = 2$, $a_n \approx 0.17$.  It can be deduced that every $a_n < a_{n+1}$ from ordering properties of exponents.  Since  $(\sqrt[n]{n} -1) < x$ for every $n$ and both are raisesd to $n$, we conclude the series must converge by the comparison test.
+
+($d$)
+
+
+
