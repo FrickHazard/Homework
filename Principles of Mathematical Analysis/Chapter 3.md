@@ -118,9 +118,9 @@ does indeed converge.
 Consider when $x = 0.99$, and when $n = 2$, $a_n \approx 0.17$.  It can be deduced that every $a_n < a_{n+1}$ from ordering properties of exponents.  Since  $(\sqrt[n]{n} -1) < x$ for every $n$ and both are raisesd to $n$, we conclude the series must converge by the comparison test.
 
 ($d$)
+Surrender! Don't know the relationships involving $|z|$ and complex exponents.
 
 
 **3.7**
 
-
-Consider the following inequality $0 \leq (a - b)^2 = a^2 - 2ab + b^2 \implies 2ab \leq a^2 +b^2$.  We use this fact to construct a sequence suitable to compare to $\frac{\sqrt{a_n}}{n}$.  Since $a_n$ converges and the harmonic series $\frac{1}{n^2}$ converges, we know that $a_n + \frac{1}{n^2}$ converges.  Now consider when $a = \sqrt{a_n}$ and $b = \frac{1}{n}$, so then $\frac{2\sqrt{a_n}}{n} \leq a_n +\frac{1}{n^2}$.  Going back we modify $b$ by setting it equal to $b = \frac{1}{2n}$.  Since multiplying a convergent series by a constant factor is still convergent we obtain the bound we need.
+Consider the following inequality $0 \leq (a - b)^2 = a^2 - 2ab + b^2 \implies 2ab \leq a^2 +b^2$.  We use this fact to construct a sequence suitable to compare to $\frac{\sqrt{a_n}}{n}$.  Since $a_n$ converges and the harmonic series $\frac{1}{n^2}$ converges, we know that $a_n + \frac{1}{n^2}$ converges.  Now consider when $a = \sqrt{a_n}$ and $b = \frac{1}{n}$, so then $\frac{2\sqrt{a_n}}{n} \leq a_n +\frac{1}{n^2}$.  Going back we modify $b$ by setting it equal to $b = \frac{1}{2n}$.  Since multiplying a convergent series by a constant factor is still convergent we obtain a suitable comparison series.  This then allows us to use the comparison test since we know that $a_n$ and the derived series are always non negative.
