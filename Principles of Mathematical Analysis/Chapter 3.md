@@ -123,4 +123,43 @@ Surrender! Don't know the relationships involving $|z|$ and complex exponents.
 
 **3.7**
 
-Consider the following inequality $0 \leq (a - b)^2 = a^2 - 2ab + b^2 \implies 2ab \leq a^2 +b^2$.  We use this fact to construct a sequence suitable to compare to $\frac{\sqrt{a_n}}{n}$.  Since $a_n$ converges and the harmonic series $\frac{1}{n^2}$ converges, we know that $a_n + \frac{1}{n^2}$ converges.  Now consider when $a = \sqrt{a_n}$ and $b = \frac{1}{n}$, so then $\frac{2\sqrt{a_n}}{n} \leq a_n +\frac{1}{n^2}$.  Going back we modify $b$ by setting it equal to $b = \frac{1}{2n}$.  Since multiplying a convergent series by a constant factor is still convergent we obtain a suitable comparison series.  This then allows us to use the comparison test since we know that $a_n$ and the derived series are always non negative.
+Prove that the convergence of $\sum{a_n}$ implies the convergence if $a_n \geq 0$ of
+
+$$\sum{\frac{\sqrt{a_n}}{n}}$$
+
+Consider the following inequality $0 \leq (a - b)^2 = a^2 - 2ab + b^2 \implies 2ab \leq a^2 +b^2$.  We use this fact to construct a sequence suitable to compare to $\frac{\sqrt{a_n}}{n}$.  Since $a_n$ converges and the harmonic series $\frac{1}{n^2}$ converges, we know that $a_n + \frac{1}{n^2}$ converges.  Now consider when $a = \sqrt{a_n}$ and $b = \frac{1}{n}$, so then $\frac{2\sqrt{a_n}}{n} \leq a_n +\frac{1}{n^2}$.  Going back we modify $b$ by setting it equal to $b = \frac{1}{2n}$.  Since multiplying a convergent series by a constant factor is still convergent we obtain a suitable comparison series.  This then allows us to use the comparison test since we know that $a_n$ and the derived series terms are always non negative.
+
+**3.8**
+
+If $\sum{a_n}$ converges, and if $\{b_n\}$ is monotonic and bounded, prove that $\sum{a_nb_n}$ converges.
+
+<!--
+
+<!-- Consider then $l = \sup \ \{ b \}$ (note we could also, $l = \max(|\lim_{n \to \infin} \sup b_n|, |\lim_{n \to \infin} \inf b_n|)$).  Since $\{ b \}$ is bounded $-\infin < l < \infin$.  We wish to construct a series $\sum{a_n|l|}$ and show that this series converges. Since $|l|$ is a constant we know $\sum{a_n|l|}$ converges.  There are two cases, if $\sum{a_n}$ converges absolutely then we know that $a_nb_n \leq |a_n||l|$, for every term and we may then use the comparison test.  If $a_n$ does not converge absolutely things are more difficult.  Consider then if $\{b_n\}$ is montonically increasing. -->
+
+<!-- Suppose $b_n \leq b_{n+1}$ the proof is symmetric in the other case.
+
+Given an $\epsilon > 0$, 
+
+Since $\{b_n\}$ is bounded let us consider $s = \sup \ \{b_n\}$.  Consider then
+
+$$\frac{\epsilon}{s}$$
+
+We use $s\epsilon$ with $\sum{a_n}$, to produce $N > N_0$ such that $m \geq n \geq N$ implies
+
+$$\left|s\sum^m_{k=n}{a_k}\right| = \left|\sum^m_{k=n}{sa_k}\right| \leq \epsilon$$
+
+Consider the case where every $b_k$ is positive or if $b_k$ starts negative and crosses the sign flip past some $N_1$ (invert for monotone decreasing), then
+
+$$\left| \sum{a_kb_k} \right| \leq \left| \sum{a_ks} \right|$$
+
+Holds, and we have sucessfully bounded $\sum{a_kb_k}$.  Alternatively consider the case where every term is negative (invert for monotone decreasing) we then consider $s = \inf\{b_n\}$, so that again
+
+$$\left| \sum{a_kb_k} \right| \leq \left| \sum{a_ks} \right|$$.
+
+We know that any series with terms multiplied by a constant must converge, so we have shown any arbiturary partial sum must be bounded by $s$. -->
+ 
+Consider theorem 3.42 and its sub lemma 3.41.  Essentially we use the monotonic property of $\{b_n\}$ to construct an inequality where by, since $\{b_n\}$ is bounded we have $|b_n| \leq M$.  We may use this $M$ to select the appropiate epsilone giving us that cauchy criterion to prove that $\sum{a_nb_n}$ converges.
+
+
+

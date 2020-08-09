@@ -278,7 +278,7 @@ open function
 #print surjective
 
 
-universes w
+universes dtr
 variables {γ : Type w}
 open function
 #print surjective
@@ -299,6 +299,7 @@ end
 
 lemma surjective_comp_i {g : β → γ} {f : α → β}
   (hg : surjective g) (hf : surjective f)
-  | 
-
-  end 
+  :=
+begin
+  induct proof irrelevance 
+end 
