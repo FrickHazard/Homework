@@ -162,4 +162,7 @@ We know that any series with terms multiplied by a constant must converge, so we
 Consider theorem 3.42 and its sub lemma 3.41.  Essentially we use the monotonic property of $\{b_n\}$ to construct an inequality where by, since $\{b_n\}$ is bounded we have $|b_n| \leq M$.  We may use this $M$ to select the appropiate epsilone giving us that cauchy criterion to prove that $\sum{a_nb_n}$ converges.
 
 
+**3.9**
+
+
 

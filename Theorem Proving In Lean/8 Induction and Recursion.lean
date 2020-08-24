@@ -273,33 +273,85 @@ vector.rec_on a
 
 end vector
 
-open function
 
-#print surjective
+-- two below are similiar proofs
+example (p q : Prop) : (p → q) → (p → p → q)
+| hp := (λ h1, λ h2, (hp h1)) 
+
+example (p q : Prop) (d : p → q) : (p → p → q)
+| hp hp2 := d hp
 
 
-universes dtr
+example (a b : β)  : (a = b) → b = a
+| h1 := (eq.symm h1)
+
+example (p q : Prop) : p ∧ q → q ∧ p
+| (and.intro h₁ h₂) := and.intro h₂ h₁
+
+example (p q : Prop) : p ∨ q → q ∨ p
+| (or.inl hp) := or.inr hp
+| (or.inr hq) := or.inl hq
+
+example {α : Type*} (p q : α → Prop) :
+  (∃ x, p x ∨ q x) → (∃ x, p x) ∨ (∃ x, q x)
+| (exists.intro x (or.inl px)) := or.inl (exists.intro x px)
+| (exists.intro x (or.inr qx)) := or.inr (exists.intro x qx)
+
+
+
+universes w
 variables {γ : Type w}
 open function
 #print surjective
 
+-- backwards style proof
 lemma surjective_comp {g : β → γ} {f : α → β}
   (hg : surjective g) (hf : surjective f) :
 surjective (g ∘ f) :=
 begin
-    intros h1,
-    cases (hg h1) with hb hbp,
-    cases (hf hb) with ha hap,
-    apply exists.intro ha,
-    apply (eq.subst hbp),
-    apply eq.symm,
-    apply eq.trans (show g hb = g (f ha), from (eq.subst hap (eq.refl (g (f ha))))),
-    apply rfl
+  intros h1,
+  cases (hg h1) with hb hbp,
+  cases (hf hb) with ha hap,
+  apply exists.intro ha,
+  apply (eq.subst hbp),
+  apply eq.symm,
+  apply eq.trans (show g hb = g (f ha), from (eq.subst hap (eq.refl (g (f ha))))),
+  apply rfl
 end
 
+-- (f : α → β), ∀ (b : β), ∃ (a : α), f a = b
 lemma surjective_comp_i {g : β → γ} {f : α → β}
-  (hg : surjective g) (hf : surjective f)
-  :=
-begin
-  induct proof irrelevance 
-end 
+  (hg : surjective g) (hf : surjective f) :
+surjective (g ∘ f)
+| hy :=
+  let ⟨hb, hbp⟩ := (hg hy),
+      ⟨ha, hap⟩ := (hf hb) in
+  -- better way to pattern match equality
+  exists.intro ha (
+    eq.trans (eq.symm (show g hb = g (f ha), from (eq.subst hap (eq.refl (g (f ha)))))) hbp
+  )
+
+
+-- excercise 2.
+namespace hidden
+
+def nnat_add : ℕ → ℕ → ℕ 
+| n 0 := n
+| n (nat.succ m) := nnat_add (succ n) m
+
+theorem nnat_add_zero_n (n : ℕ) : (nnat_add 0 n = n)
+| 0 0 := rfl
+| 
+
+
+
+def nnat_mul : ℕ → ℕ → ℕ
+| n 0 := 0 
+| n (nat.succ m) := nnat_add (nnat_mul n m) m
+
+def nnat_exp : ℕ → ℕ → ℕ
+| n 0 := 1
+| n (nat.succ m) := nnat_mul (nnat_exp n m) m
+
+end hidden
+  
