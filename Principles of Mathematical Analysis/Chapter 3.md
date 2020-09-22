@@ -6,7 +6,7 @@ Prove that convergence of $\{s_n\}$ implies convergence of $\{|s_n|\}$. Is the c
 
 Fix $\epsilon > 0$.  Since we know that $\{s_n\}$ is convergent we may produce a $N_1$ for $\epsilon$ such that $n \geq N_1$ implies that $d(s_n, p ) < \epsilon$. We also presume the following property of the embbeded metric space $X$ : $d(\bold{y}, \bold{x}) = d(|\bold{y}|, |\bold{x}|), x \in X$(Which is true in any $\mathbb{R}^k$). This allows us to use the same $N_1$ since $d(|s_n|, |p|) = d(s_n, p ) < \epsilon$.
 
-The converse is false, consider the counter example of $\{ 1, -1, 1, -1, 1, -1, ... \}$ 
+The converse is false, consider the counter example of $\{ 1, -1, 1, -1, 1, -1, ... \}$
 
 **3.2**
 
@@ -34,17 +34,17 @@ Ideas
 
 **Proof by induction** on $n$, that every $s_n$ is less than $2$.\
 **Base case** : $\sqrt{2}$ is less than $2$.\
-**Induction step** : We are given $s_n < 2$. Using the definition of $s$ we know that $s_{n + 1}= \sqrt{2 + \sqrt{s_n}}$ since $s_n < 2 \implies$ $\sqrt{s_n} < 2 \implies$ $2 + \sqrt{s_n} < 4 \implies$ $\sqrt{2 + \sqrt{s_n}} < 2$.  All of this stems from the fact the square roots do not change inequailties and futher more, are determined by a unique root. 
+**Induction step** : We are given $s_n < 2$. Using the definition of $s$ we know that $s_{n + 1}= \sqrt{2 + \sqrt{s_n}}$ since $s_n < 2 \implies$ $\sqrt{s_n} < 2 \implies$ $2 + \sqrt{s_n} < 4 \implies$ $\sqrt{2 + \sqrt{s_n}} < 2$.  All of this stems from the fact the square roots do not change inequailties and futher more, are determined by a unique root.
 
 **3.4**
 
-Find the upper and lower limits of the sequence $\{s_n\}$ defined by 
+Find the upper and lower limits of the sequence $\{s_n\}$ defined by
 
 $$s_1 = 0;  s_{2m} = \frac{s_{2m - 1}}{2}; s_{2m+1} = \frac{1}{2} + s_{2m}$$
 
 The upper limit of $s$ is $1$. the lower limit of $s$ is $\frac{1}{2}$.
 
-For any $\epsilon > 0$ we can find a number whose distance to $1$ is less than $\epsilon$. This can be seen by considering by the pattern of $0, \frac{1}{2},$ $\frac{1}{4}$, $\frac{3}{4}$, $\frac{3}{8}$, $\frac{7}{8}$, $\frac{7}{16}$, $\frac{15}{16}$ $....$. Likewise for any $\epsilon > 0$ we can find an arbituarily close element in $S$ less than $\frac{1}{2}$(The odd terms). 
+For any $\epsilon > 0$ we can find a number whose distance to $1$ is less than $\epsilon$. This can be seen by considering by the pattern of $0, \frac{1}{2},$ $\frac{1}{4}$, $\frac{3}{4}$, $\frac{3}{8}$, $\frac{7}{8}$, $\frac{7}{16}$, $\frac{15}{16}$ $....$. Likewise for any $\epsilon > 0$ we can find an arbituarily close element in $S$ less than $\frac{1}{2}$(The odd terms).
 
 **3.5**
 
@@ -63,7 +63,7 @@ Consider then any subsequence $\{ s_i \} \to s$ of $(a_n + b_n)$.  The limit $s$
 
 **Proof by negation**
 
-Suppose that 
+Suppose that
 $$\lim_{n \to \infin} sup (a_n + b_n)> \lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$$
 were true.  However this leads to a contradiction, since we may show that this violates the leastness criteria of sup. Using the lemma above, we have effectively shown that $\lim_{n \to \infin} \sup a_n +$ $\lim_{n \to \infin} \sup b_n$ is a bound for every sequence in $\lim_{n \to \infin} sup (a_n + b_n)$.  And since our negation hypothesis assumes that $\lim_{n \to \infin} sup (a_n + b_n)$ is greater than $\lim_{n \to \infin} \sup a_n + \lim_{n \to \infin} \sup b_n$, the $\sup$ of the convergences of the subsequences of  $\lim_{n\to\infin}(a_n + b_n)$ cannot be a supremum since it is not the smallest upper bound.  The negation of $>$ implies $\leq$, and our proof is done∎
 
@@ -139,7 +139,7 @@ If $\sum{a_n}$ converges, and if $\{b_n\}$ is monotonic and bounded, prove that 
 
 <!-- Suppose $b_n \leq b_{n+1}$ the proof is symmetric in the other case.
 
-Given an $\epsilon > 0$, 
+Given an $\epsilon > 0$,
 
 Since $\{b_n\}$ is bounded let us consider $s = \sup \ \{b_n\}$.  Consider then
 
@@ -158,11 +158,32 @@ Holds, and we have sucessfully bounded $\sum{a_kb_k}$.  Alternatively consider t
 $$\left| \sum{a_kb_k} \right| \leq \left| \sum{a_ks} \right|$$.
 
 We know that any series with terms multiplied by a constant must converge, so we have shown any arbiturary partial sum must be bounded by $s$. -->
- 
+
 Consider theorem 3.42 and its sub lemma 3.41.  Essentially we use the monotonic property of $\{b_n\}$ to construct an inequality where by, since $\{b_n\}$ is bounded we have $|b_n| \leq M$.  We may use this $M$ to select the appropiate epsilone giving us that cauchy criterion to prove that $\sum{a_nb_n}$ converges.
 
 
-**3.9**
+**3.9** Find the radius of convergence of each of the following power series:
 
+$$(a) \sum n^3z^n$$
 
+$$(b) \sum \frac{2^n}{n!}z^n$$
 
+$$(c) \sum \frac{2^n}{n^2}z^n$$
+
+$$(d) \sum \frac{n^3}{3^n}z^n$$
+
+$(a)$ Using 3.39 $\alpha = \lim\sup_{n\to\infin} \sqrt[n]{|n^3|}$. The $\lim$ and $\lim\sup$ of $\sqrt[n]{|n^3|}$ approaches $1$. In fact this is true for any $n^k$. So $R = \frac{1}{1} = 1$
+
+$$(b) \ \alpha = \left(\lim \sup_{n\to\infin}  \left(\sqrt[n]{\frac{2^n}{n!}} = \frac{\sqrt[n]{2^n}}{\sqrt[n]{n!}} = \frac{2}{\sqrt[n]{n!}}\right)\right) = 0$$
+
+So then $R = \infin$, which makes sense, since $\frac{1}{n!}$ dominates the other functions.
+
+$$(c) \ \alpha = \lim \sup_{n\to\infin} \left( \sqrt[n]{\frac{2^n}{n^2}} = \frac{\sqrt[n]{2^n}}{\sqrt[n]{n^2}}=\frac{2}{\sqrt[n]{n^2}}\right) = \frac{2}{1}$$
+
+So then $R = \frac{1}{a} = \frac{1}{2}$.
+
+$$(d) \ \alpha = \lim \sup_{n\to\infin}\left( \sqrt[n]{\frac{n^3}{3^n}} = \frac{\sqrt[n]{n^3}}{\sqrt[n]{3^n}} = \frac{\sqrt[n]{n^3}}{3} \right) = \frac{1}{3}$$
+
+So then $R = \frac{1}{\alpha} = 3$.
+
+**3.10**
