@@ -187,3 +187,19 @@ $$(d) \ \alpha = \lim \sup_{n\to\infin}\left( \sqrt[n]{\frac{n^3}{3^n}} = \frac{
 So then $R = \frac{1}{\alpha} = 3$.
 
 **3.10**
+
+Suppose that the coefficients of the power series $\sum a_n z^n$ are integers infinitely many of which are distinct from zero.  Prove that the radius of convergence is at most one.
+
+We have $\alpha = \lim \sup_{n\to\infin} \sqrt[n]{|a_n|}$. Consider then a non zero term  $|a_n|$, which must be greater than zero.  Since there are infinitely many distinct integers greater than zero then the $\lim \sup |a_n| \geq 1 \implies \sqrt[n]{|a_n|} \geq 1$. Since the radius is defined as $R = \frac{1}{\alpha}$ and $\alpha \geq 1$, Then $R \leq 1$.
+
+**3.11**
+
+
+Assume $\sum \frac{a_n}{ 1+ a_n}$ converges
+
+
+Since $\sum a_n$ diverges then ${a_n}$ must be a unbounded sequence and the lim of
+$$\frac{a_n}{1+a_n} = \frac{1}{1  + \frac{1}{a_n}} = 1$$
+
+This is a contradiction then since for any $\sum b_n$ the $\lim_{n \to \infin}b_n = 0$ for any convergent series
+
