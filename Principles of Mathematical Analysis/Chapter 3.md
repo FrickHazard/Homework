@@ -194,6 +194,25 @@ We have $\alpha = \lim \sup_{n\to\infin} \sqrt[n]{|a_n|}$. Consider then a non z
 
 **3.11**
 
+Suppose $a_n > 0, s_n = a_1 + \cdots + a_n,$ and $\sum a_n$ diverges.
+
+$(a)$ Prove that $\sum \frac{a_n}{1 + a_n}$ diverges.
+
+$(b)$ Prove that
+
+$$\frac{a_{N + 1}}{s_{N + 1}} + \cdots + \frac{a_{N + k}}{s_{N + k}} \geq 1 - \frac{s_N}{s_{N + k}}$$
+
+and deduce that $\sum \frac{a_n}{s_n}$ diverges.
+
+$(c)$ Prove that
+
+$$\frac{a_n}{s^2_n} \leq \frac{1}{s_{n - 1}} - \frac{1}{s_n}$$
+
+and deduce that $\sum \dfrac{a_n}{s^2_n}$ converges.
+
+$(d)$ What can be said about $$\sum \dfrac{a_n}{1 + na_n} \quad \text{and} \quad \sum \dfrac{a_n}{1 + n^2a_n} \ ?$$
+
+$(a)$
 
 Assume $\sum \frac{a_n}{ 1+ a_n}$ converges
 
@@ -201,5 +220,72 @@ Assume $\sum \frac{a_n}{ 1+ a_n}$ converges
 Since $\sum a_n$ diverges then ${a_n}$ must be a unbounded sequence and the lim of
 $$\frac{a_n}{1+a_n} = \frac{1}{1  + \frac{1}{a_n}} = 1$$
 
-This is a contradiction then since for any $\sum b_n$ the $\lim_{n \to \infin}b_n = 0$ for any convergent series
+This is a contradiction then since for any convergent series $\sum b_n$ the $\lim_{n \to \infin}b_n = 0$
+
+$(b)$
+
+Consider that for any $N$ and any $k \geq 1$
+
+$$\frac{s_{N +k}}{s_{N + k}} = \frac{a_{N + k} }{s_{N + k}} + \frac{s_{N + k - 1}}{s_{N + k}} = 1 \implies \frac{a_{N + k}}{s_{N + k}} = 1 - \frac{s_{N + k -1}}{s_{N + k}} =$$
+
+$$1- \left(\frac{s_N}{s_{N + k}} + \frac{a_{N + 1}}{s_{N + k}} + \cdots + \frac{a_{N + k - 1}}{s_{N + k}}\right)= $$
+$$\left(1 - \frac{s_N}{s_{N + k}}\right) -\left( \frac{a_{N + 1}}{s_{N + k}} + \cdots + \frac{a_{N + k - 1}}{s_{N + k}}\right)$$.
+
+Therefore we conclude that
+
+$$\frac{a_{N + k} }{s_{N + k}} = \left(1 - \frac{s_N}{s_{N + k}}\right) -\left( \frac{a_{N + 1}}{s_{N + k}} + \cdots + \frac{a_{N + k - 1}}{s_{N + k}}\right) \implies$$
+
+$$\frac{a_{N + k} }{s_{N + k}} \geq \left(1 - \frac{s_N}{s_{N + k}}\right)$$
+
+Now consider that
+
+$$\lim_{k\to \infin}\left(\frac{a_{N + 1}}{s_{N + 1}} + \cdots + \frac{a_{N + k}}{s_{N + k}}\right) \geq \lim_{k\to \infin}\left(1 - \frac{s_N}{s_{N + k}}\right) = 1 - s_N \lim \frac{1}{s_{N + k}} =1$$
+
+Assume $\sum \dfrac{a_n}{s_n}$ converges.  Then by theorem 3.22 there exists some integer $N$ such that
+
+$$\dfrac{a_{N + 1}}{s_{N + 1}} + \cdots + \dfrac{a_m}{s_n} \leq 0.2$$
+
+if $m \geq N + 1$, but this is impossible since we showed that for any fixed $N$ as $m \to \infin$ as per the inequaltiy.  So then the series diverges.
+
+($c$)
+
+$$\frac{1}{s_{n - 1}} - \frac{1}{s_n} = \frac{s_n}{s_ns_{n-1}} - \frac{s_{n - 1}}{s_ns_{n-1}} = \frac{a_n}{s_ns_{n-1}}$$
+
+And since $s_n > s_{n-1}$ we conclude that
+
+$$\frac{a_n}{s_n^2} \leq \frac{a_n}{s_ns_{n-1}} = \frac{1}{s_{n - 1}} - \frac{1}{s_n}$$
+
+Consider then $\sum \dfrac{1}{s_{n - 1}} - \dfrac{1}{s_n}$. If we can prove that this serires converges then $\frac{a_n}{s_n^2}$ must converge.  The partial sums of $\sum \dfrac{1}{s_{n - 1}} - \dfrac{1}{s_n}$ telescope. $\dfrac{1}{s_{n - 1}} - \dfrac{1}{s_n} + \dfrac{1}{s_n} - \dfrac{1}{s_{n + 1}} + \dfrac{1}{s_{n + 1}} - \dfrac{1}{s_{n + 2}} = \dfrac{1}{s_{n - 1}} - \dfrac{1}{s_{n + 2}}$. Since $s_n$ si unbounded we then know this sum converges.  And again since every term of $\dfrac{a_n}{s_n^2} \leq$ to this sum, we conclude $\dfrac{a_n}{s_n^2}$ converges.
+
+$(d)$
+
+$\sum \dfrac{a_n}{1 + na_n}$ diverges and $\sum \dfrac{a_n}{1+n^2a_n}$ converges.  By comparison with $\sum \dfrac{1}{n}$ and $\sum \dfrac{1}{n^2}$ respectively.
+
+**12.**
+
+Suppose $a_n > 0$ and $\sum a_n$ converges. Put
+
+$$r_n = \sum^{\infin}_{m=n} a_m.$$
+
+$(a)$ Prove that
+
+$$\frac{a_m}{r_m} + \cdots + \frac{a_n}{a_n} > 1 - \frac{r_n}{r_m}$$
+
+if $m < n$, and deduce that $\sum \dfrac{a_n}{r_n}$ diverges.
+
+$(a)$
+
+We note that
+
+$$\frac{a_m}{r_m} + \cdots \frac{a_n}{r_n} > \frac{a_m}{r_m} + \cdots + \frac{a_n}{r_m}$$
+
+And so
+
+$$\left(\frac{a_m}{r_m} + \cdots + \frac{a_n}{r_m} \right)+ \frac{r_n}{r_m} = \frac{r_m + a_n}{r_m} > 1$$
+
+In summary
+
+$$\left(\frac{a_m}{r_m} + \cdots \frac{a_n}{r_n}\right)+ \frac{r_n}{r_m}  >\frac{r_m + a_n}{r_m} > 1 \implies \frac{a_m}{r_m} + \cdots + \frac{a_n}{a_n} > 1 - \frac{r_n}{r_m}$$
+
+For some fixed $N$ $\lim_{k \to \infin} 1 - \dfrac{r_{k + N}}{r_k} \to 1$. Since the sequence formed from $\sum \dfrac{a_n}{r_n}$ is greater than every element of this limit, and the limit approaches $\infin$, we know that  $\sum \dfrac{a_n}{r_n}$ diverges, since the limit of terms of a converging sum must approach zero.
 
