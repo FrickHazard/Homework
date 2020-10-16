@@ -7,7 +7,7 @@ For the following graphs $G_1$ (left) and $G_2$ (right):
 ($b$) Report the order of the vertices encountered on a depth-first search starting from vertec $A$.  Break all ties by picking the vertices in alphavetical order (i.e., $A$ before $Z$).
 
 ($a$) $G_1$ : A | BDI | CEGJ | FH, $G_2$ : A | BE | CFI | DGJM | HKN | LO | P\
-($b$) $G_1$ : A B C E D G H F J I  $G_2$ : A B C D H G F E I J K L P O N M 
+($b$) $G_1$ : A B C E D G H F J I  $G_2$ : A B C D H G F E I J K L P O N M
 
 **5.2**
 
@@ -31,7 +31,7 @@ Hypothesis : For every node in the tree there is a unique path between any two n
 
 Base Case : Consider a tree of height 1 (edge height). This tree has a single root node and $k$ children nodes.  By the definition of a tree there is a unique edge for every child and parent. Consider two cases, either a pair of nodes is between the root node and and a child, or it is between two children.  In the first case the uniqueness of the path comes right from the tree definition.  In the second case a unique path between sibling nodes must go through the root. And since there there is a unique edge between a child and the root, and a path between two children is the combination of these, every pair of sibling nodes must have a uniqe path.
 
-Induction Step : Given a tree $T_n$ were every two nodes have a unique path, we wish to show a tree $T_{n+1}$ has the same property. Since the path between nodes in $T_n$ are already guaranteed to be unique by the induction hypothesis, we are only concerned with paths involving the newly added leaf nodes of $T_{n+1}$.  For a pair of nodes $(n_i, n_j)$, one of which is a new leaf node of $T_{n+1}$, consider the following cases.  Case 1, the pair consists of a node in $T_n$ and a leaf node.  Case 2 both nodes are leaf nodes.  We wish to show that for both cases the invariance holds.  Case 1, suppose $n_i$ is the leaf node and $n_j$ the node in $T_n$. The path for the pair $(parent (n_i), n_j)$ is guaranteed to be unique.  Since this path is unique and adding an child edge to this path which is guarenteed to be unique by the one edge per child property of trees, the path between $(n_i, n_j)$ must then be unique.  Case 2, consider the path between $(parent (n_i), parent(n_j))$.  This path must be unique by the induction hypothesis. Again since every edge between a parent and a child is unique in trees, adding the edge between $(n_i, parent (n_i))$ and $(n_j, parent (n_j))$ must be unique to $n_i$ and $n_j$ respectively.  Thus $T_{n+1}$ has a unique path between any two nodes.  
+Induction Step : Given a tree $T_n$ were every two nodes have a unique path, we wish to show a tree $T_{n+1}$ has the same property. Since the path between nodes in $T_n$ are already guaranteed to be unique by the induction hypothesis, we are only concerned with paths involving the newly added leaf nodes of $T_{n+1}$.  For a pair of nodes $(n_i, n_j)$, one of which is a new leaf node of $T_{n+1}$, consider the following cases.  Case 1, the pair consists of a node in $T_n$ and a leaf node.  Case 2 both nodes are leaf nodes.  We wish to show that for both cases the invariance holds.  Case 1, suppose $n_i$ is the leaf node and $n_j$ the node in $T_n$. The path for the pair $(parent (n_i), n_j)$ is guaranteed to be unique.  Since this path is unique and adding an child edge to this path which is guarenteed to be unique by the one edge per child property of trees, the path between $(n_i, n_j)$ must then be unique.  Case 2, consider the path between $(parent (n_i), parent(n_j))$.  This path must be unique by the induction hypothesis. Again since every edge between a parent and a child is unique in trees, adding the edge between $(n_i, parent (n_i))$ and $(n_j, parent (n_j))$ must be unique to $n_i$ and $n_j$ respectively.  Thus $T_{n+1}$ has a unique path between any two nodes.
 
 **5.4**
 
@@ -64,7 +64,7 @@ Give a linear algorithm to compute the chromatic number of graphs where each ver
 Use BFS traversal. If we come across any cross edges of any already discovered node we color the parent node with a color different than its the parent, and also different from the connected cross node. This situauion may never occure, in which case the graph is bipartite, otherwise this situation nessitates a third color.
 
 A easy example that three colors may be required is a triangle.
-<!-- 
+<!--
 Use a DFS traversal coloring child nodes differently than the parent.  If we run into a back edge we color the currently discovered child with a color different that the parent, and also different from the ancestor discovered through that back edge. -->
 
 **5.6**
@@ -143,7 +143,7 @@ Give efficient algorithms for both adjacency lists and matrices.
 Adjacency List :
 
 We first create an array $A$ of size $V$.  We store in $A$ every connected vert that appears in a particular vert $v$'s linked list.  For every linked list of $v$ we do a first pass filling $A$ with every node that is at the end of a directed edge from $v$.
-Then we do a second pass over $v$'s linked list, and for each item we go to that vertex's linked list and append that node as an edge from a $v$, using $A$ to exclude duplicates.  We append all these nodes to a seperate Adjacency structure $T$.  Once we have done this for every $v \in V$, we Append $T$ to the original adjacency list.  This algorithm taks $O(V)$ space, and $O(E^2 + V)$ running time.  Where $O(E^2)$ is going to be optimal, since a worst case input will require close to $E^2$ new edges. 
+Then we do a second pass over $v$'s linked list, and for each item we go to that vertex's linked list and append that node as an edge from a $v$, using $A$ to exclude duplicates.  We append all these nodes to a seperate Adjacency structure $T$.  Once we have done this for every $v \in V$, we Append $T$ to the original adjacency list.  This algorithm taks $O(V)$ space, and $O(E^2 + V)$ running time.  Where $O(E^2)$ is going to be optimal, since a worst case input will require close to $E^2$ new edges.
 
 Adjacency matrix :
 
@@ -166,13 +166,13 @@ A *vertex cover* of a graph $G = (V, E)$ is a subset of vertices $V'$ such that 
 <!-- ($b$) Conduct a BFS search starting from the root node.  For each depth compare the weight of the $p$ node to the sum of its children nodes.  If the weight of $p$ is greater delete the parent, otherwise keep the parent and delete all of $p$'s children.
 There also seems to always two ways to reach a minimum weight, strange. -->
 ($b$)
-It actually seems like marking every other height level for deletion always works.  Ok yes, consider the following induction. Consider two scenarios, one we mark the root node for deletion the other we dont. Our invariance is that deleting every other level the weighted sum of remaining nodes will be the same. 
+It actually seems like marking every other height level for deletion always works.  Ok yes, consider the following induction. Consider two scenarios, one we mark the root node for deletion the other we dont. Our invariance is that deleting every other level the weighted sum of remaining nodes will be the same.
 
 Base Case : A tree with root $d_r$ and $n$ children $c_{1-n}$.  Deleting all the children has the same total score as deleting the root.
 
 Inductive Step : Consider adding $n$ nodes to any child.  If the previous level was marked for deletion this will add $n$ points, one for each child to the total.  Otherwise if the previous level was active then all the children will be marked for deletion.  However the degree of the parent node changes by exactly $n$.  Meaning that the score will be the same.
 
-We mark the root node for deletion.  
+We mark the root node for deletion.
 
 <!-- Consider the following important fact : For every node $d$ with $n$ children, besides the root, the weight of $d = n + 1$, meaning that deleting $d$ is always beneficial. -->
 
@@ -240,13 +240,16 @@ Observe that these bounds gives you time to convert between the adjacency matrix
 
 ($a$) For every vert $v$ loop through all the connected vertices which are at most $V$.  For each of those vertices $v_2$ loop through all the connections of $v_2$ to find whether any of them are $v_1$.
 
-($b$) For every vert $v_1$ allocate a storage buffer $A$ equal to the size of all immediatly connected vertices.  Then do a DFS from $v_1$ with a depth cap of 2. For each node at depth $2$ check to see if that node is in $A$. If it is then we have found a triangle cycle.  The running time $O(|V| \cdot |E|)$ since the DFS will never exceed $O(|E|)$.  * Note we have to reset this buffer per node. which ends up being potentially another $E$, but still reduces by $O(E) = O(2E)$. 
+($b$) For every vert $v_1$ allocate a storage buffer $A$ equal to the size of all immediatly connected vertices.  Then do a DFS from $v_1$ with a depth cap of 2. For each node at depth $2$ check to see if that node is in $A$. If it is then we have found a triangle cycle.  The running time $O(|V| \cdot |E|)$ since the DFS will never exceed $O(|E|)$.  * Note we have to reset this buffer per node. which ends up being potentially another $E$, but still reduces by $O(E) = O(2E)$.
 
 **5.18**
 
 Consider a set of movies $M_1, M_2, ... M_k$.  There is a set of customers, each one of which indicates the two movies they would like to see this weekend. Movies are shown on Saturday evening and Sunday evening. Multiple movies may be screened at the same time.  You must decide which movies should be televised on Saturday and which on Sunday, so that every customer gets to see the two movies they desire.  Is there a schedule where each movie is shown at most once? Design an efficient algorithm to find such a schedule if one exists.
 
-There cannot always be an efficient schedule, consider the following tuples $(A, B)$ $(B, C)$ and $(A, C)$. There is no way only show a movie once to satisfy this input.  This is an equivalent of a directed triangle.  The two movies each customer wants represent an edge of a graph.  This problem is very similiar to a coloring problem, where each color represents a slot that a movie could be in.  Conisder a DFS, mark a the inital node as starting on Saturday(Notice for any valid result we could swap the movies on saturday and sunday and the solution would still be valid).  We then mark every other node a different "color", this allows to determine whether we need to repeat a node or a valid conifguration exists.  This Traversal is $O(E + V)$ or $O(C + M)$, where $C$ is a customers tuple of preferred movies.
+There cannot always be an efficient schedule, consider the following tuples $(A, B)$ $(B, C)$ and $(A, C)$. There is no way to only show a movie once to satisfy this input.  This is an equivalent of a directed triangle.  The two movies each customer wants represent an edge of a graph.  This problem is very similiar to a coloring problem, where each color represents a slot that a movie could be in.  Conisder a DFS, mark a the inital node as starting on Saturday(Notice for any valid result we could swap the movies on saturday and sunday and the solution would still be valid).  We then mark every other node a different "color", this allows to determine whether we need to repeat a node or a valid conifguration exists.  This Traversal is $O(E + V)$ or $O(C + M)$, where $C$ is a customers tuple of preferred movies.
 
 **5.19**
 
+Consider a post order traversal that computes two values $a$ and $b$ per node $v$.  $a$ represents the max length of the subrtree of $v$.  $b$ represents the longest length path from a leaf node to $v$.  We start with leaf nodes where $a = b = 0$. Then for each parent node we compute the following, $a = \max(\max_1(a), \beta), b = max(b_n) + 1$.  Where $\beta$, is equal to the max of any child $b + 1$, or the two greatest pairs of a $b_1 + 1$ + $b_2 + 1$.We simply return $a$ on the root node.  Traversal is $O(V)$ calculating the maxs is never more than the children so does not change the complexity.  The storage is $O(H)$ where $H$ is the height of the tree.
+
+**5.20**
