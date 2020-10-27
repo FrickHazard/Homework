@@ -261,7 +261,7 @@ $(d)$
 
 $\sum \dfrac{a_n}{1 + na_n}$ diverges and $\sum \dfrac{a_n}{1+n^2a_n}$ converges.  By comparison with $\sum \dfrac{1}{n}$ and $\sum \dfrac{1}{n^2}$ respectively.
 
-**12.**
+**3.12**
 
 Suppose $a_n > 0$ and $\sum a_n$ converges. Put
 
@@ -272,6 +272,12 @@ $(a)$ Prove that
 $$\frac{a_m}{r_m} + \cdots + \frac{a_n}{a_n} > 1 - \frac{r_n}{r_m}$$
 
 if $m < n$, and deduce that $\sum \dfrac{a_n}{r_n}$ diverges.
+
+$(b)$ Prove that
+
+$$\frac{a_n}{\sqrt{r_n}} < 2(\sqrt{r_n} - \sqrt{r_{n - 1}})$$
+
+and deduce that $\sum\dfrac{a_n}{\sqrt{r_n}}$ converges.
 
 $(a)$
 
@@ -288,4 +294,36 @@ In summary
 $$\left(\frac{a_m}{r_m} + \cdots \frac{a_n}{r_n}\right)+ \frac{r_n}{r_m}  >\frac{r_m + a_n}{r_m} > 1 \implies \frac{a_m}{r_m} + \cdots + \frac{a_n}{a_n} > 1 - \frac{r_n}{r_m}$$
 
 For some fixed $N$ $\lim_{k \to \infin} 1 - \dfrac{r_{k + N}}{r_k} \to 1$. Since the sequence formed from $\sum \dfrac{a_n}{r_n}$ is greater than every element of this limit, and the limit approaches $\infin$, we know that  $\sum \dfrac{a_n}{r_n}$ diverges, since the limit of terms of a converging sum must approach zero.
+
+($b$)
+
+
+$$\sqrt{r_n} - \sqrt{r_{n + 1}} = \frac{(\sqrt{r_n} - \sqrt{r_{n+1}})(\sqrt{r_n} + \sqrt{r_{n+1}}) }{(\sqrt{r_n} + \sqrt{r_{n+1}})} = \frac{r_n -r_{ n + 1}}{(\sqrt{r_n} + \sqrt{r_{n+1}})} > \frac{a_n}{2\sqrt{r_n}}$$
+
+The series $\sum \sqrt{r_n}$ converges, and since  for every term of $\sum \dfrac{a_n}{\sqrt{r_n}}$, that term is less than the cauchy convergence for any $N$ of $\sum \sqrt{r_n}$, $\sum \dfrac{a_n}{\sqrt{r_n}}$ must converge. For any epsilon given we may take $\epsilon/2$ to find the $N$ of $\sum \sqrt{r_n}$, for which we may show that $m \geq N \dfrac{a_m}{\sqrt{r_m}}$ has cauchy convergence.
+
+**3.13**
+
+Prove that the Cauchy product of two absolutely convergent series converges absolutely.
+
+<!-- Given $\sum |a_n| \to a$ and $\sum |b_n| \to  b$ we wish to prove that $\sum \sum^n_{k = 0} a_k b_{n-k}$. -->
+
+Using theorem 3.50, we extend this argument, since absolutely converging series imply that the original series converges.
+
+Put
+
+$$A_n = \sum^{n}_{k=0} a_k, \ \ B_n = \sum_{k=0}^{n} b_k, \ \ C_n = \sum^{n}_{k=0} c_k, \ \ \beta_n = B_n - B. \ \ \hat{D} = \sum_{k=0}^{n} |b_k|$$
+
+Then
+
+$$C_n = a_0b_0 + (a_0b_1 + a_1b_0) + \cdots + (a_0b_n + a_1b_{n-1} + \cdots a_nb_0) \\ =a_0B_n + a_1B_{n-1} + \cdots + a_nB_0 \\ = a_0(B + \beta_n) + a_1(B+ \beta_{n - 1} + \cdots + a_n(B + \beta_0)) \\ = A_nB + a_0\beta_n + a_1\beta_{n - 1} + \cdots + a_n\beta_0$$
+
+Consider then
+
+$$|C_n| = |A_nB + a_0\beta_n + a_1\beta_{n - 1} + \cdots + a_n\beta_0| \\
+\leq |A_nB| + |a_0\beta_n| + |a_1\beta_{n-1}| + \cdots + |a_n\beta_0|$$
+
+
+$$|a_0B_n + a_1B_{n-1} + \cdots + a_nB_0| \leq |a_0\hat{D}| + |a_1\hat{D}| + \cdots + |a_n\hat{D}|$$
+
 

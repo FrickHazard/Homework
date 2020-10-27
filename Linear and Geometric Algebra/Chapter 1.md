@@ -24,3 +24,6 @@ Consider two cases, either $\bold{v_1}$ and $\bold{v_2}$ form a line if they are
 
 **Excercise 1.7.**
 
+Find all the solutions $t_1$ and $t_2$ to $t_1\bold{v_1} + t_2\bold{v_2} = \bold{v_3}$.
+
+There are non since you cannot stretch or add any amount of the vectors to reach $\bold{v_3}$
