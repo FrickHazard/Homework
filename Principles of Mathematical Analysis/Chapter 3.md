@@ -306,24 +306,32 @@ The series $\sum \sqrt{r_n}$ converges, and since  for every term of $\sum \dfra
 
 Prove that the Cauchy product of two absolutely convergent series converges absolutely.
 
-<!-- Given $\sum |a_n| \to a$ and $\sum |b_n| \to  b$ we wish to prove that $\sum \sum^n_{k = 0} a_k b_{n-k}$. -->
-
-Using theorem 3.50, we extend this argument, since absolutely converging series imply that the original series converges.
-
 Put
 
-$$A_n = \sum^{n}_{k=0} a_k, \ \ B_n = \sum_{k=0}^{n} b_k, \ \ C_n = \sum^{n}_{k=0} c_k, \ \ \beta_n = B_n - B. \ \ \hat{D} = \sum_{k=0}^{n} |b_k|$$
+$$A_n = \sum^{n}_{k=0} a_k, \ \ B_n = \sum_{k=0}^{n} b_k, \ \ C_n = \sum^{n}_{k=0} a_kb_{n-k},  \ \ \hat{B} = \sum_{k=0}^{n} |b_k|$$
 
 Then
 
-$$C_n = a_0b_0 + (a_0b_1 + a_1b_0) + \cdots + (a_0b_n + a_1b_{n-1} + \cdots a_nb_0) \\ =a_0B_n + a_1B_{n-1} + \cdots + a_nB_0 \\ = a_0(B + \beta_n) + a_1(B+ \beta_{n - 1} + \cdots + a_n(B + \beta_0)) \\ = A_nB + a_0\beta_n + a_1\beta_{n - 1} + \cdots + a_n\beta_0$$
+$$C_n = a_0b_0 + (a_0b_1 + a_1b_0) + \cdots + (a_0b_n + a_1b_{n-1} + \cdots a_nb_0) \\ =a_0B_n + a_1B_{n-1} + \cdots + a_nB_0$$
 
 Consider then
 
-$$|C_n| = |A_nB + a_0\beta_n + a_1\beta_{n - 1} + \cdots + a_n\beta_0| \\
-\leq |A_nB| + |a_0\beta_n| + |a_1\beta_{n-1}| + \cdots + |a_n\beta_0|$$
+<!-- $$|C_n| = |A_nB + a_0\beta_n + a_1\beta_{n - 1} + \cdots + a_n\beta_0| \\
+\leq |A_nB| + |a_0\beta_n| + |a_1\beta_{n-1}| + \cdots + |a_n\beta_0|$$ -->
 
+<!-- Because an absolute series is at least equal to or greater than any term -->
 
-$$|a_0B_n + a_1B_{n-1} + \cdots + a_nB_0| \leq |a_0\hat{D}| + |a_1\hat{D}| + \cdots + |a_n\hat{D}|$$
+$$|a_0B_n + a_1B_{n-1} + \cdots + a_nB_0| \leq |a_0\hat{B}| + |a_1\hat{B}| + \cdots + |a_n\hat{B}|$$
 
+$$ = |\hat{B}|(|a_0| + |a_1| + \cdots + |a_n| )$$
+
+Since $\sum^{n}_{k=0} |a_k|$ converges and $\hat{B}$ is a real number, we conclude that the cauchy produce of $A$ and $B$ converges absolutely, since its partials sums are less than that of a series that we know converges.
+
+**3.14**
+
+If $\{s_n\}$ is a complex squence, define its arithmetic means $\sigma_n$ by
+
+$$\sigma_n = \frac{s_0 + s_1 + \cdots + s_n}{n+1} \ \ \ \ \ \  (n = 0, 1, 2, ...).$$
+
+$(a)$ If lim $s_n = s$, prove that lim $\sigma_n = s$.
 
