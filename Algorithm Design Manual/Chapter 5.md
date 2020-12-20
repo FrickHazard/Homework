@@ -252,4 +252,18 @@ There cannot always be an efficient schedule, consider the following tuples $(A,
 
 Consider a post order traversal that computes two values $a$ and $b$ per node $v$.  $a$ represents the max length of the subrtree of $v$.  $b$ represents the longest length path from a leaf node to $v$.  We start with leaf nodes where $a = b = 0$. Then for each parent node we compute the following, $a = \max(\max_1(a), \beta), b = max(b_n) + 1$.  Where $\beta$, is equal to the max of any child $b + 1$, or the two greatest pairs of a $b_1 + 1$ + $b_2 + 1$.We simply return $a$ on the root node.  Traversal is $O(V)$ calculating the maxs is never more than the children so does not change the complexity.  The storage is $O(H)$ where $H$ is the height of the tree.
 
+
+<!-- SKIPPED 5.20 -->
+
+
 **5.20**
+
+
+
+**5.21**
+
+Let $v$ and $w$ be two vertices in a directed graph $G = (V,E)$. Design a linear- time algorithm to find the number of different shortest paths (not necessarily vertex disjoint) between $v$ and $w$. Note: the edges in $G$ are unweighted.
+
+Allocate an array of $n$ for a discovery.  Perform a breadth first traversal from both points in dual step. In each step traverse the next layer of nodes from $v$ then $w$. Whene a node is discoverd that has been already traversed, begin counting that node and all other nodes that have already been discovered in the initial node($v$ or $w$) of that step.  The algorith is linear because a node will at most be visited twice.
+
+

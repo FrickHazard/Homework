@@ -335,3 +335,49 @@ $$\sigma_n = \frac{s_0 + s_1 + \cdots + s_n}{n+1} \ \ \ \ \ \  (n = 0, 1, 2, ...
 
 $(a)$ If lim $s_n = s$, prove that lim $\sigma_n = s$.
 
+$(b)$ Construct a sequence $\{s_n\}$ which does not converge, although  $\lim \sigma_n = 0$.
+
+
+$(a)$
+
+Given $\epsilon > 0$,
+
+Let $N_0$ be the index of $\{ s_n \}$ with $\epsilon$,
+
+Let $z = \sum^{N_0}_{i=0} s_i$
+
+
+Choose $N_1 = \left\lceil\left |\dfrac{z}{\epsilon} \right|\right\rceil + N_0$
+
+Consider then $\sigma_{N_1}$
+
+$$\frac{s_0 + s_1 + \cdots + s_{N_1}}{N_1 + 1} =\frac{z}{N_1 + 1} + \dfrac{s_{N_0 + 1} + \cdots s_{N_0 + N_1}}{N_1 + 1}$$
+
+So then
+
+$$ \left |\frac{z}{N_1 + 1} - s \right | < \epsilon$$
+
+And
+
+$$\left |\dfrac{s_{N_0 + 1} + \cdots s_{N_0 + N_1}}{N_1 + 1} - s \right | < \epsilon$$
+
+This means that $\sigma_n  < 2\epsilon$, we may simply choose $\epsilon / 2$ for $N_1$ and $\{s_n\}$.
+
+$(b)$ Consider the sequence $s = \{ 0, 1, 0, 1, 0, 1, \cdots\}$. This sequence does not converge.
+
+
+Given $\epsilon > 0$
+
+Let $N = \left \lceil \dfrac{1}{\epsilon} \right \rceil$
+
+So then we have
+
+$$\sigma_N = \frac{0 + 1 + 0 + \cdots}{N + 1} =\frac{ \left \lfloor \frac{N }{2} \right \rfloor} {N+1}$$
+
+Lemma
+
+$$\forall \ n, \ \frac{ \left \lfloor \frac{n}{2} \right \rfloor} {n+1} \leq \frac{\frac{n}{2}}{n + 1} = \frac{n}{2(n + 1)} < \frac{1}{2}$$
+
+Then consider for any $N \leq N_0$
+
+$$\left | \frac{ \left \lfloor \frac{N_0}{2} \right \rfloor}{N_0 + 1} - \frac{1}{2}\right | \leq \left | \frac{N_0}{2(N_0 + 1)  } - \frac{1}{2}\right | = \left | \frac{N_0 - (N_0 + 1)}{2(N_0 + 1)  } \right | = \left | \frac{-1}{2(N_0 + 1)  } \right | \leq \left | \frac{-1}{\frac{2}{\epsilon} + 2  } \right | = \left | \frac{-\epsilon}{2(1+\epsilon)} \right | \leq \epsilon$$
