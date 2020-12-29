@@ -337,6 +337,15 @@ $(a)$ If lim $s_n = s$, prove that lim $\sigma_n = s$.
 
 $(b)$ Construct a sequence $\{s_n\}$ which does not converge, although  $\lim \sigma_n = 0$.
 
+$(c)$ Can it happen that $s_n > 0$ for all $n$ and that $\lim \sup s_n = \infin$, although $\sigma_n = 0$?
+
+
+$(d)$ Put $a_n = s_n - s_{n - 1}$, for $n \geq  1$. Show that
+
+$$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
+
+Assume that $\lim (na_n = 0)$ and that $\{ \sigma \}$ converges. Prove that $\{s_n\}$ converges. [This gives a converse of $(a)$, but under the weaker assumption that $na_n \to 0.$]
+
 
 $(a)$
 
@@ -381,3 +390,103 @@ $$\forall \ n, \ \frac{ \left \lfloor \frac{n}{2} \right \rfloor} {n+1} \leq \fr
 Then consider for any $N \leq N_0$
 
 $$\left | \frac{ \left \lfloor \frac{N_0}{2} \right \rfloor}{N_0 + 1} - \frac{1}{2}\right | \leq \left | \frac{N_0}{2(N_0 + 1)  } - \frac{1}{2}\right | = \left | \frac{N_0 - (N_0 + 1)}{2(N_0 + 1)  } \right | = \left | \frac{-1}{2(N_0 + 1)  } \right | \leq \left | \frac{-1}{\frac{2}{\epsilon} + 2  } \right | = \left | \frac{-\epsilon}{2(1+\epsilon)} \right | \leq \epsilon$$
+
+<!-- Comment to fix compiling?? -->
+
+($c$) Yes.
+
+
+Consider the following sequence $\{s_n\}$, composed of the following consecutive blocks of numbers
+$$s_n =\{$$
+
+$$\dfrac{1}{10}, 1$$
+
+$$\dfrac{1}{10^2}, \dfrac{1}{10^3}, 2$$
+
+$$\dfrac{1}{10^4}, \dfrac{1}{10^5}, \dfrac{1}{10^6}, \dfrac{1}{10^7}, 3$$
+
+$$\dfrac{1}{10^8}, \dfrac{1}{10^9}, \dfrac{1}{10^{10}},  \dfrac{1}{10^{11}}, \dfrac{1}{10^{12}}, \dfrac{1}{10^{13}}, \dfrac{1}{10^{14}}, \dfrac{1}{10^{15}}, 4,$$
+
+$$\cdots \}$$
+
+
+and so on.
+
+The motivations for this construction are the following,
+* ${s_n}$ is unbounded
+* The following lemma
+
+**Lemma**
+
+For every whole number term with index $n$ in a block the partial sum of $\sigma_n$ is less than the partial sum of the previous whole number term(if it exists).
+
+Proof by induction
+
+Base Case compute: $\sigma_5 = \dfrac{\dfrac{1}{10} + 1 +\dfrac{1}{10^2} + \dfrac{1}{10^3} + 2}{6} < \sigma_2 = \dfrac{\dfrac{1}{10} + 1 }{3}$
+
+
+
+
+Given a block with $2^{\alpha - 1} + 1$ terms the next block has $2^{\alpha} + 1$ terms (the +1 being the whole number).
+
+Let $\alpha$ be the whole number for the first block.
+
+Let $i$ be the index of $s_i = \alpha$
+
+Let $t$ the number of terms before the first block.
+  We then have
+
+$$ \sigma_i =\dfrac{\alpha}{t +2^{\alpha - 1} + 1} <  \dfrac{(\alpha + 1)}{t + 2^{\alpha - 1} + 2^{\alpha} + 2} = \sigma_{i + 2^a + 1}$$
+
+Since $(\dfrac{1}{\alpha} + 1) \leq 2^\alpha$ for natural numbers always holds.
+
+Since every non whole number term is smaller than every other term that has appeared thus far this suffices to show **blocks** "monotonically decrease".
+
+
+Now for the proof of convergence to $0$
+
+For $\sigma_n$, fix $\epsilon > 0$,
+
+There exists a number $N$ such that the partial sum of a whole number term of $\sigma_N  < \epsilon$
+
+Since the sequence $$\dfrac{(n + 1)}{2^{n}} \to 0$$
+
+The subsequence of whole numbers of $s_n$ is less than every term $$\dfrac{(n + 1)}{2^{n}}$$
+
+so we may always find this $N$.
+
+$$N_0 \geq N \implies \sigma_{N_0} < \epsilon$$
+
+Holds since since every non-whole number term is smaller than every other term so far in the sequence and the lemma proved above handles the whole number case.
+
+$(d)$
+
+$(d)$ Put $a_n = s_n - s_{n - 1}$, for $n \geq  1$. Show that
+
+$$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
+
+Assume that $\lim (na_n = 0)$ and that $\{ \sigma \}$ converges. Prove that $\{s_n\}$ converges. [This gives a converse of $(a)$, but under the weaker assumption that $na_n \to 0.$]
+
+$$s_n - \sigma_n = s_n - \dfrac{s_0 + \sum^n_{k=1} s_k}{n +1} = \dfrac{s_n(n+1)}{n+1} - \dfrac{s_0 + \sum^n_{k=1} s_k}{n+1}$$
+
+$$\dfrac{s_n(n + 1) - s_0 - \sum^n_{k=1} s_k}{n + 1} = \dfrac{1}{n+1} \left (s_n(n + 1)  - s_0 - \sum^n_{k=1} s_k \right )$$
+
+
+For all $k$
+$$ka_n + (k + 1)a_{n + 1} = ks_n - ks_{n - 1} + (k + 1)s_{n + 1} - (k + 1)s_{n}  =  - ks_{n - 1} -s_n + (k + 1)s_{n + 1}$$
+
+When inducted on a sum
+
+$$\sum^n_{k=1}a_k = s_n(n + 1) - s_0 - \sum^n_{k=1}s_k$$
+
+As each succesive term reduces a previous term by $ks_k - (k + 1)s_k = -s_k$, with start and end tails of $-s_0$ and $ns_n$.
+
+
+So then
+
+$$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
+
+
+Applying $(a),$ $s_n - \sigma_n$ must converge to $0$
+
+We know that $s_n - \sigma_n$ converges and $\sigma_n$ converges so therefore $s_n$ converges.
