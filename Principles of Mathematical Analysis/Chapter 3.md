@@ -346,6 +346,26 @@ $$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
 
 Assume that $\lim (na_n = 0)$ and that $\{ \sigma \}$ converges. Prove that $\{s_n\}$ converges. [This gives a converse of $(a)$, but under the weaker assumption that $na_n \to 0.$]
 
+$(e)$ Derive the last conclusion from a weaker hypothesis: Assume $M < \infin.$ $|na_n| \leq M$ for all $n,$ and $\lim \sigma_n = \sigma.$ Prove that $s_n = \sigma,$ by completing the following outline:
+
+If $m < n$ then
+
+$$s_n - \sigma_n = \dfrac{m+1}{n-m}(\sigma_n - \sigma_m) + \dfrac{1}{n-m} \sum^n_{i=m+1} (s_n - s_i).$$
+
+For these $i$,
+
+$$|s_n - s_i| \leq \dfrac{(n-i)M}{i + 1} \leq \dfrac{(n-m-1)M}{m + 2}.$$
+
+Fix $\epsilon > 0$ and associate eith each $n$ the integer $m$ that satisfies
+
+$$m \leq \dfrac{n - \epsilon}{1 + \epsilon} < m + 1.$$
+
+Then $(m+1)/(n-m)\leq 1/\epsilon$ and $|s_n - s_i| < M\epsilon$. Hence
+
+$$\lim_{n \to \infin} \sup |s_n - \sigma| \leq M \epsilon.$$
+
+Since $\epsilon$ was arbitrary, $\lim s_n = \sigma$.
+
 
 $(a)$
 
@@ -461,11 +481,6 @@ Holds since since every non-whole number term is smaller than every other term s
 
 $(d)$
 
-$(d)$ Put $a_n = s_n - s_{n - 1}$, for $n \geq  1$. Show that
-
-$$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
-
-Assume that $\lim (na_n = 0)$ and that $\{ \sigma \}$ converges. Prove that $\{s_n\}$ converges. [This gives a converse of $(a)$, but under the weaker assumption that $na_n \to 0.$]
 
 $$s_n - \sigma_n = s_n - \dfrac{s_0 + \sum^n_{k=1} s_k}{n +1} = \dfrac{s_n(n+1)}{n+1} - \dfrac{s_0 + \sum^n_{k=1} s_k}{n+1}$$
 
@@ -490,3 +505,174 @@ $$s_n - \sigma_n = \dfrac{1}{n + 1}\sum^{n}_{k = 1} ka_k.$$
 Applying $(a),$ $s_n - \sigma_n$ must converge to $0$
 
 We know that $s_n - \sigma_n$ converges and $\sigma_n$ converges so therefore $s_n$ converges.
+
+
+<!-- Surrender online solutions had different equalities  -->
+$(e)$
+
+
+If $m < n$ then
+
+<!-- $$s_n - \sigma_n =\dfrac{s_n(n + 1) - s_0 - \sum^n_{k=1} s_k}{n +1} = \dfrac{\dfrac{n-m}{n+1}}{\dfrac{n-m}{n+1}} \dfrac{s_n(n + 1) - s_0 - \sum^n_{k=1} s_k}{n +1}=$$
+
+$$\dfrac{(n-m)s_n - \dfrac{n-m}{n+1}s_0 - \dfrac{n-m}{n+1}\sum^n_{k=1} s_k}{n-m} =\dfrac{(n-m)s_n - \dfrac{n-m}{n+1}s_0 - \dfrac{n-m}{n+1}(\sum^n_{k=m+1} s_k + \sum^{m+1}_{k=1} s_k)}{n-m}=$$
+
+$$\dfrac{(n-m)s_n - \dfrac{n-m}{n+1}\sum^n_{k=m+1} - \dfrac{n-m}{n+1}s_0 - \dfrac{n-m}{n+1}\sum^{m+1}_{k=1} s_k}{n-m}$$ -->
+
+
+$$\dfrac{m+1}{n-m}(\sigma_n - \sigma_m) + \dfrac{1}{n-m} \sum^n_{i=m+1} (s_n - s_i) = \dfrac{(m+1)(\sigma_n - \sigma_m) + \sum^n_{i=m+1}s_n - s_i}{n-m}=$$
+
+$$\dfrac{(m+1)\left (\dfrac{[s_0 + \cdots + s_n]}{n+1} - \dfrac{[s_0 + \cdots + s_m]}{m + 1}\right ) + \sum^n_{i=m+1}s_n - s_i}{n-m} =$$
+
+$$\dfrac{\dfrac{(m+1)}{n+1}[s_0 + \cdots + s_n] - [s_0 + \cdots + s_m] + (n - m)s_n - [s_{m+1} + \cdots + s_n]}{n-m}=$$
+
+$$\dfrac{\dfrac{(m+1)}{n+1}[s_0 + \cdots + s_n] - [s_0 + \cdots + s_n] + (n - m)s_n}{n-m}=$$
+
+$$\dfrac{\dfrac{(m+1)}{n+1}[s_0 + \cdots + s_n] - \dfrac{(n + 1)[s_0 + \cdots + s_n]}{n + 1} + (n - m)s_n}{n-m}=$$
+
+$$\dfrac{\dfrac{[s_0 + \cdots + s_n](m + 1 - n - 1)}{n+1} + (n - m)s_n}{n-m}=$$
+
+$$\dfrac{\dfrac{[s_0 + \cdots + s_n](m - n)}{n+1} + (n - m)s_n}{n-m}=$$
+
+$$\dfrac{\dfrac{[s_0 + \cdots + s_n](m - n)}{n+1}}{n-m} + s_n=$$
+
+$$s_n - \sigma_n$$
+
+<!-- $$\dfrac{\dfrac{n + 1}{n - m}}{\dfrac{n + 1}{n - m}} \dfrac{\dfrac{(m+1)}{n+1}\dfrac{[s_0 + \cdots + s_n]}{n+1} - [s_0 + \cdots + s_n] + (n - m)s_n}{n-m}=$$
+
+$$\dfrac{\dfrac{(m+1)}{n-m}\dfrac{[s_0 + \cdots + s_n]}{n+1} - \dfrac{n + 1}{n - m}[s_0 + \cdots + s_n] + (n + 1)s_n}{n + 1}=$$ -->
+
+
+**3.15**
+
+Definition 3.21 can be extended to the case in which the $a_n$ lie in some fixed $R^k$. Absolute convergence is defined as convergence of $\sum|\bold{a}_n|$. Show that Theorems 3.22, 3.23, 3.25(a), 3.33, 3.34, 3.42, 3.45, 3.47 and 3.55 are true in this more general setting. (Only slight modifications are required in any of the proofs.)
+
+(3.22)
+
+Left, Suppose $\sum \bold{a}_n$ converges, this means each individual component $i$ of $\bold{a} = (a_1, \cdots, a_k)$ converges.  Since the sum of every component converges then the cauchy criteron holds.  We may then use $\dfrac{\epsilon}{k}$, since $\sum_n^m|{a_1}| + \cdots + \sum_n^m|{a_k}| \leq \epsilon k$. In other words we use 3.22 for every componet of $\sum \bold{a}_n$ and divide $\epsilon$ by $k$.
+
+Right, we may use the right direction of (3.22) to show that every component of $\sum_n^m\bold{a}_n$ must be a Cauchy sequnce, and since each component sequence of $\bold{a}$ is cauchy in $\R$, then every component sequence converges. Finally since every component sequence converges in $\bold{a}_n$, then $\sum \bold{a}_n$ converges.
+
+(3.23)
+
+If $\sum \bold{a}_n$ converges then $\lim_{n \to \infin} \bold{a} = \bold{0}$.
+
+Apply (3.22) with $m=n$
+
+(3.25)(a)
+
+If $|\bold{a_n}| \leq \bold{c}_n$ for $n \geq N_0$, where $N_0$ is some fixed integer, and if $\sum \bold{c}_n$ converges then the sum of $\sum \bold{a}_n$ converges.
+
+Given an $\epsilon > 0$, get $N_1$ from cauchy of $\sum \bold{c}_n$ with $\epsilon / 2$, use $M \geq N = \max \ N_0 \ N_1$. Then we have $|\bold{a}_N| \leq \bold{c}_N \land |\bold{a}_M| \leq \bold{c}_M$ and $|\bold{c}_N - \bold{c}_M| \leq \epsilon / 2$. We then use algebra to obtain
+
+$$|\bold{a}_N - \bold{a}_M| = |\bold{a}_N - \bold{a}_M + ( \max \ \bold{c}_N \bold{c}_M - \max \ \bold{c}_N \bold{c}_M)| \leq $$
+
+$$|\max \ \bold{c}_N \bold{c}_M - \bold{a}_M| + |\max \bold{c}_N \bold{c}_M - \bold{a}_N| \leq$$
+
+$$|\max \bold{c}_N \bold{c}_M - \bold{c}_N| + |\max \bold{c}_N \bold{c}_M - \bold{c}_M| \leq \epsilon.$$.
+
+
+In other words $\sum \bold{a}_n$ is cauchy and must converges.
+
+(3.33)
+
+Given $\sum \bold{a}_n$, put $\alpha = \lim \sup_{n \to \infin}$ $\sqrt[n]{|\bold{a}_n|}$.
+
+*Then*
+
+(a)  if $\alpha < 1, \sum \bold{a}_n$  converges
+
+(b)  if $\alpha > 1, \sum \bold{a}_n$  diverges
+
+(c)  if $\alpha = 1, \sum \bold{a}_n$, the test gives no information
+
+If $\alpha < 1$ we choose $\beta$ so that $\alpha < \beta < 1$, and an integer $N$ such that
+
+$$\sqrt[n]{|\bold{a}_n|} < \beta$$
+
+for $n \geq N$ [by Theorem 3.17(b)]. That is, $n \geq N$ implies
+
+$$|\bold{a}_n| < \beta^n.$$
+
+
+Since $0 < \beta < 1$, $\sum \beta^n$ converges.  Convergence of $\sum \bold{a}_n$ follows since every component $\sum \bold{a}_n^{[k]}$ converges from the comparison test.  If the sum of every component converges, then $\sum \bold{a}$ converges.
+
+If $\alpha > 1$ then again by Theorem 3.17, there is a
+(a sub sequence converges to sup)
+sequence $\{n_k\}$ such that
+
+$$\sqrt[n_k]{|\bold{a}_{n_k}|} \to \alpha$$
+
+Hence $|\bold{a}_n| > 1$ for infinitely many values of $n$, so that the condition $\bold{a_n} \to 0$
+
+(3.34)
+
+We define vector division as element wise.
+
+Supposing that every vectors in $\bold{a}_n$ is nonzero or an $N$ such that no terms are zero.
+
+The series $\sum \bold{a}_n$,
+
+(a) converges if $\lim \sup_{n \to \infin} \left |\dfrac{\bold{a}_{n+1}}{\bold{a}_n}\right | < 1$
+
+(b) diverges if $\left | \dfrac{\bold{a}_{n+1}}{\bold{a}_n} \right | \geq 1$ for all $n \geq n_0$, where $n_0$ is some fixed integer.
+
+**Proof** If conditioin (a) holds, we can find $\beta < 1$, and an integer $N$, such that
+
+
+$$\left |\dfrac{\bold{a}_{n+1}}{\bold{a}_n} \right |< \beta$$
+
+for $n \geq N$. In particular,
+
+$$\left |\dfrac{\bold{a}_{N + 1}}{\bold{a}_N}\right| < \beta$$
+
+Since the length of $\bold{a}$ is $\geq$ to the $|a_i|$ and negative compnents do not effect length,
+
+$$|\bold{a}_{N + 1}| < \beta|\bold{a}_N|$$
+
+$$|\bold{a}_{N + 2}| < \beta|\bold{a}_{N + 1}| < \beta^2 |\bold{a}_N|$$
+
+$$\cdots \cdots \cdots \cdots$$
+$$|\bold{a}_{N + 1}| < \beta|\bold{a}_N|$$
+
+That is,
+
+$$|\bold{a}_n| < |\bold{a}_N|\beta^{-N} \cdot \beta^n$$
+
+for $n \geq N$, and (a) follows from the comparison test, since $\sum \beta^n$ converges.
+
+If $|\bold{a}_{n+1}| \geq |\bold{a}_n|$ for $n\geq n_0$, it is easily seen that at least one component
+$a_i \nrightarrow 0$ of $\bold{a}$, and hence (b) follows.
+
+(3.42)
+
+Suppose
+
+
+(a) the partial sums $\bold{A}_n$ of $\sum \bold{a}_n$ form a  bounded sequence;
+
+(b) $b_0 \geq b_1 \geq b_2 \geq \cdots$;
+
+(c) $\lim_{n \to \infin} b_n = 0.$
+
+Then $\sum \bold{a}_n b_n$ converges
+
+**Proof** Choose $M$ such that $|\bold{A_n}| \leq M$ for all $n$.  Given $\epsilon > 0$, there is an integer $N$ such that $b_N \leq (\epsilon/2M)$. For $N \leq p \leq q$, we have
+
+$$\left | \sum^q_{n=p} \bold{a}_n b_n \right | =\left | \sum^{q-1}_{n=p}\bold{A}_n(b_n - b_{n + 1}) + \bold{A}_q b_q - \bold{A}_{p-1}b_p\right|$$
+
+$$= \left | \sum^{q-1}_{n=p}\bold{A}_n(b_n - b_{n + 1}) + \bold{A}_q b_q - \bold{A}_{p-1}b_p\right|$$
+
+
+$$\leq M \left | \sum^{q-1}_{n=p}(b_n - b_{n + 1}) + b_q + b_p\right |$$
+
+$$2Mb_p \leq 2Mb_N \leq \epsilon$$
+
+Convergence now follows from the Caucht criterion. We note that the first inequality in the abover chain depends of course on the fact that $b_n - b_{n + 1} \geq 0$.
+
+
+20.
+
+Suppose $\{p_n\}$ is a Cauchy sequence in a metric space $X$, and some subsequence $\{p_{n_i}\}$ converges to a point $p \in X.$  Prove that the full sequence $\{p_n\}$ converges to $p$.
+
+Given $\epsilon > 0$ choose $N$ from $\{p_{n_i}\}$ with $\epsilon/2$. So then for $n \geq N$ $|p_N - p| \leq \epsilon/2$ and $|p_N - p_n| \leq \epsilon/2$.  So then we have $|p_N - p_n|  + |p_N - p| \leq |p_N - p_n - p_N + p | = |p - p_n| = |p_n - p| \leq \epsilon$.
