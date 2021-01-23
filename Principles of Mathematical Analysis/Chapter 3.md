@@ -676,3 +676,35 @@ Convergence now follows from the Caucht criterion. We note that the first inequa
 Suppose $\{p_n\}$ is a Cauchy sequence in a metric space $X$, and some subsequence $\{p_{n_i}\}$ converges to a point $p \in X.$  Prove that the full sequence $\{p_n\}$ converges to $p$.
 
 Given $\epsilon > 0$ choose $N$ from $\{p_{n_i}\}$ with $\epsilon/2$. So then for $n \geq N$ $|p_N - p| \leq \epsilon/2$ and $|p_N - p_n| \leq \epsilon/2$.  So then we have $|p_N - p_n|  + |p_N - p| \leq |p_N - p_n - p_N + p | = |p - p_n| = |p_n - p| \leq \epsilon$.
+
+23 Suppose $\{p_n\}$ and $\{ q_n\}$ are Cauchy sequences in a metric space $X$. Show that the sequence $\{d(p_n, q_n)\}$ converges.
+
+Given $ε > 0$, use $ε/2$ with $\{ p_n\}$ and $\{ q_n\}$ to produce $N_1$ and $N_2$.  Choosing $N_0 = \max N_1 N_2$ we then have $n ≥ N_0$ $d(q_{N_0}, q_{n}) ≤ ε/2$ and $d(p_{N_0}, p_n) ≤ ε/2$.
+
+Fact
+
+$$d(p_n, q_n) \leq d(p_n, p_{N_0}) + d(q_n, p_{N_0}) ≤ $$
+
+$$d(p_n, p_{N_0}) + d(p_{N_0}, q_{N_0}) + d(q_n, q_{N_0}) →$$
+
+$$d(p_n, q_n) -  d(p_{N_0}, q_{N_0}) ≤ d(p_n, p_{N_0}) + d(q_n, q_{N_0})$$
+
+The same is true, by the same proccess
+
+
+$$d(p_{N_0}, q_{N_0})  - d(p_n, q_n) ≤ d(p_n, p_{N_0}) + d(q_n, q_{N_0})$$
+
+
+
+Final Result
+
+$$|d(p_{N_0}, q_{N_0}) - d(p_n, q_n) | ≤$$
+$$ |d(p_n, p_{N_0}) + d(q_n, q_{N_0})| =$$
+
+Since both
+$d(p_{N_0}, q_{N_0})  - d(p_n, q_n) ≤ d(p_n, p_{N_0}) + d(q_n, q_{N_0})$ and $d(p_n, q_n) -  d(p_{N_0}, q_{N_0}) ≤ d(p_n, p_{N_0}) + d(q_n, q_{N_0})$ h.old
+
+$$|d(p_n, p_{N_0}) + d(q_n, q_{N_0})| = d(p_n, p_{N_0}) + d(q_n, q_{N_0}) ≤ ε$$
+
+
+So then $\{d(p_n, q_n)\}$  is Cauchy, and since the distance function is in $\mathbb{R}$ $\{d(p_n, q_n)\}$  converges.
