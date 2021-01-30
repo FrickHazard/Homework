@@ -708,3 +708,59 @@ $$|d(p_n, p_{N_0}) + d(q_n, q_{N_0})| = d(p_n, p_{N_0}) + d(q_n, q_{N_0}) ≤ ε
 
 
 So then $\{d(p_n, q_n)\}$  is Cauchy, and since the distance function is in $\mathbb{R}$ $\{d(p_n, q_n)\}$  converges.
+
+
+(24a)
+
+Let $X$ be a metric space
+(a)Call two Cauchy sequences $\{p_n\}$ $\{q_n\}$ in $X$ equivalent if
+
+$$\lim_{n \to \infin} d(p_n, q_n) = 0.$$
+
+Prove that this is an equivalence relationship.
+
+(a) Reflexivity, since the distance of between the same point of a metric space $d(p_n, p_n) = 0$ forall $n$, then every element of the sequence $\{ d(p_n, p_n)\} = 0$.
+
+(b) Symmetric, Since distance in a metric space is symmetric $\{ d(p_n, q_n)\} = \{ d(q_n, p_n)\}$.
+
+(c) Transitivity, Give $\{p_n\}$, $\{q_n\}$, $\{r_n\}$, and $\lim_{n \to \infin} d(p_n, q_n) = 0.$, $\lim_{n \to \infin} d(q_n, r_n) = 0.$
+
+Given $ε > 0$, use $ε/2$ with and $\lim_{n \to \infin} d(p_n, q_n) = 0.$, $\lim_{n \to \infin} d(q_n, r_n)$, to get $N$, so that $n ≥ N$
+
+$$|d(p_n, r_n)| = d(p_n, r_n) ≤  d(p_n, q_n) + d(q_n, r_n) ≤ ε$$.
+
+In other words, "because of the Cauchy criterion".
+
+(24b)
+Let $X^*$ be the set of all equvalence classes so obtained. If $P ∈ X^*$, $Q ∈ X^*$, $\{p_n\} ∈ P$, $\{q_n\} ∈ Q$ define
+
+$$Δ(P,Q) = \lim_{n → \infin} d(p_n, q_n);$$
+
+by exercise 23, the limit exists.  Show that the number $Δ(P,Q)$ is unchanged if $\{p_n\}$ an $\{q_n\}$ are replaced by equivalent sequences, and hence that $Δ$ is a distance function in $X^*$.
+
+Given $Δ(P,Q) = δ$ with $\{p_n\} ∈ P$, $\{q_n\} ∈ Q$ we now show that with $\{r_n\} ∈ P$ and $\{s_n\} ∈ Q$$
+
+$$\lim_{n → \infin} d(p_n, q_n) =  \lim_{n → \infin} d(r_n, s_n)$$
+
+Consider $\{r_n\} ∈ P$ and $\{s_n\} ∈ Q$.  From the defined equivalence class,
+
+$$\lim_{n → \infin} d(p_n, r_n) = 0$$
+$$\lim_{n → \infin} d(q_n, s_n) = 0$$
+
+holds.
+
+Given $ε > 0$ use $ε/3$ with the max $N$ of $\{ d(p_n, r_n)\}$, $\{ d(q_n, s_n)\}$ and $\{d(p_n, q_n)\}$ such that $n ≥ N$ entails
+
+$$d(p_n, r_n) ≤ ε/3$$
+$$d(q_n, s_n) ≤ ε/3$$
+$$|d(p_n, q_n) - δ| ≤ ε/3$$
+
+We then derive
+
+$$|d(r_n, s_n) - δ| = |d(r_n, s_n) - d(p_n, q_n) + d(p_n, q_n) - δ| ≤$$
+
+$$|d(r_n, s_n) - d(p_n, q_n)| + |d(p_n, q_n) - δ| ≤$$
+
+By the cauchy criterion $|d(r_n, s_n) - d(p_n, q_n)|  ≤ |d(p_n, r_n) + d(q_n, s_n)|$
+
+$$|d(p_n, r_n) + d(q_n, s_n)| + |d(p_n, q_n) - δ| ≤ ε$$
