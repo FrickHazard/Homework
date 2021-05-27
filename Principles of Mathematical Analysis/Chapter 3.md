@@ -764,3 +764,89 @@ $$|d(r_n, s_n) - d(p_n, q_n)| + |d(p_n, q_n) - δ| ≤$$
 By the cauchy criterion $|d(r_n, s_n) - d(p_n, q_n)|  ≤ |d(p_n, r_n) + d(q_n, s_n)|$
 
 $$|d(p_n, r_n) + d(q_n, s_n)| + |d(p_n, q_n) - δ| ≤ ε$$
+
+
+
+**14**
+
+Let $I = [0,1]$ be the closed unit interval. Suppose $f$ is a continuous mapping of $I$ into $I$. Prove that $f(x) = x$ for at least on $x \in I$.
+
+<br/>
+
+Proof by contradiction,
+
+Suppose $\forall \ x, f(x) \neq x$ which implies $\forall \ x, d(f(x), x) > 0$.
+
+$I$ is a connected set and therefore $f(I)$ must be connected as well, by theorem 4.22.
+
+
+We show a contradiction by proving that $f(I)$ must be seperated.
+
+
+Consider the sets $A = \{ f(x) \ | \ f(x) > x\}$ and $B = \{ f(x) \ | \ f(x) < x\}$.
+
+$A \cup B = f(I)$, since $\forall \ x, f(x) \neq x$.
+
+However consider $\overline{A} \cap B$ and $A \cap \overline{B}$.
+
+Using a Symmetric argument for both, both sets must be $\empty$. Since the closure term cannot include any points $f(x) \ >(or <) \ x$. Since these are not limit points of $A$ and $B$ respectively.
+
+Thus $f(I)$ is both seperated and connected which is a contradiction.
+
+The intuition for this comes from considering the empty diaganol on the graph of $(x, f(x))$, and this proof applies to any connected function that maps into itself.
+
+
+
+**8.**
+
+Suppose $X$ is non empty nor a single element.
+
+Take the $\inf i$ and the $\sup s$ of $X$.
+
+Using $\epsilon = \frac{1}{2}$ Get $\delta > 0$ such that  $\forall \ x_1 \ x_2 \in X, \ d(x_1, x_2) \implies d(f(x_1), \ f(x_2)) < \epsilon$
+
+
+Let $N = \lceil (s - i)/\delta \rceil$
+
+Consider the sequence of sets $S_n = \{ x \in X \ | \ i + \delta (n - 1) \leq x \leq i + \delta n \}$
+
+$X = \cup \ S_N$ (index starting at 1 and going to N).
+
+The image of every $S_n$ under $f$ is bounded by $\epsilon$ because of uniform continuity.
+
+So then $f(S_n)$ is a bounded set for every element of $S_N$.  The fininte union of bounded sets is bounded.
+
+
+**11.**
+
+Suppose $f$ is a uniformly continous mapping of a metric space $X$ into a metic space $Y$ and prove that $\{f(x_n)\}$ is a cauchy sequence in $Y$ for every Cauchy sequence $\{x_n\}$ in $X$.  Use this result to give an alternative proof for the theorem stated in Exercise 13.
+
+
+**Lemma**
+
+Given $\epsilon > 0$
+
+Extract $\delta > 0, \forall \ x_1, x_2, \ 0 \leq d(x_1, x_2) \leq \delta \implies d(f(x_1), f(x_2)) < \epsilon$ with $\epsilon$ using uniform continuity
+
+
+Extract $N$ such that $n \geq N \land m \geq M \implies d(x_n, x_m) < \delta$ with $\delta$ using the def of cauchy sequences.
+
+Now choose $N$, so that use the second statement to meet the condition of the first statement and receive $d(f(x_n), f(x_m)) < \epsilon$.
+
+**Main Proof**
+
+$E \subset X$
+
+Every point of $X$ is in $E$ or a limit point of $E$
+
+Let $f$ be a uniformly continous *real* function defined on $E$.]
+
+Prove that $f$ has a continous extension from $E$ to $X$ (see Exercise 5 for terminology).
+
+We focus on all the point in $X$ that are limit points of $E$ but not points of $E$.
+
+Given $\epsilon > 0$
+
+Extract $\delta > 0, \forall \ x_1, x_2, \ 0 \leq d(x_1, x_2) \leq \delta \implies d(f(x_1), f(x_2)) < \epsilon$ for $E$.
+
+Consider then
