@@ -152,3 +152,105 @@ Extract $\delta_2$ from $f$ with $\delta_1$
 We then choose $\delta_2$,
 
 So if any two points in $E$ are less than $\delta_2$ then the distance between $d(f(x_1), f(x_2))$ must be less than $\delta_1$ which in turn implies the distance between $d(g(f(x_1)), g(f(x_2)))$ is less than $\epsilon$.
+
+**18.**
+
+Every rational $x$ can be written in the form $x = m/n$, where $n > 0$ and $m$ and $n$ are integers withour any common divisors when $m=0$ we take $n = 1$. Consider the function $f$ defined on $\mathbb{R}^1$ by
+
+$$f(x) = \{ 0 \  | \ x \ \ \text{irrational} \  , \frac{1}{n} \ | \ x = \frac{m}{n} \}$$
+
+Prove that $f$ is continous at every irrational point, and that $f$ has a simple discontinuity at every rational pont.
+
+
+Suppose $x$ is an irrational point, and given $\epsilon > 0$.
+
+
+Consider the image of $f$ on $R^1$ for any real number $x > 0$ there is only finitely many points of the form ${1}{m}$ above. This can be shown by considering that there must be a rational number $\frac{a}{b}$ between 0 and $x$ by the aramedian property.  Taking $\frac{1}{ab}$, For evey $m < ab$ there can be at most $m - 1$ unique numbers in the numerator. Consider the minimum $\delta$ of the finite set of all irreducible ${p}{q}$ that could reduce to $\frac{1}{m}$ $m < ab$.  If we then choose $\delta$, for any rational number ${p}{q}$ in $R^1$ less than $\delta$, that number must have shorter distance than epsilon.  Irrational numbers are always zero and less than any $\epsilon$.
+
+
+We may use this same argument to show that the limit every rational point = $0$, which with the condition($m=0$ we take $n = 1$.) implies that every rational point has a simple discontinuity. In other words $f(x+) = f(x-) \neq f(x).$
+
+<!-- By the Archimedes theorem we produce a rational number $0 > \frac{a}{b}$ between $0$ and $\epsilon$.
+
+Choose $\frac{1}{ab}$.
+
+If the distance between a rational point $d(x, \frac{m}{n}) < \frac{1}{ab}$, consider two cases
+
+If $\frac{m}{n} < \frac{1}{ab}$ then $n < ab$
+
+Else if $\frac{m}{n} > \frac{1}{ab}$ then $n < ab$ -->
+**Not Rudin**
+
+
+Exercise 2.4 If the step-size parameters, ↵n, are not constant, then the estimate Qn is
+a weighted average of previously received rewards with a weighting di↵erent from that
+given by (2.6). What is the weighting on each prior reward for the general case, analogous
+to (2.6), in terms of the sequence of step-size parameters?
+
+$$Q_{n+1} = Q_n + \alpha_n[R_n - Q_n]$$
+
+$$\alpha_n R_n + (1 - \alpha_n)Q_n$$
+
+$$\alpha_n R_n + (1 - \alpha_n)[\alpha_{n-1}R_{n-1} +  (1-\alpha_{n-1} )Q_{n-1}]$$
+
+$$\alpha_n R_n + (1 - \alpha_n)\alpha_{n-1}R_{n-1} +  (1 - \alpha_n)(1-\alpha_{n-1} )Q_{n-1}$$
+
+<!-- $$\alpha_n R_n + (1 - \alpha_n)\alpha_{n-1}R_{n-1} + (1 - \alpha_n)(1-\alpha_{n-1})(a_{n-2})R_{n-2} + (1 - \alpha_n)(1-\alpha_{n-1})(1 - a_{n-2})R_{n-2}Q_{n-1}$$ -->
+
+
+$$ = \alpha_nR_n + (1 - a_n)(\alpha_{n-1}R_{n-1} +(1-\alpha_{n-1})(\cdots))$$
+
+
+<!-- $$\alpha_n R_n + (1 - \alpha_n)[\alpha_{n-1}R_{n-1} +  (1-\alpha_{n-1} )[\alpha_{n-2} R_{n-2} + (1 - \alpha_{n-2})Q_{n-2}]]$$ -->
+
+
+ ...
+
+<!-- $$Q_n + \alpha_n[R_n - Q_n]$$
+
+$$(Q_{n-1} + \alpha_n[R_{n - 1} - Q_{n-1}]) + \alpha_n[R_n - (Q_{n-1} + \alpha_n[R_{n - 1} - Q_{n-1}])]$$ -->
+
+
+
+Chapter 5
+
+First consider the following lemma if $0 \leq \alpha  \wedge \forall x > 0 \ , \ \alpha \leq x$, then $\alpha = 0$, where $x$ and $\alpha$ are real numbers.
+
+Suppose f was non constant, then for some  $x$ and $y$, $x < y \wedge f(x) \neq f(y) \implies |f(x) - f(y)| > 0$ Let us call this distance $\epsilon = |f(x) - f(y) | \leq (x - y)^2$.
+
+
+So then $0 \leq |f(x) - f(y)|$.
+
+Give a number $l > 0$
+
+if $\epsilon \leq$ then are condition is met, otherwise
+$l < \epsilon$ and we consider the telecopic sum
+
+$$ n = \left \lceil \dfrac{\epsilon^2}{l} \right \rceil$$
+
+
+$$|f(x) - f(y)| = \left |\sum_{i=1}^{n} f(x + \dfrac{(i-1)\epsilon}{n}) - f(x + \dfrac{i\epsilon}{n})\right |$$
+
+For each term for the sum
+
+
+$$ f(x + \dfrac{(i-1)\epsilon}{n}) - f(x + \dfrac{i\epsilon}{n}) \leq  \left(\dfrac{(i-1)\epsilon}{n} - \dfrac{i\epsilon}{n}\right)^2$$
+
+$$=\left(\dfrac{((i-1) - i)\epsilon}{n} \right)^2 = \left(\dfrac{-\epsilon}{n} = \right)^2 = \left(\dfrac{-\epsilon}{n} = \right)^2$$
+
+
+So then
+
+$$|f(x) - f(y)| \leq \sum_{i}^{n} \left(\dfrac{-\epsilon}{n}  \right)^2 = n \left(\dfrac{-\epsilon}{n}  \right)^2 =$$
+
+
+$$ \left(\dfrac{\epsilon^2}{\left \lceil \dfrac{\epsilon^2}{l} \right \rceil} \right) \leq l$$
+
+
+Alternatively using the telescopic sum
+
+
+
+
+
+  <!-- every term $\frac{(y - x)i}{\lceil \epsilon \rceil 2} < |x - y|$ and $< 1$.  The square of any real number $a^2 < a < 1$. So then by the cauchy criteron the sum of numbers must be less than or eqaul to $|x - y|$ however by the property of the function we have show that this sum is in fact less than  $|x - y|$.  Which is a contradicition. -->
